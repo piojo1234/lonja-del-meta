@@ -380,7 +380,7 @@ const LonjaModal = {
           <button id="btn-close-modal-sheet" class="text-slate-500 hover:text-slate-800 font-mono-tech text-xs font-bold py-1">
             ← Volver al Geovisor
           </button>
-          <a href="https://wa.me/573123661758?text=Hola%20Lonja,%20deseo%20adquirir%20muestras%20comerciales%20de%20Granada%20(${prod.offerId})" target="_blank" rel="noopener" class="text-emerald-700 hover:text-emerald-800 font-mono-tech text-xs font-bold flex items-center gap-1.5">
+          <a href="https://wa.me/573123661758?text=Hola%20Lonja,%20deseo%20adquirir%20muestras%20comerciales%20de%20${encodeURIComponent(prod.muni || 'Meta')}%20(${prod.offerId})" target="_blank" rel="noopener" class="text-emerald-700 hover:text-emerald-800 font-mono-tech text-xs font-bold flex items-center gap-1.5">
             <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
             <span>Comprar por WhatsApp (+57 312 366 1758)</span>
           </a>
@@ -431,7 +431,7 @@ const LonjaModal = {
           if (btnKeyText) btnKeyText.textContent = 'Validar Clave & Ver Pack Trío ($18.000 COP)';
           if (btnWompiText) btnWompiText.textContent = 'Pagar $18.000 COP con Wompi (Pack 3)';
         } else if (type === 'full') {
-          selectedPackage = { type: 'full', name: `Pack Completo Zona Granada + KMZ`, priceVal: 35000, priceText: '$ 35.000 COP' };
+          selectedPackage = { type: 'full', name: `Pack Completo Zona ${prod.muni || 'Meta'} + KMZ`, priceVal: 35000, priceText: '$ 35.000 COP' };
           cardFull.classList.remove('border-slate-200', 'bg-white');
           cardFull.classList.add('border-indigo-600', 'bg-indigo-50/50');
           if (totalDisplay) totalDisplay.textContent = '$ 35.000 COP';
@@ -687,7 +687,7 @@ const LonjaModal = {
             <div class="md:col-span-7 flex flex-col justify-between font-mono-tech text-xs">
               <div>
                 <span class="text-[10px] font-bold uppercase text-slate-400 block mb-0.5">Muestra Pericial Homologada:</span>
-                <h3 class="font-display font-black text-lg text-slate-900">${prod.offerId} · Granada (Meta)</h3>
+                <h3 class="font-display font-black text-lg text-slate-900">${prod.offerId} · ${prod.muni || 'Meta'}</h3>
                 <p class="text-xs text-slate-600 font-sans mt-0.5">${prod.tipo} • Área: ${prod.area}</p>
               </div>
 
@@ -710,7 +710,7 @@ const LonjaModal = {
                 </div>
                 <div class="flex justify-between items-center pt-2 border-t border-slate-200">
                   <span class="text-slate-700 font-bold">Teléfono Contacto Oferente:</span>
-                  <a href="https://wa.me/${prod.phoneReal.replace(/[^0-9]/g, '')}?text=Hola,%20vi%20su%20oferta%20en%20Granada" target="_blank" class="font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1">
+                  <a href="https://wa.me/${prod.phoneReal.replace(/[^0-9]/g, '')}?text=Hola,%20vi%20su%20oferta%20en%20${encodeURIComponent(prod.muni || 'Meta')}" target="_blank" class="font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1">
                     <i data-lucide="phone-call" class="w-3.5 h-3.5 text-emerald-600"></i>
                     <span>${prod.phoneReal}</span>
                   </a>
@@ -814,9 +814,9 @@ const LonjaModal = {
         <div class="flex items-center justify-between mb-3">
           <h4 class="font-mono-tech text-xs uppercase font-bold text-slate-800 flex items-center gap-1.5">
             <i data-lucide="file-check-2" class="w-4 h-4 text-emerald-600"></i>
-            <span>Fichas de Ofertas Comerciales Desbloqueadas (Granada, Meta)</span>
+            <span>Fichas de Ofertas Comerciales Desbloqueadas (${isVillavo ? 'Villavicencio, Meta' : 'Granada, Meta'})</span>
           </h4>
-          <span class="text-[11px] font-mono-tech text-slate-500 font-semibold">8 Muestras Disponibles (6 Urbanas + 2 Rurales)</span>
+          <span class="text-[11px] font-mono-tech text-slate-500 font-semibold">${isVillavo ? '3 Muestras Homologadas (Comuna 4)' : '8 Muestras Disponibles (6 Urbanas + 2 Rurales)'}</span>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
