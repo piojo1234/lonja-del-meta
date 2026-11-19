@@ -351,23 +351,37 @@
 
               <!-- Capas Villavicencio -->
               <div id="capas-villavo-group" class="inline-flex flex-wrap items-center gap-2">
-                <!-- Capa Urbana Villavicencio -->
-                <div class="inline-flex rounded-xl shadow-sm">
-                  <button type="button" onclick="window.toggleCapaCatastral('villavicencio', 'urbano')" id="btn-capa-villavo-urbano" class="px-3 py-1.5 bg-blue-900/60 hover:bg-blue-800 text-blue-200 rounded-l-xl font-bold border border-blue-500/50 text-[11px] flex items-center gap-1.5 transition-all" title="Ver polígonos urbanos de Villavicencio en el mapa">
-                    <i data-lucide="layers" class="w-3.5 h-3.5 text-blue-400"></i>
-                    <span id="label-capa-villavo-urbano">Villavo Urbana (22k)</span>
+                <!-- Selector de Sector Urbano Villavicencio (8 Sectores Oficiales IGAC - 115k predios) -->
+                <div class="inline-flex items-center rounded-xl shadow-sm border border-blue-500/50 bg-slate-900/95 overflow-hidden">
+                  <span class="pl-2.5 pr-1.5 text-blue-400 text-xs flex items-center gap-1 font-bold shrink-0">
+                    <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+                    <span class="hidden md:inline">Sector Urbano:</span>
+                  </span>
+                  <select id="select-sector-villavo" onchange="window.cambiarSectorVillavicencio(this.value)" class="bg-blue-950/80 text-blue-100 text-xs font-mono-tech py-1.5 px-2 font-bold focus:outline-none focus:ring-1 focus:ring-blue-400 border-0 cursor-pointer max-w-[210px] sm:max-w-none">
+                    <option value="" selected>📂 Elige Sector Urbano (115k predios)...</option>
+                    <option value="01">Sector 01: Centro Histórico (1.4k)</option>
+                    <option value="02">Sector 02: Barzal / Caudal / 7 Agosto (3.1k)</option>
+                    <option value="03">Sector 03: Porvenir / Villa Julia (17k)</option>
+                    <option value="04">Sector 04: Esperanza / Rosablanca (22k)</option>
+                    <option value="05">Sector 05: Catumare / San Antonio (16.8k)</option>
+                    <option value="06">Sector 06: Ciudad Porfía / Montecarlo (26k)</option>
+                    <option value="07">Sector 07: Camino Real / Kirpas / Covisan (27.7k)</option>
+                    <option value="08">Sector 08: Vanguardia / Vía Restrepo (590)</option>
+                  </select>
+                  <button type="button" onclick="window.limpiarCapaVillavo()" id="btn-limpiar-villavo" title="Remover sector urbano visible" class="px-2 py-1.5 bg-blue-900/40 hover:bg-rose-900/70 text-blue-300 hover:text-rose-200 border-l border-blue-500/40 text-[11px] font-bold transition-colors">
+                    ✕
                   </button>
-                  <button type="button" onclick="window.comprarProductoPorId('capa-catastral-urbana-villavicencio')" title="Adquirir Capa Completa 142k KMZ para Google Earth / QGIS" class="px-2.5 py-1.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 rounded-r-xl border border-l-0 border-amber-500/50 text-[10px] font-bold flex items-center gap-1 transition-colors">
+                  <button type="button" onclick="window.comprarProductoPorId('capa-catastral-urbana-villavicencio')" title="Adquirir Capa Completa 142k KMZ para Google Earth / QGIS" class="px-2.5 py-1.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border-l border-amber-500/50 text-[10px] font-bold flex items-center gap-1 transition-colors shrink-0">
                     <i data-lucide="lock" class="w-3 h-3 text-amber-400"></i>
-                    <span>KMZ</span>
+                    <span>KMZ (142k)</span>
                   </button>
                 </div>
 
-                <!-- Capa Rural Villavicencio -->
+                <!-- Capa Rural Villavicencio (26k predios totales) -->
                 <div class="inline-flex rounded-xl shadow-sm">
                   <button type="button" onclick="window.toggleCapaCatastral('villavicencio', 'rural')" id="btn-capa-villavo-rural" class="px-3 py-1.5 bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 rounded-l-xl font-bold border border-emerald-500/50 text-[11px] flex items-center gap-1.5 transition-all" title="Ver polígonos rurales de Villavicencio en el mapa">
                     <i data-lucide="layers" class="w-3.5 h-3.5 text-emerald-400"></i>
-                    <span id="label-capa-villavo-rural">Villavo Rural (4.9k)</span>
+                    <span id="label-capa-villavo-rural">Villavo Rural (26k)</span>
                   </button>
                   <button type="button" onclick="window.comprarProductoPorId('capa-catastral-rural-villavicencio')" title="Adquirir Capa Completa 34k KMZ para Google Earth / QGIS" class="px-2.5 py-1.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 rounded-r-xl border border-l-0 border-amber-500/50 text-[10px] font-bold flex items-center gap-1 transition-colors">
                     <i data-lucide="lock" class="w-3 h-3 text-amber-400"></i>
@@ -647,7 +661,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="assets/js/data.js?v=20261119_v4"></script>
-  <script src="assets/js/datalonja.js?v=20261119_v4"></script>
+  <script src="assets/js/data.js?v=20261119_v5"></script>
+  <script src="assets/js/datalonja.js?v=20261119_v5"></script>
 </body>
 </html>

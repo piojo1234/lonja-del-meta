@@ -2076,6 +2076,128 @@ function initGeovisorPericial() {
     }, 4500);
   }
 
+  // Diccionario de los 8 Sectores Oficiales IGAC de Villavicencio (115.035 predios urbanos)
+  const SECTORES_VILLAVO = {
+    '01': { nombre: 'Sector 01: Centro Histórico', count: '1.433', tag: 'Centro Histórico', file: 'villavicencio_urbano_sec01.geojson' },
+    '02': { nombre: 'Sector 02: El Barzal / Caudal / 7 de Agosto', count: '3.107', tag: 'Barzal / Caudal', file: 'villavicencio_urbano_sec02.geojson' },
+    '03': { nombre: 'Sector 03: Porvenir / Villa Julia / 20 de Julio', count: '17.084', tag: 'Porvenir / Villa Julia', file: 'villavicencio_urbano_sec03.geojson' },
+    '04': { nombre: 'Sector 04: La Esperanza / Rosablanca / Primavera', count: '22.187', tag: 'Esperanza / Rosablanca', file: 'villavicencio_urbano_sec04.geojson' },
+    '05': { nombre: 'Sector 05: Catumare / San Antonio / Juan Pablo II', count: '16.835', tag: 'Catumare / San Antonio', file: 'villavicencio_urbano_sec05.geojson' },
+    '06': { nombre: 'Sector 06: Ciudad Porfía / Montecarlo / Charrascal', count: '26.053', tag: 'Ciudad Porfía', file: 'villavicencio_urbano_sec06.geojson' },
+    '07': { nombre: 'Sector 07: Camino Real / Kirpas / Covisan / Valles', count: '27.744', tag: 'Camino Real / Kirpas', file: 'villavicencio_urbano_sec07.geojson' },
+    '08': { nombre: 'Sector 08: Vanguardia urbana / Vía Restrepo', count: '590', tag: 'Vanguardia / Expansión', file: 'villavicencio_urbano_sec08.geojson' }
+  };
+
+  let activeVillavoSectorLayer = null;
+  let activeVillavoSectorId = null;
+
+  window.limpiarCapaVillavo = function() {
+    if (activeVillavoSectorLayer && map.hasLayer(activeVillavoSectorLayer)) {
+      map.removeLayer(activeVillavoSectorLayer);
+    }
+    activeVillavoSectorLayer = null;
+    activeVillavoSectorId = null;
+    const sel = document.getElementById('select-sector-villavo');
+    if (sel) sel.value = '';
+    showMapBanner('ℹ️ Capa de sector urbano de Villavicencio removida');
+  };
+
+  window.cambiarSectorVillavicencio = async function(sectorId, shouldFly = true) {
+    if (!sectorId) {
+      window.limpiarCapaVillavo();
+      return null;
+    }
+    const secInfo = SECTORES_VILLAVO[sectorId];
+    if (!secInfo) return null;
+
+    // Remover sector anterior si estaba visible
+    if (activeVillavoSectorLayer && map.hasLayer(activeVillavoSectorLayer)) {
+      map.removeLayer(activeVillavoSectorLayer);
+    }
+
+    const cacheKey = `villavicencio_sec_${sectorId}`;
+
+    // Si ya está en memoria
+    if (cadastralLayers[cacheKey]) {
+      activeVillavoSectorLayer = cadastralLayers[cacheKey];
+      activeVillavoSectorId = sectorId;
+      activeVillavoSectorLayer.addTo(map);
+      if (shouldFly) {
+        map.flyToBounds(activeVillavoSectorLayer.getBounds(), { padding: [30, 30], maxZoom: 16, duration: 1 });
+      }
+      showMapBanner(`✅ ${secInfo.nombre} visible (${secInfo.count} predios)`);
+      return activeVillavoSectorLayer;
+    }
+
+    // Cargar vía Fetch
+    showMapBanner(`⏳ Descargando ${secInfo.nombre} (${secInfo.count} predios)...`);
+    try {
+      const res = await fetch(`assets/data/${secInfo.file}`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+
+      const layer = L.geoJSON(data, {
+        renderer: canvasRenderer,
+        style: {
+          color: '#2563EB',
+          weight: 1.2,
+          opacity: 0.85,
+          fillColor: '#3b82f6',
+          fillOpacity: 0.15
+        },
+        onEachFeature: function(feature, flayer) {
+          const p = feature.properties || {};
+          const nupre = p.codigo || p.nupre || 'Sin Código';
+          const area = p.area_m2 ? `${p.area_m2} m²` : (p.SHAPE_Area ? `${p.SHAPE_Area} m²` : 'Consultar ficha');
+          const cond = p.cond || p.condicion || p.Codigo_Anterior || 'NPH';
+          const sectorTag = p.sector ? `Sector ${p.sector} · ${secInfo.tag}` : 'Villavicencio (Meta)';
+
+          flayer.bindPopup(`
+            <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:240px; font-size:12px; color:#1e293b;">
+              <div style="background:#1d4ed8; color:white; padding:6px 10px; border-radius:6px; font-weight:bold; font-size:11px; margin-bottom:6px;">
+                PREDIO URBANO · VILLAVICENCIO
+              </div>
+              <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:6px; font-family:'JetBrains Mono',monospace; font-size:10px; margin-bottom:6px; word-break:break-all;">
+                <b>NUPRE (30 dígitos):</b><br><span style="color:#0C2F5A; font-weight:bold;">${nupre}</span>
+              </div>
+              <table style="width:100%; font-size:11px; margin-bottom:8px; line-height:1.4;">
+                <tr><td style="color:#64748b;">Condición:</td><td style="text-align:right; font-weight:bold; font-family:'JetBrains Mono',monospace;">${cond}</td></tr>
+                <tr><td style="color:#64748b;">Área Cartográfica:</td><td style="text-align:right; font-weight:bold;">${area}</td></tr>
+                <tr><td style="color:#64748b;">Sector / Jurisdicción:</td><td style="text-align:right; font-weight:bold;">${sectorTag}</td></tr>
+              </table>
+              <div style="display:flex; gap:6px;">
+                <a href="https://wa.me/573123661758?text=Hola%20Lonja,%20deseo%20cotizar%20un%20avaluo%20para%20el%20predio%20catastral%20${encodeURIComponent(nupre)}%20en%20Villavicencio" target="_blank" style="flex:1; background:#0C2F5A; color:white; text-align:center; padding:6px 8px; border-radius:6px; font-size:11px; font-weight:bold; text-decoration:none; display:block;">
+                  Cotizar Avalúo
+                </a>
+              </div>
+              <div style="margin-top:6px;">
+                <a href="https://geoportal.igac.gov.co/contenido/consulta-catastral" target="_blank" rel="noopener noreferrer" style="width:100%; background:#1e293b; color:#93c5fd; text-align:center; padding:6px 8px; border-radius:6px; font-size:10px; font-weight:bold; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:4px; border:1px solid #334155;" title="Abrir consulta en Geoportal IGAC">
+                  <span>🔗 Contrastar en Geoportal IGAC ↗</span>
+                </a>
+              </div>
+            </div>
+          `);
+        }
+      });
+
+      cadastralLayers[cacheKey] = layer;
+      activeVillavoSectorLayer = layer;
+      activeVillavoSectorId = sectorId;
+      layer.addTo(map);
+
+      if (shouldFly) {
+        map.flyToBounds(layer.getBounds(), { padding: [30, 30], maxZoom: 16, duration: 1 });
+      }
+      showMapBanner(`✅ ¡${secInfo.nombre} cargado (${secInfo.count} predios)!`);
+      return layer;
+    } catch (err) {
+      console.error('Error cargando sector:', err);
+      showMapBanner(`❌ Error al cargar sector: ${err.message}`, false);
+      return null;
+    }
+  };
+  window.cargarSectorVillavicencio = window.cambiarSectorVillavicencio;
+
   window.toggleCapaCatastral = async function(muniOrTipo, maybeTipo) {
     let muni = 'granada';
     let tipo = 'urbano';
@@ -2090,20 +2212,29 @@ function initGeovisorPericial() {
 
     const isVillavo = muni === 'villavicencio';
     const isUrb = tipo === 'urbano';
+
+    // Si es Villavicencio urbano, cargar por defecto Sector 04 o sincronizar select
+    if (isVillavo && isUrb) {
+      const sel = document.getElementById('select-sector-villavo');
+      const targetSec = (sel && sel.value) ? sel.value : '04';
+      if (sel) sel.value = targetSec;
+      return window.cambiarSectorVillavicencio(targetSec);
+    }
+
     const layerKey = `${isVillavo ? 'villavicencio' : 'granada'}_${isUrb ? 'urbano' : 'rural'}`;
 
     const btnId = isVillavo 
-      ? (isUrb ? 'btn-capa-villavo-urbano' : 'btn-capa-villavo-rural')
+      ? 'btn-capa-villavo-rural'
       : (isUrb ? 'btn-capa-granada-urbano' : 'btn-capa-granada-rural');
 
     const labelId = isVillavo 
-      ? (isUrb ? 'label-capa-villavo-urbano' : 'label-capa-villavo-rural')
+      ? 'label-capa-villavo-rural'
       : (isUrb ? 'label-capa-granada-urbano' : 'label-capa-granada-rural');
 
     const btn = document.getElementById(btnId);
     const label = document.getElementById(labelId);
 
-    const countText = isVillavo ? (isUrb ? '22.187' : '4.903') : (isUrb ? '20.846' : '8.662');
+    const countText = isVillavo ? '26.039' : (isUrb ? '20.846' : '8.662');
     const muniLabel = isVillavo ? 'Villavo' : 'Granada';
     const zoneName = isUrb ? 'Urbana' : 'Rural';
     const primaryColor = isUrb ? '#2563EB' : '#059669';
@@ -2111,7 +2242,7 @@ function initGeovisorPericial() {
     // 1. Si la capa ya está en el mapa, ocultarla
     if (cadastralLayers[layerKey] && map.hasLayer(cadastralLayers[layerKey])) {
       map.removeLayer(cadastralLayers[layerKey]);
-      if (label) label.textContent = `${muniLabel} ${zoneName} (${isVillavo ? (isUrb ? '22k' : '4.9k') : (isUrb ? '20k' : '8.6k')})`;
+      if (label) label.textContent = `${muniLabel} ${zoneName} (${isVillavo ? '26k' : (isUrb ? '20k' : '8.6k')})`;
       if (btn) {
         btn.classList.remove('ring-2', 'ring-white', 'scale-105');
         btn.style.backgroundColor = '';
@@ -2123,7 +2254,7 @@ function initGeovisorPericial() {
     // 2. Si la capa ya fue cargada en memoria, mostrarla de inmediato
     if (cadastralLayers[layerKey]) {
       cadastralLayers[layerKey].addTo(map);
-      if (label) label.textContent = `✅ Ocultar ${muniLabel} (${isVillavo ? (isUrb ? '22k' : '4.9k') : (isUrb ? '20k' : '8.6k')})`;
+      if (label) label.textContent = `✅ Ocultar ${muniLabel} (${isVillavo ? '26k' : (isUrb ? '20k' : '8.6k')})`;
       if (btn) {
         btn.classList.add('ring-2', 'ring-white');
         btn.style.backgroundColor = primaryColor;
@@ -2138,7 +2269,7 @@ function initGeovisorPericial() {
 
     try {
       const fileName = isVillavo 
-        ? (isUrb ? 'villavicencio_urbano_parcels.geojson' : 'villavicencio_rural_parcels.geojson')
+        ? 'villavicencio_rural_parcels.geojson'
         : (isUrb ? 'granada_urbano_parcels.geojson' : 'granada_rural_parcels.geojson');
 
       const res = await fetch(`assets/data/${fileName}`);
@@ -2156,10 +2287,10 @@ function initGeovisorPericial() {
         },
         onEachFeature: function(feature, flayer) {
           const p = feature.properties || {};
-          const nupre = p.nupre || 'Sin Código';
-          const area = p.SHAPE_Area ? `${p.SHAPE_Area} m²` : 'Consultar ficha';
-          const codAnt = p.Codigo_Anterior || p.condicion || 'N/A';
-          const vereda = p.Vereda_Codigo || p.Barrio_Codigo || (isVillavo ? 'Villavicencio (Meta)' : 'Granada (Meta)');
+          const nupre = p.codigo || p.nupre || 'Sin Código';
+          const area = p.area_m2 ? `${p.area_m2} m²` : (p.SHAPE_Area ? `${p.SHAPE_Area} m²` : 'Consultar ficha');
+          const cond = p.cond || p.condicion || p.Codigo_Anterior || 'NPH';
+          const vereda = p.sector ? `Sector ${p.sector} · Villavicencio Rural` : (p.Vereda_Codigo || p.Barrio_Codigo || (isVillavo ? 'Villavicencio (Meta)' : 'Granada (Meta)'));
 
           flayer.bindPopup(`
             <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:240px; font-size:12px; color:#1e293b;">
@@ -2170,7 +2301,7 @@ function initGeovisorPericial() {
                 <b>NUPRE (30 dígitos):</b><br><span style="color:#0C2F5A; font-weight:bold;">${nupre}</span>
               </div>
               <table style="width:100%; font-size:11px; margin-bottom:8px; line-height:1.4;">
-                <tr><td style="color:#64748b;">Condición / Cód:</td><td style="text-align:right; font-weight:bold; font-family:'JetBrains Mono',monospace;">${codAnt}</td></tr>
+                <tr><td style="color:#64748b;">Condición / Cód:</td><td style="text-align:right; font-weight:bold; font-family:'JetBrains Mono',monospace;">${cond}</td></tr>
                 <tr><td style="color:#64748b;">Área Cartográfica:</td><td style="text-align:right; font-weight:bold;">${area}</td></tr>
                 <tr><td style="color:#64748b;">Sector / Jurisdicción:</td><td style="text-align:right; font-weight:bold;">${vereda}</td></tr>
               </table>
@@ -2192,7 +2323,7 @@ function initGeovisorPericial() {
       cadastralLayers[layerKey] = layer;
       layer.addTo(map);
 
-      if (label) label.textContent = `✅ Ocultar ${muniLabel} (${isVillavo ? (isUrb ? '22k' : '4.9k') : (isUrb ? '20k' : '8.6k')})`;
+      if (label) label.textContent = `✅ Ocultar ${muniLabel} (${isVillavo ? '26k' : (isUrb ? '20k' : '8.6k')})`;
       if (btn) {
         btn.classList.add('ring-2', 'ring-white');
         btn.style.backgroundColor = primaryColor;
@@ -2379,76 +2510,160 @@ function initGeovisorPericial() {
 
     let igacSuccess = false;
 
-    // 3. Intento de consulta en vivo al FeatureServer del IGAC / Catastro Multipropósito
-    try {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 3500);
+    // 2.1 Búsqueda Rápida Local en Capas de Villavicencio (8 Sectores Oficiales y Rural)
+    if (rawCode.startsWith('50001')) {
+      try {
+        const isRural = rawCode.substring(5, 7) === '00';
+        const sec = rawCode.substring(7, 9);
 
-      // Endpoint oficial de consulta GeoJSON del IGAC
-      const igacQueryUrl = `https://servicios.igac.gov.co/arcgis/rest/services/sinic/SINIC_DA/FeatureServer/0/query?where=pre_codigo%3D%27${rawCode}%27&outFields=*&returnGeometry=true&outSR=4326&f=geojson`;
+        if (!isRural && SECTORES_VILLAVO[sec]) {
+          if (currentMuni !== 'villavicencio') window.seleccionarMunicipio('villavicencio');
+          const sel = document.getElementById('select-sector-villavo');
+          if (sel) sel.value = sec;
 
-      const response = await fetch(igacQueryUrl, {
-        signal: controller.signal,
-        headers: { 'Accept': 'application/json' }
-      });
-      clearTimeout(timeoutId);
+          const layer = await window.cambiarSectorVillavicencio(sec, false);
+          if (layer) {
+            let found = null;
+            layer.eachLayer(l => {
+              if (found) return;
+              const p = (l.feature && l.feature.properties) || {};
+              const c = p.codigo || p.nupre || '';
+              if (c === rawCode || c.includes(rawCode) || rawCode.includes(c)) {
+                found = l;
+              }
+            });
 
-      if (response.ok) {
-        const geojson = await response.json();
-        if (geojson && geojson.features && geojson.features.length > 0) {
-          const feat = geojson.features[0];
-          polygonLayer.clearLayers();
-          
-          const leafletGeojson = L.geoJSON(feat, {
-            style: {
-              color: '#10B981',
-              fillColor: '#10B981',
-              fillOpacity: 0.45,
-              weight: 3
+            if (found) {
+              polygonLayer.clearLayers();
+              const highlight = L.geoJSON(found.feature, {
+                style: {
+                  color: '#10B981',
+                  fillColor: '#10B981',
+                  fillOpacity: 0.45,
+                  weight: 3.5
+                }
+              }).addTo(polygonLayer);
+
+              const p = found.feature.properties || {};
+              const nupre = p.codigo || p.nupre || rawCode;
+              const area = p.area_m2 ? `${p.area_m2} m²` : 'Consultar ficha';
+              const cond = p.cond || 'NPH';
+
+              highlight.bindPopup(`
+                <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:250px; font-size:12px; color:#1e293b;">
+                  <div style="background:#059669; color:white; padding:6px 10px; border-radius:6px; font-weight:bold; font-size:11px; margin-bottom:6px;">
+                    🎯 PREDIO LOCALIZADO · SECTOR ${sec} (${SECTORES_VILLAVO[sec].tag})
+                  </div>
+                  <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:6px; font-family:'JetBrains Mono',monospace; font-size:10px; margin-bottom:6px; word-break:break-all;">
+                    <b>NUPRE Oficial:</b><br><span style="color:#0C2F5A; font-weight:bold;">${nupre}</span>
+                  </div>
+                  <table style="width:100%; font-size:11px; margin-bottom:8px; line-height:1.4;">
+                    <tr><td style="color:#64748b;">Condición:</td><td style="text-align:right; font-weight:bold; font-family:'JetBrains Mono',monospace;">${cond}</td></tr>
+                    <tr><td style="color:#64748b;">Área Cartográfica:</td><td style="text-align:right; font-weight:bold;">${area}</td></tr>
+                    <tr><td style="color:#64748b;">Sector IGAC:</td><td style="text-align:right; font-weight:bold;">Sector ${sec} · Villavicencio</td></tr>
+                  </table>
+                  <div style="display:flex; gap:6px;">
+                    <a href="https://wa.me/573123661758?text=Hola%20Lonja,%20deseo%20cotizar%20un%20avaluo%20para%20el%20predio%20catastral%20${encodeURIComponent(nupre)}%20en%20Villavicencio" target="_blank" style="flex:1; background:#0C2F5A; color:white; text-align:center; padding:6px 8px; border-radius:6px; font-size:11px; font-weight:bold; text-decoration:none; display:block;">
+                      Cotizar Avalúo
+                    </a>
+                  </div>
+                  <div style="margin-top:6px;">
+                    <a href="https://geoportal.igac.gov.co/contenido/consulta-catastral" target="_blank" rel="noopener noreferrer" style="width:100%; background:#1e293b; color:#93c5fd; text-align:center; padding:6px 8px; border-radius:6px; font-size:10px; font-weight:bold; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:4px; border:1px solid #334155;">
+                      <span>🔗 Contrastar en Geoportal IGAC ↗</span>
+                    </a>
+                  </div>
+                </div>
+              `);
+
+              map.flyToBounds(highlight.getBounds(), { padding: [50, 50], maxZoom: 18, duration: 1.2 });
+              setTimeout(() => highlight.openPopup(), 1300);
+              showMapBanner(`🎯 ¡Predio encontrado en el ${SECTORES_VILLAVO[sec].nombre}!`);
+              igacSuccess = true;
+              if (searchBtn) {
+                searchBtn.disabled = false;
+                searchBtn.innerHTML = originalBtnHtml;
+                lucide.createIcons();
+              }
             }
-          }).addTo(polygonLayer);
-
-          const attrs = feat.properties || {};
-          const popupContent = `
-            <div style="font-family:'Plus Jakarta Sans',sans-serif; width:270px; color:#1e293b; padding:2px;">
-              <div style="background:#059669; color:white; padding:8px 10px; border-radius:6px; margin-bottom:8px;">
-                <span style="font-family:'JetBrains Mono',monospace; font-size:9px; text-transform:uppercase; color:#d1fae5; display:block;">GEOMETRÍA OFICIAL EN VIVO · IGAC REST</span>
-                <strong style="font-size:12px; display:block; margin-top:2px;">Predio Validado por Catastro Nacional</strong>
-              </div>
-              <div style="font-family:'JetBrains Mono',monospace; font-size:10px; background:#f8fafc; border:1px solid #e2e8f0; padding:6px; border-radius:6px; margin-bottom:8px; word-break:break-all;">
-                <strong>NUPRE:</strong> ${rawCode}
-              </div>
-              <p style="font-size:11px; color:#475569; margin-bottom:8px;">
-                Polígono espacial recuperado exitosamente desde la API de entidades del IGAC.
-              </p>
-              <div style="display:flex; gap:6px;">
-                <a href="#catalogo" style="flex:1; background:#059669; color:white; text-align:center; padding:6px 8px; border-radius:6px; font-size:11px; font-weight:bold; text-decoration:none; display:block;">
-                  Bancos KMZ
-                </a>
-                <a href="https://wa.me/573123661758?text=Hola%20Lonja,%20requiero%20avaluo%20del%20predio%20IGAC%20${rawCode}" target="_blank" style="flex:1; background:#0C2F5A; color:white; text-align:center; padding:6px 8px; border-radius:6px; font-size:11px; font-weight:bold; text-decoration:none; display:block;">
-                  Cotizar Avalúo
-                </a>
-              </div>
-              <div style="margin-top:6px;">
-                <a href="https://geoportal.igac.gov.co/contenido/consulta-catastral" target="_blank" rel="noopener noreferrer" style="width:100%; background:#1e293b; color:#93c5fd; text-align:center; padding:6px 8px; border-radius:6px; font-size:10px; font-weight:bold; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:4px; border:1px solid #334155;" title="Abrir consulta en Geoportal IGAC">
-                  <span>🔗 Contrastar en Geoportal Oficial IGAC ↗</span>
-                </a>
-              </div>
-            </div>
-          `;
-          leafletGeojson.bindPopup(popupContent);
-          map.flyToBounds(leafletGeojson.getBounds(), { padding: [50, 50], duration: 1.2 });
-          setTimeout(() => leafletGeojson.openPopup(), 1300);
-          igacSuccess = true;
+          }
         }
+      } catch (e) {
+        console.warn('Búsqueda local de Villavicencio falló, intentando IGAC:', e);
       }
-    } catch (err) {
-      console.log('Consulta en línea al IGAC redirigida a motor cartográfico local:', err.message);
-    } finally {
-      if (searchBtn) {
-        searchBtn.disabled = false;
-        searchBtn.innerHTML = originalBtnHtml;
-        lucide.createIcons();
+    }
+
+    // 3. Intento de consulta en vivo al FeatureServer del IGAC / Catastro Multipropósito (si no fue hallado localmente)
+    if (!igacSuccess) {
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3500);
+
+        // Endpoint oficial de consulta GeoJSON del IGAC
+        const igacQueryUrl = `https://servicios.igac.gov.co/arcgis/rest/services/sinic/SINIC_DA/FeatureServer/0/query?where=pre_codigo%3D%27${rawCode}%27&outFields=*&returnGeometry=true&outSR=4326&f=geojson`;
+
+        const response = await fetch(igacQueryUrl, {
+          signal: controller.signal,
+          headers: { 'Accept': 'application/json' }
+        });
+        clearTimeout(timeoutId);
+
+        if (response.ok) {
+          const geojson = await response.json();
+          if (geojson && geojson.features && geojson.features.length > 0) {
+            const feat = geojson.features[0];
+            polygonLayer.clearLayers();
+            
+            const leafletGeojson = L.geoJSON(feat, {
+              style: {
+                color: '#10B981',
+                fillColor: '#10B981',
+                fillOpacity: 0.45,
+                weight: 3
+              }
+            }).addTo(polygonLayer);
+
+            const attrs = feat.properties || {};
+            const popupContent = `
+              <div style="font-family:'Plus Jakarta Sans',sans-serif; width:270px; color:#1e293b; padding:2px;">
+                <div style="background:#059669; color:white; padding:8px 10px; border-radius:6px; margin-bottom:8px;">
+                  <span style="font-family:'JetBrains Mono',monospace; font-size:9px; text-transform:uppercase; color:#d1fae5; display:block;">GEOMETRÍA OFICIAL EN VIVO · IGAC REST</span>
+                  <strong style="font-size:12px; display:block; margin-top:2px;">Predio Validado por Catastro Nacional</strong>
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace; font-size:10px; background:#f8fafc; border:1px solid #e2e8f0; padding:6px; border-radius:6px; margin-bottom:8px; word-break:break-all;">
+                  <strong>NUPRE:</strong> ${rawCode}
+                </div>
+                <p style="font-size:11px; color:#475569; margin-bottom:8px;">
+                  Polígono espacial recuperado exitosamente desde la API de entidades del IGAC.
+                </p>
+                <div style="display:flex; gap:6px;">
+                  <a href="#catalogo" style="flex:1; background:#059669; color:white; text-align:center; padding:6px 8px; border-radius:6px; font-size:11px; font-weight:bold; text-decoration:none; display:block;">
+                    Bancos KMZ
+                  </a>
+                  <a href="https://wa.me/573123661758?text=Hola%20Lonja,%20requiero%20avaluo%20del%20predio%20IGAC%20${rawCode}" target="_blank" style="flex:1; background:#0C2F5A; color:white; text-align:center; padding:6px 8px; border-radius:6px; font-size:11px; font-weight:bold; text-decoration:none; display:block;">
+                    Cotizar Avalúo
+                  </a>
+                </div>
+                <div style="margin-top:6px;">
+                  <a href="https://geoportal.igac.gov.co/contenido/consulta-catastral" target="_blank" rel="noopener noreferrer" style="width:100%; background:#1e293b; color:#93c5fd; text-align:center; padding:6px 8px; border-radius:6px; font-size:10px; font-weight:bold; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:4px; border:1px solid #334155;" title="Abrir consulta en Geoportal IGAC">
+                    <span>🔗 Contrastar en Geoportal Oficial IGAC ↗</span>
+                  </a>
+                </div>
+              </div>
+            `;
+            leafletGeojson.bindPopup(popupContent);
+            map.flyToBounds(leafletGeojson.getBounds(), { padding: [50, 50], duration: 1.2 });
+            setTimeout(() => leafletGeojson.openPopup(), 1300);
+            igacSuccess = true;
+          }
+        }
+      } catch (err) {
+        console.log('Consulta en línea al IGAC redirigida a motor cartográfico local:', err.message);
+      } finally {
+        if (searchBtn) {
+          searchBtn.disabled = false;
+          searchBtn.innerHTML = originalBtnHtml;
+          lucide.createIcons();
+        }
       }
     }
 
