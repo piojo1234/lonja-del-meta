@@ -1091,6 +1091,74 @@ window.openProductCheckoutModal = function(prod) {
   if (window.LonjaModal) window.LonjaModal.renderCheckout(prod);
 };
 
+// Función global para comprar/desbloquear cualquier producto por su ID
+window.comprarProductoPorId = function(productId) {
+  let prod = null;
+  if (window.LONJA_DATA) {
+    if (Array.isArray(window.LONJA_DATA.dataLonjaProducts)) {
+      prod = window.LONJA_DATA.dataLonjaProducts.find(p => p.id === productId);
+    }
+    if (!prod && Array.isArray(window.LONJA_DATA.catalogProducts)) {
+      prod = window.LONJA_DATA.catalogProducts.find(p => p.id === productId);
+    }
+  }
+
+  // Fallbacks periciales con precios y metadatos oficiales de la Lonja
+  if (!prod) {
+    const fallbacks = {
+      'capa-catastral-urbana-granada': {
+        id: 'capa-catastral-urbana-granada',
+        name: 'Capa Catastral Vectorial Urbana: Granada (Meta) 2026',
+        badge: '20.846 Predios Urbanos',
+        priceDisplay: 'Cartografía SIG: $120.000 COP',
+        priceValue: 120000,
+        format: 'Archivo KMZ Oficial para Google Earth & QGIS',
+        targetAudience: 'Avaluadores Urbanos, Topógrafos y Peritos Catastrales',
+        zipFile: 'U_TERRENO_GRANADA_2026.kmz'
+      },
+      'capa-catastral-rural-granada': {
+        id: 'capa-catastral-rural-granada',
+        name: 'Capa Catastral Vectorial Rural: Granada (Meta) 2026',
+        badge: '8.662 Predios Rurales',
+        priceDisplay: 'Cartografía SIG: $120.000 COP',
+        priceValue: 120000,
+        format: 'Archivo KMZ Oficial para Google Earth & QGIS',
+        targetAudience: 'Avaluadores Rurales, Agrónomos e Ingenieros',
+        zipFile: 'R_TERRENO_GRANADA_2026.kmz'
+      },
+      'capa-catastral-urbana-villavicencio': {
+        id: 'capa-catastral-urbana-villavicencio',
+        name: 'Capa Catastral Vectorial Urbana: Villavicencio (Meta) 2026',
+        badge: '142.264 Predios Urbanos',
+        priceDisplay: 'Cartografía SIG: $140.000 COP',
+        priceValue: 140000,
+        format: 'Archivo KMZ (Formal e Informal) para Google Earth & QGIS',
+        targetAudience: 'Avaluadores Urbanos y Peritos Colegiados RAA',
+        zipFile: 'Capa_Catastral_Urbana_Villavicencio_2026.zip'
+      },
+      'capa-catastral-rural-villavicencio': {
+        id: 'capa-catastral-rural-villavicencio',
+        name: 'Capa Catastral Vectorial Rural: Villavicencio (Meta) 2026',
+        badge: '34.279 Predios Rurales',
+        priceDisplay: 'Cartografía SIG: $130.000 COP',
+        priceValue: 130000,
+        format: 'Archivo KMZ (Formal e Informal) para Google Earth & QGIS',
+        targetAudience: 'Avaluadores Rurales y Peritos Catastrales',
+        zipFile: 'Capa_Catastral_Rural_Villavicencio_2026.zip'
+      }
+    };
+    prod = fallbacks[productId];
+  }
+
+  if (prod && window.LonjaModal) {
+    window.LonjaModal.renderCheckout(prod);
+  } else if (typeof window.openProductCheckoutModal === 'function') {
+    window.openProductCheckoutModal(prod);
+  } else {
+    window.location.hash = 'catalogo';
+  }
+};
+
 /* ==========================================================================
    1. CATÁLOGO PRO & SISTEMA DE BÓVEDA CON CLAVE
    ========================================================================== */
@@ -1691,149 +1759,7 @@ function initGeovisorPericial() {
     }
   ];
 
-  let currentMuni = 'granada';
-  let currentZoneFilter = 'all';
-
-  function updateVisibleMarkers() {
-    markersLayer.clearLayers();
-    pinMarkers.forEach(m => {
-      const matchMuni = currentMuni === 'todos' || 
-        (currentMuni === 'villavicencio' && m.offerData.divipola === '50001') ||
-        (currentMuni === 'granada' && m.offerData.divipola === '50313');
-      
-      const matchZone = currentZoneFilter === 'all' || m.offerData.zoneType === currentZoneFilter;
-
-      if (matchMuni && matchZone) {
-        markersLayer.addLayer(m);
-      }
-    });
-
-    // Actualizar contadores de los botones de filtro secundario (Todas, Urbanas, Rurales)
-    const availableForMuni = pinMarkers.filter(m => {
-      return currentMuni === 'todos' || 
-        (currentMuni === 'villavicencio' && m.offerData.divipola === '50001') ||
-        (currentMuni === 'granada' && m.offerData.divipola === '50313');
-    });
-
-    const countAll = availableForMuni.length;
-    const countUrb = availableForMuni.filter(m => m.offerData.zoneType === 'urbano').length;
-    const countRur = availableForMuni.filter(m => m.offerData.zoneType === 'rural').length;
-
-    const labelAll = document.getElementById('filter-label-all');
-    const labelUrb = document.getElementById('filter-label-urb');
-    const labelRur = document.getElementById('filter-label-rur');
-
-    if (labelAll) labelAll.textContent = `📍 Todas (${countAll})`;
-    if (labelUrb) labelUrb.textContent = `🔵 Urbanas (${countUrb})`;
-    if (labelRur) labelRur.textContent = `🟢 Rurales (${countRur})`;
-  }
-
-  // Función global para conmutar centro del mapa y filtrar ofertas entre Granada y Villavicencio
-  window.seleccionarMunicipio = function(muniKey) {
-    currentMuni = muniKey || 'granada';
-
-    const btnGranada = document.getElementById('btn-muni-granada');
-    const btnVillavo = document.getElementById('btn-muni-villavo');
-    const btnTodos = document.getElementById('btn-muni-todos');
-    const title = document.getElementById('geovisor-muni-title');
-    const countPill = document.getElementById('geovisor-count-pill');
-    const input = document.getElementById('geovisor-codigo-input');
-    const capasGranada = document.getElementById('capas-granada-group');
-    const capasVillavo = document.getElementById('capas-villavo-group');
-
-    // Resetear estilos de botones del segmented control
-    [btnGranada, btnVillavo, btnTodos].forEach(b => {
-      if (!b) return;
-      b.className = 'px-3.5 py-2 rounded-lg text-xs font-mono-tech font-bold transition-all flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-slate-800 min-h-[42px] sm:min-h-0';
-    });
-
-    const setActiveBtn = (b) => {
-      if (!b) return;
-      b.className = 'px-3.5 py-2 rounded-lg text-xs font-mono-tech font-bold transition-all flex items-center justify-center gap-1.5 bg-slate-800 text-white shadow border border-slate-700 min-h-[42px] sm:min-h-0';
-    };
-
-    if (muniKey === 'villavicencio') {
-      setActiveBtn(btnVillavo);
-      map.flyTo([4.140, -73.588], 15, { duration: 1.2 });
-      showMapBanner('📍 Centrado en Villavicencio (Meta) · Comuna 4 (Abajamcito & Prados de Siberia)');
-      if (title) title.innerHTML = 'Visor Catastral y Puntos de Mercado: Villavicencio (Meta)';
-      if (countPill) countPill.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span><span>3 Ofertas Depuradas en Comuna 4 (50001)</span>';
-      if (input) input.placeholder = 'Ingresa código predial nacional NUPRE de Villavicencio (ej: 500010104...)';
-      if (capasVillavo) capasVillavo.style.opacity = '1';
-      if (capasGranada) capasGranada.style.opacity = '0.5';
-    } else if (muniKey === 'todos') {
-      setActiveBtn(btnTodos);
-      map.flyTo([3.84, -73.65], 10, { duration: 1.5 });
-      showMapBanner('🗺️ Cobertura departamental: Granada & Villavicencio');
-      if (title) title.innerHTML = 'Visor Catastral y Puntos de Mercado: Granada & Villavicencio (Meta)';
-      if (countPill) countPill.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span><span>11 Ofertas Georreferenciadas Visibles</span>';
-      if (input) input.placeholder = 'Ingresa código predial nacional NUPRE (30 dígitos IGAC)...';
-      if (capasGranada) capasGranada.style.opacity = '1';
-      if (capasVillavo) capasVillavo.style.opacity = '1';
-    } else {
-      // Granada por defecto
-      setActiveBtn(btnGranada);
-      map.flyTo(defaultCenter, defaultZoom, { duration: 1.2 });
-      showMapBanner('📍 Centrado en Granada (Meta) · Casco Urbano y Zona Rural');
-      if (title) title.innerHTML = 'Visor Catastral y Puntos de Mercado: Granada (Meta)';
-      if (countPill) countPill.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span><span>8 Ofertas Georreferenciadas (50313)</span>';
-      if (input) input.placeholder = 'Ingresa código predial nacional NUPRE de Granada (ej: 503130100...)';
-      if (capasGranada) capasGranada.style.opacity = '1';
-      if (capasVillavo) capasVillavo.style.opacity = '0.5';
-    }
-
-    updateVisibleMarkers();
-  };
-
-  window.centrarMunicipio = window.seleccionarMunicipio;
-
-  // Exponer función global para abrir modal de compra de ficha individual o packs
-  window.desbloquearOfertaIndividual = function(offerId) {
-    const offer = marketOffers.find(o => o.id === offerId);
-    if (!offer) {
-      console.warn('Oferta no encontrada:', offerId);
-      return;
-    }
-
-    const virtualProd = {
-      id: `ficha-${offer.id}`,
-      offerId: offer.id,
-      isSingleOffer: true,
-      zoneType: offer.zoneType,
-      zoneColor: offer.zoneColor,
-      muni: offer.muni || 'Granada (Meta)',
-      name: `Ficha Comercial: ${offer.id} (${offer.muni || 'Granada, Meta'})`,
-      priceDisplay: "$ 7.000 COP",
-      priceValue: 7000,
-      format: "PDF Oficial Sin Censura + Punto KMZ + Contacto Directo",
-      targetAudience: "Avaluadores RAA y Peritos Colegiados",
-      phoneReal: offer.phoneReal,
-      addressReal: offer.addressReal,
-      unitValueReal: offer.unitValueReal,
-      factorReal: offer.factorReal,
-      rawPriceReal: offer.rawPriceReal,
-      pdf: offer.pdf,
-      kmz: offer.kmz,
-      foto: offer.foto,
-      tipo: offer.tipo,
-      area: offer.area,
-      medidas: offer.medidas,
-      topografia: offer.topografia,
-      servicios: offer.servicios,
-      via: offer.via,
-      rangoEstimado: offer.rangoEstimado
-    };
-
-    if (window.LonjaModal) {
-      window.LonjaModal.renderCheckout(virtualProd);
-    } else if (typeof openProductCheckoutModal === 'function') {
-      openProductCheckoutModal(virtualProd);
-    } else {
-      alert('Iniciando modal pericial...');
-    }
-  };
-
-  // Renderizar Marcadores Diferenciados por Color (Azul: Urbano · Verde: Rural)
+  // 1. Renderizar Marcadores Diferenciados por Color (Azul: Urbano · Verde: Rural)
   const pinMarkers = [];
 
   marketOffers.forEach(o => {
@@ -1941,10 +1867,125 @@ function initGeovisorPericial() {
     marker.bindPopup(popupHtml);
   });
 
+  // 2. Control de Estado Activo y Filtros
+  let currentMuni = 'granada';
+  let currentZoneFilter = 'all';
+
+  function updateVisibleMarkers() {
+    markersLayer.clearLayers();
+    pinMarkers.forEach(m => {
+      const matchMuni = currentMuni === 'todos' || 
+        (currentMuni === 'villavicencio' && m.offerData.divipola === '50001') ||
+        (currentMuni === 'granada' && m.offerData.divipola === '50313');
+      
+      const matchZone = currentZoneFilter === 'all' || m.offerData.zoneType === currentZoneFilter;
+
+      if (matchMuni && matchZone) {
+        markersLayer.addLayer(m);
+      }
+    });
+
+    // Actualizar contadores de los botones de filtro secundario (Todas, Urbanas, Rurales)
+    const availableForMuni = pinMarkers.filter(m => {
+      return currentMuni === 'todos' || 
+        (currentMuni === 'villavicencio' && m.offerData.divipola === '50001') ||
+        (currentMuni === 'granada' && m.offerData.divipola === '50313');
+    });
+
+    const countAll = availableForMuni.length;
+    const countUrb = availableForMuni.filter(m => m.offerData.zoneType === 'urbano').length;
+    const countRur = availableForMuni.filter(m => m.offerData.zoneType === 'rural').length;
+
+    const labelAll = document.getElementById('filter-label-all');
+    const labelUrb = document.getElementById('filter-label-urb');
+    const labelRur = document.getElementById('filter-label-rur');
+
+    if (labelAll) labelAll.textContent = `📍 Todas (${countAll})`;
+    if (labelUrb) labelUrb.textContent = `🔵 Urbanas (${countUrb})`;
+    if (labelRur) labelRur.textContent = `🟢 Rurales (${countRur})`;
+  }
+
+  // 3. Función global para conmutar centro del mapa y filtrar ofertas entre Granada y Villavicencio
+  window.seleccionarMunicipio = function(muniKey) {
+    currentMuni = muniKey || 'granada';
+
+    const btnGranada = document.getElementById('btn-muni-granada');
+    const btnVillavo = document.getElementById('btn-muni-villavo');
+    const btnTodos = document.getElementById('btn-muni-todos');
+    const title = document.getElementById('geovisor-muni-title');
+    const countPill = document.getElementById('geovisor-count-pill');
+    const input = document.getElementById('geovisor-codigo-input');
+    const capasGranada = document.getElementById('capas-granada-group');
+    const capasVillavo = document.getElementById('capas-villavo-group');
+
+    // Resetear estilos de botones a inactivo
+    [btnGranada, btnVillavo, btnTodos].forEach(b => {
+      if (!b) return;
+      b.className = 'px-3.5 py-2 rounded-lg text-xs font-mono-tech font-bold transition-all flex items-center justify-center gap-1.5 bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 border border-slate-800 min-h-[42px] sm:min-h-0';
+    });
+
+    const setActiveBtn = (b) => {
+      if (!b) return;
+      b.className = 'px-3.5 py-2 rounded-lg text-xs font-mono-tech font-bold transition-all flex items-center justify-center gap-1.5 bg-emerald-600 text-white shadow-lg border border-emerald-400 ring-2 ring-emerald-500/50 min-h-[42px] sm:min-h-0';
+    };
+
+    if (muniKey === 'villavicencio') {
+      setActiveBtn(btnVillavo);
+      map.flyTo([4.140, -73.588], 15, { duration: 1.2 });
+      setTimeout(() => map.invalidateSize(), 300);
+      showMapBanner('📍 Centrado en Villavicencio (Meta) · Comuna 4 (Abajamcito & Prados de Siberia)');
+      if (title) title.innerHTML = 'Visor Catastral y Puntos de Mercado: Villavicencio (Meta)';
+      if (countPill) countPill.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span><span>3 Ofertas Depuradas en Comuna 4 (50001)</span>';
+      if (input) input.placeholder = 'Ingresa código predial nacional NUPRE de Villavicencio (ej: 500010104...)';
+      if (capasVillavo) { capasVillavo.style.display = 'inline-flex'; capasVillavo.style.opacity = '1'; }
+      if (capasGranada) capasGranada.style.opacity = '0.4';
+    } else if (muniKey === 'todos') {
+      setActiveBtn(btnTodos);
+      map.flyTo([3.84, -73.65], 10, { duration: 1.5 });
+      setTimeout(() => map.invalidateSize(), 300);
+      showMapBanner('🗺️ Cobertura departamental: Granada & Villavicencio');
+      if (title) title.innerHTML = 'Visor Catastral y Puntos de Mercado: Granada & Villavicencio (Meta)';
+      if (countPill) countPill.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span><span>11 Ofertas Georreferenciadas Visibles</span>';
+      if (input) input.placeholder = 'Ingresa código predial nacional NUPRE (30 dígitos IGAC)...';
+      if (capasGranada) { capasGranada.style.display = 'inline-flex'; capasGranada.style.opacity = '1'; }
+      if (capasVillavo) { capasVillavo.style.display = 'inline-flex'; capasVillavo.style.opacity = '1'; }
+    } else {
+      // Granada por defecto
+      setActiveBtn(btnGranada);
+      map.flyTo(defaultCenter, defaultZoom, { duration: 1.2 });
+      setTimeout(() => map.invalidateSize(), 300);
+      showMapBanner('📍 Centrado en Granada (Meta) · Casco Urbano y Zona Rural');
+      if (title) title.innerHTML = 'Visor Catastral y Puntos de Mercado: Granada (Meta)';
+      if (countPill) countPill.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span><span>8 Ofertas Georreferenciadas (50313)</span>';
+      if (input) input.placeholder = 'Ingresa código predial nacional NUPRE de Granada (ej: 503130100...)';
+      if (capasGranada) { capasGranada.style.display = 'inline-flex'; capasGranada.style.opacity = '1'; }
+      if (capasVillavo) capasVillavo.style.opacity = '0.4';
+    }
+
+    updateVisibleMarkers();
+  };
+
+  window.centrarMunicipio = window.seleccionarMunicipio;
+
+  // Enlazar listeners directos en los botones
+  const btnGranadaEl = document.getElementById('btn-muni-granada');
+  const btnVillavoEl = document.getElementById('btn-muni-villavo');
+  const btnTodosEl = document.getElementById('btn-muni-todos');
+
+  if (btnGranadaEl) {
+    btnGranadaEl.onclick = (e) => { e.preventDefault(); window.seleccionarMunicipio('granada'); };
+  }
+  if (btnVillavoEl) {
+    btnVillavoEl.onclick = (e) => { e.preventDefault(); window.seleccionarMunicipio('villavicencio'); };
+  }
+  if (btnTodosEl) {
+    btnTodosEl.onclick = (e) => { e.preventDefault(); window.seleccionarMunicipio('todos'); };
+  }
+
   // Inicializar pines en el mapa según el municipio activo por defecto
   updateVisibleMarkers();
 
-  // Filtro de Ofertas en Vivo (Todas / Urbanas / Rurales)
+  // 4. Filtro de Ofertas en Vivo (Todas / Urbanas / Rurales)
   window.filtrarGeovisorOfertas = function(filterType) {
     currentZoneFilter = filterType || 'all';
     updateVisibleMarkers();
@@ -1960,6 +2001,52 @@ function initGeovisorPericial() {
       if (filterType === 'all') btnAll.classList.add('ring-2', 'ring-white', 'scale-105');
       if (filterType === 'urbano') btnUrb.classList.add('ring-2', 'ring-white', 'scale-105');
       if (filterType === 'rural') btnRur.classList.add('ring-2', 'ring-white', 'scale-105');
+    }
+  };
+
+  // 5. Exponer función global para abrir modal de compra de ficha individual o packs
+  window.desbloquearOfertaIndividual = function(offerId) {
+    const offer = marketOffers.find(o => o.id === offerId);
+    if (!offer) {
+      console.warn('Oferta no encontrada:', offerId);
+      return;
+    }
+
+    const virtualProd = {
+      id: `ficha-${offer.id}`,
+      offerId: offer.id,
+      isSingleOffer: true,
+      zoneType: offer.zoneType,
+      zoneColor: offer.zoneColor,
+      muni: offer.muni || 'Granada (Meta)',
+      name: `Ficha Comercial: ${offer.id} (${offer.muni || 'Granada, Meta'})`,
+      priceDisplay: "$ 7.000 COP",
+      priceValue: 7000,
+      format: "PDF Oficial Sin Censura + Punto KMZ + Contacto Directo",
+      targetAudience: "Avaluadores RAA y Peritos Colegiados",
+      phoneReal: offer.phoneReal,
+      addressReal: offer.addressReal,
+      unitValueReal: offer.unitValueReal,
+      factorReal: offer.factorReal,
+      rawPriceReal: offer.rawPriceReal,
+      pdf: offer.pdf,
+      kmz: offer.kmz,
+      foto: offer.foto,
+      tipo: offer.tipo,
+      area: offer.area,
+      medidas: offer.medidas,
+      topografia: offer.topografia,
+      servicios: offer.servicios,
+      via: offer.via,
+      rangoEstimado: offer.rangoEstimado
+    };
+
+    if (window.LonjaModal) {
+      window.LonjaModal.renderCheckout(virtualProd);
+    } else if (typeof openProductCheckoutModal === 'function') {
+      openProductCheckoutModal(virtualProd);
+    } else {
+      alert('Iniciando modal pericial...');
     }
   };
 
