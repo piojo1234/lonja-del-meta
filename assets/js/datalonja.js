@@ -2052,8 +2052,10 @@ function initGeovisorPericial() {
 
   // Capas Catastrales Masivas en Vivo (Canvas Ultra Rápido sin saturar memoria)
   const cadastralLayers = {
-    urbano: null,
-    rural: null
+    granada_urbano: null,
+    granada_rural: null,
+    villavicencio_urbano: null,
+    villavicencio_rural: null
   };
   const canvasRenderer = L.canvas({ padding: 0.5 });
 
@@ -2074,44 +2076,71 @@ function initGeovisorPericial() {
     }, 4500);
   }
 
-  window.toggleCapaCatastral = async function(tipo) {
+  window.toggleCapaCatastral = async function(muniOrTipo, maybeTipo) {
+    let muni = 'granada';
+    let tipo = 'urbano';
+
+    if (maybeTipo) {
+      muni = muniOrTipo;
+      tipo = maybeTipo;
+    } else {
+      tipo = muniOrTipo;
+      muni = (currentMuni === 'villavicencio') ? 'villavicencio' : 'granada';
+    }
+
+    const isVillavo = muni === 'villavicencio';
     const isUrb = tipo === 'urbano';
-    const btn = document.getElementById(isUrb ? 'btn-capa-urbano' : 'btn-capa-rural');
-    const label = document.getElementById(isUrb ? 'label-capa-urbano' : 'label-capa-rural');
-    const countText = isUrb ? '20.846' : '8.662';
-    const zoneName = isUrb ? 'Urbanos' : 'Rurales';
+    const layerKey = `${isVillavo ? 'villavicencio' : 'granada'}_${isUrb ? 'urbano' : 'rural'}`;
+
+    const btnId = isVillavo 
+      ? (isUrb ? 'btn-capa-villavo-urbano' : 'btn-capa-villavo-rural')
+      : (isUrb ? 'btn-capa-granada-urbano' : 'btn-capa-granada-rural');
+
+    const labelId = isVillavo 
+      ? (isUrb ? 'label-capa-villavo-urbano' : 'label-capa-villavo-rural')
+      : (isUrb ? 'label-capa-granada-urbano' : 'label-capa-granada-rural');
+
+    const btn = document.getElementById(btnId);
+    const label = document.getElementById(labelId);
+
+    const countText = isVillavo ? (isUrb ? '22.187' : '4.903') : (isUrb ? '20.846' : '8.662');
+    const muniLabel = isVillavo ? 'Villavo' : 'Granada';
+    const zoneName = isUrb ? 'Urbana' : 'Rural';
     const primaryColor = isUrb ? '#2563EB' : '#059669';
 
     // 1. Si la capa ya está en el mapa, ocultarla
-    if (cadastralLayers[tipo] && map.hasLayer(cadastralLayers[tipo])) {
-      map.removeLayer(cadastralLayers[tipo]);
-      if (label) label.textContent = `Ver Predios ${zoneName} (${isUrb ? '20k' : '8.6k'})`;
+    if (cadastralLayers[layerKey] && map.hasLayer(cadastralLayers[layerKey])) {
+      map.removeLayer(cadastralLayers[layerKey]);
+      if (label) label.textContent = `${muniLabel} ${zoneName} (${isVillavo ? (isUrb ? '22k' : '4.9k') : (isUrb ? '20k' : '8.6k')})`;
       if (btn) {
         btn.classList.remove('ring-2', 'ring-white', 'scale-105');
         btn.style.backgroundColor = '';
       }
-      showMapBanner(`ℹ️ Capa de predios ${zoneName.toLowerCase()} ocultada del visor`);
+      showMapBanner(`ℹ️ Capa ${muniLabel} ${zoneName.toLowerCase()} ocultada del visor`);
       return;
     }
 
     // 2. Si la capa ya fue cargada en memoria, mostrarla de inmediato
-    if (cadastralLayers[tipo]) {
-      cadastralLayers[tipo].addTo(map);
-      if (label) label.textContent = `✅ Ocultar Predios ${zoneName} (${isUrb ? '20k' : '8.6k'})`;
+    if (cadastralLayers[layerKey]) {
+      cadastralLayers[layerKey].addTo(map);
+      if (label) label.textContent = `✅ Ocultar ${muniLabel} (${isVillavo ? (isUrb ? '22k' : '4.9k') : (isUrb ? '20k' : '8.6k')})`;
       if (btn) {
         btn.classList.add('ring-2', 'ring-white');
         btn.style.backgroundColor = primaryColor;
       }
-      showMapBanner(`✅ Capa ${zoneName} visible en el visor (${countText} predios)`);
+      showMapBanner(`✅ Capa ${muniLabel} ${zoneName} visible en el visor (${countText} predios)`);
       return;
     }
 
     // 3. Cargar la capa vía Fetch
-    if (label) label.textContent = `⏳ Cargando ${countText} predios...`;
-    showMapBanner(`⏳ Descargando y renderizando ${countText} polígonos catastrales ${zoneName.toLowerCase()}...`);
+    if (label) label.textContent = `⏳ Cargando ${countText}...`;
+    showMapBanner(`⏳ Descargando y renderizando ${countText} polígonos catastrales ${muniLabel} ${zoneName.toLowerCase()}...`);
 
     try {
-      const fileName = isUrb ? 'granada_urbano_parcels.geojson' : 'granada_rural_parcels.geojson';
+      const fileName = isVillavo 
+        ? (isUrb ? 'villavicencio_urbano_parcels.geojson' : 'villavicencio_rural_parcels.geojson')
+        : (isUrb ? 'granada_urbano_parcels.geojson' : 'granada_rural_parcels.geojson');
+
       const res = await fetch(`assets/data/${fileName}`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
@@ -2129,25 +2158,30 @@ function initGeovisorPericial() {
           const p = feature.properties || {};
           const nupre = p.nupre || 'Sin Código';
           const area = p.SHAPE_Area ? `${p.SHAPE_Area} m²` : 'Consultar ficha';
-          const codAnt = p.Codigo_Anterior || 'N/A';
-          const vereda = p.Vereda_Codigo || p.Barrio_Codigo || 'Granada (Meta)';
+          const codAnt = p.Codigo_Anterior || p.condicion || 'N/A';
+          const vereda = p.Vereda_Codigo || p.Barrio_Codigo || (isVillavo ? 'Villavicencio (Meta)' : 'Granada (Meta)');
 
           flayer.bindPopup(`
             <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:240px; font-size:12px; color:#1e293b;">
               <div style="background:${primaryColor}; color:white; padding:6px 10px; border-radius:6px; font-weight:bold; font-size:11px; margin-bottom:6px;">
-                PREDIO CATASTRAL ${zoneName.toUpperCase()} · GRANADA
+                PREDIO CATASTRAL ${zoneName.toUpperCase()} · ${muniLabel.toUpperCase()}
               </div>
               <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:6px; font-family:'JetBrains Mono',monospace; font-size:10px; margin-bottom:6px; word-break:break-all;">
                 <b>NUPRE (30 dígitos):</b><br><span style="color:#0C2F5A; font-weight:bold;">${nupre}</span>
               </div>
               <table style="width:100%; font-size:11px; margin-bottom:8px; line-height:1.4;">
-                <tr><td style="color:#64748b;">Cód. Anterior:</td><td style="text-align:right; font-weight:bold; font-family:'JetBrains Mono',monospace;">${codAnt}</td></tr>
+                <tr><td style="color:#64748b;">Condición / Cód:</td><td style="text-align:right; font-weight:bold; font-family:'JetBrains Mono',monospace;">${codAnt}</td></tr>
                 <tr><td style="color:#64748b;">Área Cartográfica:</td><td style="text-align:right; font-weight:bold;">${area}</td></tr>
                 <tr><td style="color:#64748b;">Sector / Jurisdicción:</td><td style="text-align:right; font-weight:bold;">${vereda}</td></tr>
               </table>
               <div style="display:flex; gap:6px;">
-                <a href="https://wa.me/573123661758?text=Hola%20Lonja,%20deseo%20cotizar%20un%20avaluo%20para%20el%20predio%20catastral%20${encodeURIComponent(nupre)}%20en%20Granada" target="_blank" style="flex:1; background:#0C2F5A; color:white; text-align:center; padding:6px 8px; border-radius:6px; font-size:11px; font-weight:bold; text-decoration:none; display:block;">
+                <a href="https://wa.me/573123661758?text=Hola%20Lonja,%20deseo%20cotizar%20un%20avaluo%20para%20el%20predio%20catastral%20${encodeURIComponent(nupre)}%20en%20${muniLabel}" target="_blank" style="flex:1; background:#0C2F5A; color:white; text-align:center; padding:6px 8px; border-radius:6px; font-size:11px; font-weight:bold; text-decoration:none; display:block;">
                   Cotizar Avalúo
+                </a>
+              </div>
+              <div style="margin-top:6px;">
+                <a href="https://geoportal.igac.gov.co/contenido/consulta-catastral" target="_blank" rel="noopener noreferrer" style="width:100%; background:#1e293b; color:#93c5fd; text-align:center; padding:6px 8px; border-radius:6px; font-size:10px; font-weight:bold; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:4px; border:1px solid #334155;" title="Abrir consulta en Geoportal IGAC">
+                  <span>🔗 Contrastar en Geoportal IGAC ↗</span>
                 </a>
               </div>
             </div>
@@ -2155,18 +2189,18 @@ function initGeovisorPericial() {
         }
       });
 
-      cadastralLayers[tipo] = layer;
+      cadastralLayers[layerKey] = layer;
       layer.addTo(map);
 
-      if (label) label.textContent = `✅ Ocultar Predios ${zoneName} (${isUrb ? '20k' : '8.6k'})`;
+      if (label) label.textContent = `✅ Ocultar ${muniLabel} (${isVillavo ? (isUrb ? '22k' : '4.9k') : (isUrb ? '20k' : '8.6k')})`;
       if (btn) {
         btn.classList.add('ring-2', 'ring-white');
         btn.style.backgroundColor = primaryColor;
       }
-      showMapBanner(`✅ ¡${countText} predios ${zoneName.toLowerCase()} cargados con éxito en el mapa!`);
+      showMapBanner(`✅ ¡${countText} predios de ${muniLabel} ${zoneName.toLowerCase()} cargados con éxito en el mapa!`);
 
-      if (!isUrb) {
-        map.flyToBounds(layer.getBounds(), { padding: [20, 20], maxZoom: 14, duration: 1 });
+      if (!isUrb || isVillavo) {
+        map.flyToBounds(layer.getBounds(), { padding: [20, 20], maxZoom: 15, duration: 1 });
       }
     } catch (err) {
       console.error('Error cargando capa catastral:', err);

@@ -326,9 +326,9 @@
               <div id="capas-granada-group" class="inline-flex flex-wrap items-center gap-2">
                 <!-- Capa Urbana Granada -->
                 <div class="inline-flex rounded-xl shadow-sm">
-                  <button type="button" onclick="window.toggleCapaCatastral('urbano')" id="btn-capa-urbano" class="px-3 py-1.5 bg-blue-900/60 hover:bg-blue-800 text-blue-200 rounded-l-xl font-bold border border-blue-500/50 text-[11px] flex items-center gap-1.5 transition-all" title="Ver polígonos urbanos de Granada en el mapa">
+                  <button type="button" onclick="window.toggleCapaCatastral('granada', 'urbano')" id="btn-capa-granada-urbano" class="px-3 py-1.5 bg-blue-900/60 hover:bg-blue-800 text-blue-200 rounded-l-xl font-bold border border-blue-500/50 text-[11px] flex items-center gap-1.5 transition-all" title="Ver polígonos urbanos de Granada en el mapa">
                     <i data-lucide="layers" class="w-3.5 h-3.5 text-blue-400"></i>
-                    <span id="label-capa-urbano">Granada Urbana (20k)</span>
+                    <span id="label-capa-granada-urbano">Granada Urbana (20k)</span>
                   </button>
                   <button type="button" onclick="window.comprarProductoPorId('capa-catastral-urbana-granada')" title="Adquirir Capa KMZ Urbana para Google Earth / QGIS" class="px-2.5 py-1.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 rounded-r-xl border border-l-0 border-amber-500/50 text-[10px] font-bold flex items-center gap-1 transition-colors">
                     <i data-lucide="lock" class="w-3 h-3 text-amber-400"></i>
@@ -338,9 +338,9 @@
 
                 <!-- Capa Rural Granada -->
                 <div class="inline-flex rounded-xl shadow-sm">
-                  <button type="button" onclick="window.toggleCapaCatastral('rural')" id="btn-capa-rural" class="px-3 py-1.5 bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 rounded-l-xl font-bold border border-emerald-500/50 text-[11px] flex items-center gap-1.5 transition-all" title="Ver polígonos rurales de Granada en el mapa">
+                  <button type="button" onclick="window.toggleCapaCatastral('granada', 'rural')" id="btn-capa-granada-rural" class="px-3 py-1.5 bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 rounded-l-xl font-bold border border-emerald-500/50 text-[11px] flex items-center gap-1.5 transition-all" title="Ver polígonos rurales de Granada en el mapa">
                     <i data-lucide="layers" class="w-3.5 h-3.5 text-emerald-400"></i>
-                    <span id="label-capa-rural">Granada Rural (8.6k)</span>
+                    <span id="label-capa-granada-rural">Granada Rural (8.6k)</span>
                   </button>
                   <button type="button" onclick="window.comprarProductoPorId('capa-catastral-rural-granada')" title="Adquirir Capa KMZ Rural para Google Earth / QGIS" class="px-2.5 py-1.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 rounded-r-xl border border-l-0 border-amber-500/50 text-[10px] font-bold flex items-center gap-1 transition-colors">
                     <i data-lucide="lock" class="w-3 h-3 text-amber-400"></i>
@@ -349,16 +349,31 @@
                 </div>
               </div>
 
-              <!-- Capas Catastrales Villavicencio (Protegidas por Pasarela / Bóveda) -->
+              <!-- Capas Villavicencio -->
               <div id="capas-villavo-group" class="inline-flex flex-wrap items-center gap-2">
-                <button type="button" onclick="window.comprarProductoPorId('capa-catastral-urbana-villavicencio')" title="Adquirir Capa Urbana Villavicencio (142k predios KMZ)" class="px-3 py-1.5 bg-blue-950/80 hover:bg-blue-900 text-blue-200 rounded-xl border border-blue-500/50 text-[11px] font-bold flex items-center gap-1.5 transition-all shadow-sm">
-                  <i data-lucide="lock" class="w-3.5 h-3.5 text-amber-400"></i>
-                  <span>Villavicencio Urbana (142k)</span>
-                </button>
-                <button type="button" onclick="window.comprarProductoPorId('capa-catastral-rural-villavicencio')" title="Adquirir Capa Rural Villavicencio (34k predios KMZ)" class="px-3 py-1.5 bg-emerald-950/80 hover:bg-emerald-900 text-emerald-200 rounded-xl border border-emerald-500/50 text-[11px] font-bold flex items-center gap-1.5 transition-all shadow-sm">
-                  <i data-lucide="lock" class="w-3.5 h-3.5 text-amber-400"></i>
-                  <span>Villavicencio Rural (34k)</span>
-                </button>
+                <!-- Capa Urbana Villavicencio -->
+                <div class="inline-flex rounded-xl shadow-sm">
+                  <button type="button" onclick="window.toggleCapaCatastral('villavicencio', 'urbano')" id="btn-capa-villavo-urbano" class="px-3 py-1.5 bg-blue-900/60 hover:bg-blue-800 text-blue-200 rounded-l-xl font-bold border border-blue-500/50 text-[11px] flex items-center gap-1.5 transition-all" title="Ver polígonos urbanos de Villavicencio en el mapa">
+                    <i data-lucide="layers" class="w-3.5 h-3.5 text-blue-400"></i>
+                    <span id="label-capa-villavo-urbano">Villavo Urbana (22k)</span>
+                  </button>
+                  <button type="button" onclick="window.comprarProductoPorId('capa-catastral-urbana-villavicencio')" title="Adquirir Capa Completa 142k KMZ para Google Earth / QGIS" class="px-2.5 py-1.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 rounded-r-xl border border-l-0 border-amber-500/50 text-[10px] font-bold flex items-center gap-1 transition-colors">
+                    <i data-lucide="lock" class="w-3 h-3 text-amber-400"></i>
+                    <span>KMZ</span>
+                  </button>
+                </div>
+
+                <!-- Capa Rural Villavicencio -->
+                <div class="inline-flex rounded-xl shadow-sm">
+                  <button type="button" onclick="window.toggleCapaCatastral('villavicencio', 'rural')" id="btn-capa-villavo-rural" class="px-3 py-1.5 bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 rounded-l-xl font-bold border border-emerald-500/50 text-[11px] flex items-center gap-1.5 transition-all" title="Ver polígonos rurales de Villavicencio en el mapa">
+                    <i data-lucide="layers" class="w-3.5 h-3.5 text-emerald-400"></i>
+                    <span id="label-capa-villavo-rural">Villavo Rural (4.9k)</span>
+                  </button>
+                  <button type="button" onclick="window.comprarProductoPorId('capa-catastral-rural-villavicencio')" title="Adquirir Capa Completa 34k KMZ para Google Earth / QGIS" class="px-2.5 py-1.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 rounded-r-xl border border-l-0 border-amber-500/50 text-[10px] font-bold flex items-center gap-1 transition-colors">
+                    <i data-lucide="lock" class="w-3 h-3 text-amber-400"></i>
+                    <span>KMZ</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -632,7 +647,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="assets/js/data.js?v=20261119_v3"></script>
-  <script src="assets/js/datalonja.js?v=20261119_v3"></script>
+  <script src="assets/js/data.js?v=20261119_v4"></script>
+  <script src="assets/js/datalonja.js?v=20261119_v4"></script>
 </body>
 </html>
