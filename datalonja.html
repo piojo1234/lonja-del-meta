@@ -250,58 +250,52 @@
             </h2>
           </div>
           <div class="flex flex-wrap items-center gap-2">
-            <!-- Conmutador de Municipio -->
-            <div class="inline-flex rounded-xl bg-slate-900 p-1 border border-slate-700 shadow-sm">
-              <button onclick="window.centrarMunicipio('granada')" class="px-3 py-1.5 rounded-lg text-xs font-mono-tech font-bold text-white bg-slate-800 hover:bg-slate-700 transition-all flex items-center gap-1.5 shadow">
-                <span>📍 Granada (50313)</span>
-              </button>
-              <button onclick="window.centrarMunicipio('villavicencio')" class="px-3 py-1.5 rounded-lg text-xs font-mono-tech font-bold text-emerald-300 hover:text-white hover:bg-slate-700 transition-all flex items-center gap-1.5">
-                <span>📍 Villavicencio (50001)</span>
-              </button>
-            </div>
-            <div id="geovisor-count-pill" class="flex items-center gap-1.5 font-mono-tech text-xs text-emerald-300 bg-emerald-950/60 border border-emerald-500/40 px-3 py-1.5 rounded-lg">
+            <div id="geovisor-count-pill" class="flex items-center gap-1.5 font-mono-tech text-xs text-emerald-300 bg-emerald-950/60 border border-emerald-500/40 px-3 py-1.5 rounded-lg shadow-sm">
               <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
               <span>11 Ofertas Georreferenciadas Visibles</span>
             </div>
-            <div class="flex items-center gap-1.5 font-mono-tech text-xs text-blue-300 bg-blue-950/60 border border-blue-500/40 px-3 py-1.5 rounded-lg">
+            <a href="https://geoportal.igac.gov.co/contenido/consulta-catastral" target="_blank" rel="noopener noreferrer" title="Abrir Geoportal Oficial de Consulta Catastral del IGAC" class="flex items-center gap-1.5 font-mono-tech text-xs text-blue-300 hover:text-white bg-blue-950/70 hover:bg-blue-900 border border-blue-500/50 px-3 py-1.5 rounded-lg transition-colors shadow-sm">
               <span class="w-2 h-2 rounded-full bg-blue-400"></span>
-              <span>API IGAC / Catastro Multipropósito: Conectado</span>
-            </div>
+              <span>🔗 Geoportal Oficial IGAC ↗</span>
+            </a>
           </div>
         </div>
 
-        <!-- Search Bar and Quick Test Buttons -->
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5 mb-5 shadow-lg">
-          <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 mb-3">
-            <div class="flex-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-              <div class="relative flex-1">
-                <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-3.5"></i>
-                <input type="text" id="geovisor-codigo-input" placeholder="Ingresa código predial nacional (ej: Tunja 15001..., Granada 50313...)" class="w-full text-xs font-mono-tech p-3 pl-9 bg-slate-950 text-white border border-slate-700 rounded-xl focus:outline-none focus:border-emerald-400" />
-              </div>
-              <button id="btn-geovisor-buscar" class="px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-mono-tech text-xs font-bold uppercase rounded-xl flex items-center justify-center gap-2 transition-all shrink-0">
-                <i data-lucide="scan" class="w-4 h-4"></i>
-                <span>Localizar Predio</span>
+        <!-- Panel de Control Pericial: Selector Táctil de Municipio + Buscador Predial NUPRE -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5 mb-5 shadow-xl">
+          <!-- 1. Selector Primario de Municipio (Táctil, Ergonómico en Móvil y PC) -->
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-4 pb-3.5 border-b border-slate-800/80">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              <span class="text-slate-300 font-mono-tech text-xs font-bold uppercase tracking-wider">Municipio Activo:</span>
+              <span class="text-slate-500 text-xs hidden md:inline">• Jurisdicción Catastral IGAC</span>
+            </div>
+            
+            <!-- Segmented Control de Municipios -->
+            <div class="grid grid-cols-3 sm:flex items-center gap-1.5 bg-slate-950 p-1 rounded-xl border border-slate-800 shadow-inner">
+              <button type="button" id="btn-muni-granada" onclick="window.seleccionarMunicipio('granada')" class="px-3.5 py-2 rounded-lg text-xs font-mono-tech font-bold transition-all flex items-center justify-center gap-1.5 bg-slate-800 text-white shadow border border-slate-700 min-h-[42px] sm:min-h-0">
+                <span>📍 Granada</span>
+                <span class="text-[10px] text-emerald-400 font-normal hidden lg:inline">(50313)</span>
+              </button>
+              <button type="button" id="btn-muni-villavo" onclick="window.seleccionarMunicipio('villavicencio')" class="px-3.5 py-2 rounded-lg text-xs font-mono-tech font-bold transition-all flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-slate-800 min-h-[42px] sm:min-h-0">
+                <span>📍 Villavicencio</span>
+                <span class="text-[10px] text-emerald-400 font-normal hidden lg:inline">(50001)</span>
+              </button>
+              <button type="button" id="btn-muni-todos" onclick="window.seleccionarMunicipio('todos')" class="px-3 py-2 rounded-lg text-xs font-mono-tech font-bold transition-all flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-slate-800 min-h-[42px] sm:min-h-0">
+                <span>🗺️ Ambos</span>
               </button>
             </div>
           </div>
 
-          <!-- Quick Sample Predios Buttons -->
-          <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-800/80 font-mono-tech text-xs">
-            <span class="text-slate-400 text-[11px] font-bold uppercase">Probar Lotes de Muestra:</span>
-            <button class="sample-predio-btn px-2.5 py-1 bg-emerald-900/80 hover:bg-emerald-800 text-emerald-200 rounded-lg border border-emerald-400/50 text-[11px] font-bold transition-colors flex items-center gap-1 shadow-sm" data-id="vil1">
-              📍 Villavicencio - Abajamcito (66 m²)
-            </button>
-            <button class="sample-predio-btn px-2.5 py-1 bg-blue-900/80 hover:bg-blue-800 text-blue-200 rounded-lg border border-blue-400/50 text-[11px] font-bold transition-colors flex items-center gap-1 shadow-sm" data-id="tunja1">
-              🏛️ Tunja (Boyacá) - Centro Histórico
-            </button>
-            <button class="sample-predio-btn px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-emerald-300 rounded-lg border border-slate-700 text-[11px] transition-colors" data-id="urb1">
-              📍 Granada - Urbano (198 m²)
-            </button>
-            <button class="sample-predio-btn px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-emerald-300 rounded-lg border border-slate-700 text-[11px] transition-colors" data-id="urb2">
-              📍 Granada - Comercial (227 m²)
-            </button>
-            <button class="sample-predio-btn px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-emerald-300 rounded-lg border border-slate-700 text-[11px] transition-colors" data-id="rur1">
-              🌾 Granada - Rural Finca (42.5 Ha)
+          <!-- 2. Buscador por Código Predial Nacional (NUPRE 30 dígitos) -->
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+            <div class="relative flex-1">
+              <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-3.5"></i>
+              <input type="text" id="geovisor-codigo-input" placeholder="Ingresa código predial nacional NUPRE (ej: Granada 50313..., Villavicencio 50001...)" class="w-full text-sm sm:text-xs font-mono-tech p-3 pl-9 bg-slate-950 text-white border border-slate-700 rounded-xl focus:outline-none focus:border-emerald-400 transition-colors shadow-inner" />
+            </div>
+            <button id="btn-geovisor-buscar" class="px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-mono-tech text-xs font-bold uppercase rounded-xl flex items-center justify-center gap-2 transition-all shrink-0 shadow-md min-h-[44px]">
+              <i data-lucide="scan" class="w-4 h-4"></i>
+              <span>Localizar Predio</span>
             </button>
           </div>
         </div>
@@ -310,17 +304,17 @@
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 mb-4 p-3.5 bg-slate-900 border border-slate-800 rounded-2xl shadow-sm font-mono-tech text-xs">
           <!-- Ofertas Filter -->
           <div class="flex flex-wrap items-center gap-2">
-            <span class="text-slate-400 text-[11px] font-bold uppercase">Ofertas de Mercado:</span>
+            <span class="text-slate-400 text-[11px] font-bold uppercase">Filtrar Ofertas:</span>
             <button onclick="window.filtrarGeovisorOfertas('all')" id="filter-btn-all" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-white rounded-xl font-bold border border-slate-600 transition-all flex items-center gap-1 shadow-sm">
-              <span>📍 Todas (7)</span>
+              <span id="filter-label-all">📍 Todas (11)</span>
             </button>
             <button onclick="window.filtrarGeovisorOfertas('urbano')" id="filter-btn-urb" class="px-3 py-1.5 bg-blue-950/80 hover:bg-blue-900 text-blue-200 rounded-xl font-bold border border-blue-500/50 transition-all flex items-center gap-1.5 shadow-sm">
               <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
-              <span>🔵 Urbanas (5)</span>
+              <span id="filter-label-urb">🔵 Urbanas (9)</span>
             </button>
             <button onclick="window.filtrarGeovisorOfertas('rural')" id="filter-btn-rur" class="px-3 py-1.5 bg-emerald-950/80 hover:bg-emerald-900 text-emerald-200 rounded-xl font-bold border border-emerald-500/50 transition-all flex items-center gap-1.5 shadow-sm">
               <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-              <span>🟢 Rurales (2)</span>
+              <span id="filter-label-rur">🟢 Rurales (2)</span>
             </button>
           </div>
 
@@ -328,42 +322,47 @@
           <div class="flex flex-wrap items-center gap-2 pt-2 lg:pt-0 border-t lg:border-t-0 border-slate-800">
             <span class="text-slate-400 text-[11px] font-bold uppercase">Capas Catastrales:</span>
             
-            <!-- Capa Urbana -->
-            <div class="inline-flex rounded-xl shadow-sm">
-              <button onclick="window.toggleCapaCatastral('urbano')" id="btn-capa-urbano" class="px-3 py-1.5 bg-blue-900/60 hover:bg-blue-800 text-blue-200 rounded-l-xl font-bold border border-blue-500/50 text-[11px] flex items-center gap-1.5 transition-all">
-                <i data-lucide="layers" class="w-3.5 h-3.5 text-blue-400"></i>
-                <span id="label-capa-urbano">Ver Predios Urbanos (20k)</span>
-              </button>
-              <a href="assets/downloads/U_TERRENO_GRANADA_2026.kmz" download title="Descargar KMZ Urbano para Google Earth / QGIS" class="px-2.5 py-1.5 bg-blue-950 hover:bg-blue-900 text-blue-300 rounded-r-xl border border-l-0 border-blue-500/50 text-[10px] font-bold flex items-center gap-1">
-                <i data-lucide="download" class="w-3 h-3 text-blue-400"></i>
-                <span>KMZ</span>
-              </a>
-            </div>
+            <!-- Capas Granada -->
+            <div id="capas-granada-group" class="inline-flex flex-wrap items-center gap-2">
+              <!-- Capa Urbana Granada -->
+              <div class="inline-flex rounded-xl shadow-sm">
+                <button onclick="window.toggleCapaCatastral('urbano')" id="btn-capa-urbano" class="px-3 py-1.5 bg-blue-900/60 hover:bg-blue-800 text-blue-200 rounded-l-xl font-bold border border-blue-500/50 text-[11px] flex items-center gap-1.5 transition-all" title="Cargar polígonos urbanos de Granada en el mapa">
+                  <i data-lucide="layers" class="w-3.5 h-3.5 text-blue-400"></i>
+                  <span id="label-capa-urbano">Granada Urbana (20k)</span>
+                </button>
+                <a href="assets/downloads/U_TERRENO_GRANADA_2026.kmz" download title="Descargar KMZ Urbano para Google Earth / QGIS" class="px-2.5 py-1.5 bg-blue-950 hover:bg-blue-900 text-blue-300 rounded-r-xl border border-l-0 border-blue-500/50 text-[10px] font-bold flex items-center gap-1">
+                  <i data-lucide="download" class="w-3 h-3 text-blue-400"></i>
+                  <span>KMZ</span>
+                </a>
+              </div>
 
-            <!-- Capa Rural Granada -->
-            <div class="inline-flex rounded-xl shadow-sm">
-              <button onclick="window.toggleCapaCatastral('rural')" id="btn-capa-rural" class="px-3 py-1.5 bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 rounded-l-xl font-bold border border-emerald-500/50 text-[11px] flex items-center gap-1.5 transition-all">
-                <i data-lucide="layers" class="w-3.5 h-3.5 text-emerald-400"></i>
-                <span id="label-capa-rural">Ver Predios Rurales (8.6k)</span>
-              </button>
-              <a href="assets/downloads/R_TERRENO_GRANADA_2026.kmz" download title="Descargar KMZ Rural para Google Earth / QGIS" class="px-2.5 py-1.5 bg-emerald-950 hover:bg-emerald-900 text-emerald-300 rounded-r-xl border border-l-0 border-emerald-500/50 text-[10px] font-bold flex items-center gap-1">
-                <i data-lucide="download" class="w-3 h-3 text-emerald-400"></i>
-                <span>KMZ</span>
-              </a>
+              <!-- Capa Rural Granada -->
+              <div class="inline-flex rounded-xl shadow-sm">
+                <button onclick="window.toggleCapaCatastral('rural')" id="btn-capa-rural" class="px-3 py-1.5 bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 rounded-l-xl font-bold border border-emerald-500/50 text-[11px] flex items-center gap-1.5 transition-all" title="Cargar polígonos rurales de Granada en el mapa">
+                  <i data-lucide="layers" class="w-3.5 h-3.5 text-emerald-400"></i>
+                  <span id="label-capa-rural">Granada Rural (8.6k)</span>
+                </button>
+                <a href="assets/downloads/R_TERRENO_GRANADA_2026.kmz" download title="Descargar KMZ Rural para Google Earth / QGIS" class="px-2.5 py-1.5 bg-emerald-950 hover:bg-emerald-900 text-emerald-300 rounded-r-xl border border-l-0 border-emerald-500/50 text-[10px] font-bold flex items-center gap-1">
+                  <i data-lucide="download" class="w-3 h-3 text-emerald-400"></i>
+                  <span>KMZ</span>
+                </a>
+              </div>
             </div>
 
             <!-- Capas Catastrales Villavicencio -->
-            <div class="inline-flex rounded-xl shadow-sm">
-              <a href="assets/downloads/Capa_Catastral_Urbana_Villavicencio_2026.zip" download title="Descargar Capa Urbana Villavicencio (142k predios KMZ)" class="px-3 py-1.5 bg-blue-950 hover:bg-blue-900 text-blue-200 rounded-xl border border-blue-500/50 text-[11px] font-bold flex items-center gap-1.5 transition-all">
-                <i data-lucide="download" class="w-3.5 h-3.5 text-blue-400"></i>
-                <span>Villavicencio Urbana (142k)</span>
-              </a>
-            </div>
-            <div class="inline-flex rounded-xl shadow-sm">
-              <a href="assets/downloads/Capa_Catastral_Rural_Villavicencio_2026.zip" download title="Descargar Capa Rural Villavicencio (34k predios KMZ)" class="px-3 py-1.5 bg-emerald-950 hover:bg-emerald-900 text-emerald-200 rounded-xl border border-emerald-500/50 text-[11px] font-bold flex items-center gap-1.5 transition-all">
-                <i data-lucide="download" class="w-3.5 h-3.5 text-emerald-400"></i>
-                <span>Villavicencio Rural (34k)</span>
-              </a>
+            <div id="capas-villavo-group" class="inline-flex flex-wrap items-center gap-2">
+              <div class="inline-flex rounded-xl shadow-sm">
+                <a href="assets/downloads/Capa_Catastral_Urbana_Villavicencio_2026.zip" download title="Descargar Capa Urbana Villavicencio (142k predios KMZ)" class="px-3 py-1.5 bg-blue-950 hover:bg-blue-900 text-blue-200 rounded-xl border border-blue-500/50 text-[11px] font-bold flex items-center gap-1.5 transition-all">
+                  <i data-lucide="download" class="w-3.5 h-3.5 text-blue-400"></i>
+                  <span>Villavicencio Urbana (142k)</span>
+                </a>
+              </div>
+              <div class="inline-flex rounded-xl shadow-sm">
+                <a href="assets/downloads/Capa_Catastral_Rural_Villavicencio_2026.zip" download title="Descargar Capa Rural Villavicencio (34k predios KMZ)" class="px-3 py-1.5 bg-emerald-950 hover:bg-emerald-900 text-emerald-200 rounded-xl border border-emerald-500/50 text-[11px] font-bold flex items-center gap-1.5 transition-all">
+                  <i data-lucide="download" class="w-3.5 h-3.5 text-emerald-400"></i>
+                  <span>Villavicencio Rural (34k)</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -373,30 +372,36 @@
           <!-- Notification Floating Banner -->
           <div id="geovisor-status-banner" class="hidden absolute top-4 left-1/2 -translate-x-1/2 z-30 bg-slate-900/95 border border-emerald-500/80 text-emerald-300 px-4 py-2 rounded-xl text-xs font-mono-tech shadow-2xl flex items-center gap-2 pointer-events-none"></div>
 
+          <!-- Mobile Gesture Hint Badge -->
+          <div class="absolute top-3 right-3 z-20 bg-slate-950/90 backdrop-blur-sm border border-slate-700/80 px-2.5 py-1 rounded-lg text-[10px] font-mono-tech text-slate-300 flex items-center gap-1.5 pointer-events-none shadow">
+            <i data-lucide="hand" class="w-3.5 h-3.5 text-emerald-400"></i>
+            <span>Navega con 1 dedo · Zoom con 2</span>
+          </div>
+
           <div id="geovisor-map" style="height: 520px; width: 100%;" class="z-10"></div>
           
           <!-- Floating Legend / Controls Overlay -->
           <div class="absolute bottom-4 left-4 z-20 bg-slate-950/90 backdrop-blur-md p-3.5 rounded-xl border border-slate-700 font-mono-tech text-xs text-white max-w-xs shadow-xl hidden sm:block">
             <span class="text-[10px] text-slate-400 uppercase font-bold block mb-1.5">Convenciones Periciales:</span>
-            <div class="space-y-1.5 text-[11px]">
+            <div class="space-y-1.5 text-[11px]" id="geovisor-legend-items">
               <div class="flex items-center gap-2">
                 <span class="w-3 h-3 rounded-full bg-blue-600 border border-white"></span>
-                <span>🔵 Suelo Urbano: 50313-U01 a U05</span>
+                <span>🔵 Suelo Urbano: Granada &amp; Villavicencio</span>
               </div>
               <div class="flex items-center gap-2">
                 <span class="w-3 h-3 rounded-full bg-emerald-500 border border-white"></span>
-                <span>🟢 Suelo Rural: 50313-R01 y R02</span>
+                <span>🟢 Suelo Rural: Granada (50313-R01, R02)</span>
               </div>
               <div class="flex items-center gap-2 text-amber-300">
                 <span class="text-[10px]">🔒</span>
-                <span>Ficha $7k · Pack Trío $18k · Todo $35k</span>
+                <span>Ficha $7k · Pack Trío $18k · Master $35k</span>
               </div>
               <div class="flex items-center gap-2">
                 <span class="w-3 h-3 rounded bg-amber-500/40 border border-amber-400"></span>
                 <span>🟠 Predio en Consulta (NUPRE 30d)</span>
               </div>
               <div class="flex items-center gap-2 text-slate-400 text-[10px] pt-1 border-t border-slate-800">
-                <span>Capa: Esri Satélite HD + Catastro 2026</span>
+                <span>Capa: Esri Satélite HD + Catastro IGAC 2026</span>
               </div>
             </div>
           </div>
@@ -406,19 +411,19 @@
         <div class="p-5 bg-gradient-to-r from-slate-900 to-[#0C2F5A] border border-slate-700 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 shadow-lg">
           <div>
             <span class="text-[10px] font-mono-tech uppercase font-bold text-emerald-400">
-              ARSENAL CARTOGRÁFICO DE GRANADA (META) 2026 DISPONIBLE
+              ARSENAL CARTOGRÁFICO DEL META 2026: GRANADA &amp; VILLAVICENCIO
             </span>
             <h4 class="font-display font-bold text-white text-base mt-0.5">
-              ¿Requieres todos los 29.508 predios vectoriales y las 6 ofertas con fotos en tu Google Earth o QGIS?
+              ¿Requieres las capas catastrales vectoriales (206.000+ predios) y ofertas con fotos en tu Google Earth o QGIS?
             </h4>
             <p class="text-xs text-slate-300 mt-1">
-              Descarga directa inmediata en archivo KMZ con licencias de uso pericial bajo la Ley 1673 de 2013.
+              Descarga directa inmediata en archivo KMZ/ZIP con licencias de uso pericial bajo la Ley 1673 de 2013 y Res. IGAC 620.
             </p>
           </div>
           <div class="flex items-center gap-3 shrink-0 w-full md:w-auto">
             <a href="#catalogo" class="btn-brutalist w-full md:w-auto px-5 py-3 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-mono-tech text-xs font-black uppercase tracking-wider rounded-xl shadow-md text-center flex items-center justify-center gap-2">
               <i data-lucide="download" class="w-4 h-4"></i>
-              <span>Adquirir Paquete KMZ</span>
+              <span>Ver Catálogo de Paquetes</span>
             </a>
           </div>
         </div>

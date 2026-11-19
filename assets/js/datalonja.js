@@ -1691,24 +1691,101 @@ function initGeovisorPericial() {
     }
   ];
 
-  // Función global para conmutar centro del mapa entre Granada y Villavicencio
-  window.centrarMunicipio = function(muniKey) {
+  let currentMuni = 'granada';
+  let currentZoneFilter = 'all';
+
+  function updateVisibleMarkers() {
+    markersLayer.clearLayers();
+    pinMarkers.forEach(m => {
+      const matchMuni = currentMuni === 'todos' || 
+        (currentMuni === 'villavicencio' && m.offerData.divipola === '50001') ||
+        (currentMuni === 'granada' && m.offerData.divipola === '50313');
+      
+      const matchZone = currentZoneFilter === 'all' || m.offerData.zoneType === currentZoneFilter;
+
+      if (matchMuni && matchZone) {
+        markersLayer.addLayer(m);
+      }
+    });
+
+    // Actualizar contadores de los botones de filtro secundario (Todas, Urbanas, Rurales)
+    const availableForMuni = pinMarkers.filter(m => {
+      return currentMuni === 'todos' || 
+        (currentMuni === 'villavicencio' && m.offerData.divipola === '50001') ||
+        (currentMuni === 'granada' && m.offerData.divipola === '50313');
+    });
+
+    const countAll = availableForMuni.length;
+    const countUrb = availableForMuni.filter(m => m.offerData.zoneType === 'urbano').length;
+    const countRur = availableForMuni.filter(m => m.offerData.zoneType === 'rural').length;
+
+    const labelAll = document.getElementById('filter-label-all');
+    const labelUrb = document.getElementById('filter-label-urb');
+    const labelRur = document.getElementById('filter-label-rur');
+
+    if (labelAll) labelAll.textContent = `📍 Todas (${countAll})`;
+    if (labelUrb) labelUrb.textContent = `🔵 Urbanas (${countUrb})`;
+    if (labelRur) labelRur.textContent = `🟢 Rurales (${countRur})`;
+  }
+
+  // Función global para conmutar centro del mapa y filtrar ofertas entre Granada y Villavicencio
+  window.seleccionarMunicipio = function(muniKey) {
+    currentMuni = muniKey || 'granada';
+
+    const btnGranada = document.getElementById('btn-muni-granada');
+    const btnVillavo = document.getElementById('btn-muni-villavo');
+    const btnTodos = document.getElementById('btn-muni-todos');
+    const title = document.getElementById('geovisor-muni-title');
+    const countPill = document.getElementById('geovisor-count-pill');
+    const input = document.getElementById('geovisor-codigo-input');
+    const capasGranada = document.getElementById('capas-granada-group');
+    const capasVillavo = document.getElementById('capas-villavo-group');
+
+    // Resetear estilos de botones del segmented control
+    [btnGranada, btnVillavo, btnTodos].forEach(b => {
+      if (!b) return;
+      b.className = 'px-3.5 py-2 rounded-lg text-xs font-mono-tech font-bold transition-all flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-slate-800 min-h-[42px] sm:min-h-0';
+    });
+
+    const setActiveBtn = (b) => {
+      if (!b) return;
+      b.className = 'px-3.5 py-2 rounded-lg text-xs font-mono-tech font-bold transition-all flex items-center justify-center gap-1.5 bg-slate-800 text-white shadow border border-slate-700 min-h-[42px] sm:min-h-0';
+    };
+
     if (muniKey === 'villavicencio') {
-      map.flyTo([4.140, -73.588], 16, { duration: 1.5 });
-      showMapBanner('📍 Centrado en Villavicencio (Meta) · Comuna 4: Abajamcito y Prados de Siberia');
-      const title = document.getElementById('geovisor-muni-title');
+      setActiveBtn(btnVillavo);
+      map.flyTo([4.140, -73.588], 15, { duration: 1.2 });
+      showMapBanner('📍 Centrado en Villavicencio (Meta) · Comuna 4 (Abajamcito & Prados de Siberia)');
       if (title) title.innerHTML = 'Visor Catastral y Puntos de Mercado: Villavicencio (Meta)';
-      const countPill = document.getElementById('geovisor-count-pill');
-      if (countPill) countPill.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span><span>3 Ofertas Depuradas en Comuna 4</span>';
+      if (countPill) countPill.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span><span>3 Ofertas Depuradas en Comuna 4 (50001)</span>';
+      if (input) input.placeholder = 'Ingresa código predial nacional NUPRE de Villavicencio (ej: 500010104...)';
+      if (capasVillavo) capasVillavo.style.opacity = '1';
+      if (capasGranada) capasGranada.style.opacity = '0.5';
+    } else if (muniKey === 'todos') {
+      setActiveBtn(btnTodos);
+      map.flyTo([3.84, -73.65], 10, { duration: 1.5 });
+      showMapBanner('🗺️ Cobertura departamental: Granada & Villavicencio');
+      if (title) title.innerHTML = 'Visor Catastral y Puntos de Mercado: Granada & Villavicencio (Meta)';
+      if (countPill) countPill.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span><span>11 Ofertas Georreferenciadas Visibles</span>';
+      if (input) input.placeholder = 'Ingresa código predial nacional NUPRE (30 dígitos IGAC)...';
+      if (capasGranada) capasGranada.style.opacity = '1';
+      if (capasVillavo) capasVillavo.style.opacity = '1';
     } else {
-      map.flyTo(defaultCenter, defaultZoom, { duration: 1.5 });
+      // Granada por defecto
+      setActiveBtn(btnGranada);
+      map.flyTo(defaultCenter, defaultZoom, { duration: 1.2 });
       showMapBanner('📍 Centrado en Granada (Meta) · Casco Urbano y Zona Rural');
-      const title = document.getElementById('geovisor-muni-title');
       if (title) title.innerHTML = 'Visor Catastral y Puntos de Mercado: Granada (Meta)';
-      const countPill = document.getElementById('geovisor-count-pill');
-      if (countPill) countPill.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span><span>8 Ofertas Georreferenciadas Visibles</span>';
+      if (countPill) countPill.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span><span>8 Ofertas Georreferenciadas (50313)</span>';
+      if (input) input.placeholder = 'Ingresa código predial nacional NUPRE de Granada (ej: 503130100...)';
+      if (capasGranada) capasGranada.style.opacity = '1';
+      if (capasVillavo) capasVillavo.style.opacity = '0.5';
     }
+
+    updateVisibleMarkers();
   };
+
+  window.centrarMunicipio = window.seleccionarMunicipio;
 
   // Exponer función global para abrir modal de compra de ficha individual o packs
   window.desbloquearOfertaIndividual = function(offerId) {
@@ -1846,11 +1923,14 @@ function initGeovisorPericial() {
           </div>
         </div>
 
-        <!-- Botón de Desbloqueo Inmediato -->
+        <!-- Botón de Desbloqueo Inmediato y Enlace IGAC -->
         <div style="display:flex; flex-direction:column; gap:4px;">
           <button onclick="window.desbloquearOfertaIndividual('${o.id}')" style="width:100%; background:${mainColor}; hover:opacity:0.9; color:white; text-align:center; padding:8px 10px; border-radius:8px; font-size:11px; font-weight:800; font-family:'JetBrains Mono',monospace; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; box-shadow:0 3px 8px rgba(0,0,0,0.25);">
             <span>🔓 Desbloquear Ficha ($7.000) o Packs</span>
           </button>
+          <a href="https://geoportal.igac.gov.co/contenido/consulta-catastral" target="_blank" rel="noopener noreferrer" style="width:100%; background:#0f172a; color:#93c5fd; text-align:center; padding:6px 8px; border-radius:6px; font-size:10px; font-weight:bold; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:4px; border:1px solid #334155;" title="Contrastar este sector en el Geoportal Oficial del IGAC">
+            <span>🔗 Contrastar en Geoportal IGAC ↗</span>
+          </a>
           <a href="#catalogo" style="font-size:10px; text-align:center; color:#64748b; text-decoration:none; margin-top:2px;">
             O adquiere el Pack Completo de Ofertas + Capas KMZ →
           </a>
@@ -1859,17 +1939,15 @@ function initGeovisorPericial() {
     `;
 
     marker.bindPopup(popupHtml);
-    markersLayer.addLayer(marker);
   });
+
+  // Inicializar pines en el mapa según el municipio activo por defecto
+  updateVisibleMarkers();
 
   // Filtro de Ofertas en Vivo (Todas / Urbanas / Rurales)
   window.filtrarGeovisorOfertas = function(filterType) {
-    markersLayer.clearLayers();
-    pinMarkers.forEach(m => {
-      if (filterType === 'all' || m.offerData.zoneType === filterType) {
-        markersLayer.addLayer(m);
-      }
-    });
+    currentZoneFilter = filterType || 'all';
+    updateVisibleMarkers();
 
     const btnAll = document.getElementById('filter-btn-all');
     const btnUrb = document.getElementById('filter-btn-urb');
@@ -2127,6 +2205,11 @@ function initGeovisorPericial() {
             Cotizar Avalúo
           </a>
         </div>
+        <div style="margin-top:6px;">
+          <a href="https://geoportal.igac.gov.co/contenido/consulta-catastral" target="_blank" rel="noopener noreferrer" style="width:100%; background:#1e293b; color:#93c5fd; text-align:center; padding:6px 8px; border-radius:6px; font-size:10px; font-weight:bold; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:4px; border:1px solid #334155;" title="Abrir consulta catastral en Geoportal IGAC">
+            <span>🔗 Contrastar en Geoportal Oficial IGAC ↗</span>
+          </a>
+        </div>
       </div>
     `;
 
@@ -2134,18 +2217,6 @@ function initGeovisorPericial() {
     map.flyToBounds(polygon.getBounds(), { padding: [50, 50], duration: 1.2 });
     setTimeout(() => { polygon.openPopup(); }, 1300);
   }
-
-  // Escuchar botones de lotes de muestra
-  document.querySelectorAll('.sample-predio-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const sampleId = btn.getAttribute('data-id');
-      const input = document.getElementById('geovisor-codigo-input');
-      if (sampleParcels[sampleId]) {
-        if (input) input.value = sampleParcels[sampleId].codigo;
-        displayParcel(sampleParcels[sampleId]);
-      }
-    });
-  });
 
   // Escuchar buscador por código
   const searchInput = document.getElementById('geovisor-codigo-input');
@@ -2155,7 +2226,7 @@ function initGeovisorPericial() {
     const rawCode = (searchInput ? searchInput.value : '').trim().replace(/[^0-9]/g, '');
 
     if (!rawCode) {
-      alert('Por favor ingresa un código predial de 30 dígitos o selecciona uno de los lotes de muestra de Granada.');
+      alert('Por favor ingresa un código predial nacional (NUPRE de 30 dígitos IGAC) para localizar el predio.');
       return;
     }
 
@@ -2235,6 +2306,11 @@ function initGeovisorPericial() {
                 </a>
                 <a href="https://wa.me/573123661758?text=Hola%20Lonja,%20requiero%20avaluo%20del%20predio%20IGAC%20${rawCode}" target="_blank" style="flex:1; background:#0C2F5A; color:white; text-align:center; padding:6px 8px; border-radius:6px; font-size:11px; font-weight:bold; text-decoration:none; display:block;">
                   Cotizar Avalúo
+                </a>
+              </div>
+              <div style="margin-top:6px;">
+                <a href="https://geoportal.igac.gov.co/contenido/consulta-catastral" target="_blank" rel="noopener noreferrer" style="width:100%; background:#1e293b; color:#93c5fd; text-align:center; padding:6px 8px; border-radius:6px; font-size:10px; font-weight:bold; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:4px; border:1px solid #334155;" title="Abrir consulta en Geoportal IGAC">
+                  <span>🔗 Contrastar en Geoportal Oficial IGAC ↗</span>
                 </a>
               </div>
             </div>
