@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataLonja Pro | Banco de Ofertas KMZ, Capas Catastrales y Herramientas RAA</title>
+  <meta name="description" content="Marketplace de datos periciales para avaluadores y peritos RAA en el Meta y Colombia. Ofertas de mercado depuradas en KMZ, capas catastrales de Granada y matrices de homogeneización.">
+  <meta name="keywords" content="ofertas de mercado granada meta kmz, cartografia catastral granada meta, capas prediales qgis, plantilla avaluo comercial raa, matriz homogeneizacion igac 620">
+  <meta name="author" content="Lonja de Avalúos del Meta S.A.S.">
+
+  <!-- Favicon & Brand Icons -->
+  <link rel="icon" type="image/png" href="assets/img/logo-symbol.svg">
+
+  <!-- Tailwind CSS & Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Leaflet GIS Mapping Engine -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Montserrat:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/main.css?v=20261112_02">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Montserrat', 'sans-serif'],
+            sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+            'mono-tech': ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            lonja: {
+              navy: '#0C2F5A',
+              dark: '#121212',
+              bg: '#F7F6F2',
+              copper: '#2C4A3E',
+              brick: '#8E5B4C',
+              gold: '#D97706'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#F8FAFC] text-slate-800 font-sans antialiased selection:bg-[#0C2F5A] selection:text-white">
+
+  <!-- ======================================================================
+       TOP BANNER: B2B IDENTIFICATION & RETURN TO CLIENTS SITE
+       ====================================================================== -->
+  <div class="bg-[#0C2F5A] text-white py-2 px-4 border-b border-slate-700/60 font-mono-tech text-[11px] tracking-wide">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="px-2 py-0.5 bg-emerald-500 text-slate-950 font-black rounded uppercase text-[10px]">
+          HUB PROFESIONAL RAA
+        </span>
+        <span>EXCLUSIVO PARA AVALUADORES, PERITOS JUDICIALES Y TOPÓGRAFOS</span>
+      </div>
+      <a href="index.html" class="flex items-center gap-1.5 text-emerald-300 hover:text-white font-bold transition-colors">
+        <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+        <span>¿Eres propietario? Ir al Sitio Institucional de Avalúos</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       MAIN HEADER / NAVIGATION
+       ====================================================================== -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Logo Brand -->
+      <a href="datalonja.html" class="flex items-center gap-3 group">
+        <img src="lonja_logo_main.png" alt="Lonja de Avalúos del Meta" class="h-11 w-auto object-contain" />
+        <div class="border-l border-slate-200 pl-3">
+          <div class="flex items-center gap-1.5">
+            <span class="font-display font-black text-lg text-slate-900 tracking-tight">DataLonja</span>
+            <span class="px-1.5 py-0.5 bg-emerald-700 text-white font-mono-tech text-[9px] font-bold uppercase rounded">PRO</span>
+          </div>
+          <p class="font-mono-tech text-[10px] text-slate-500 tracking-wider">BANCO DE DATOS & METODOLOGÍA RAA</p>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-6 font-mono-tech text-xs font-semibold text-slate-600">
+        <a href="#geovisor" class="hover:text-[#0C2F5A] transition-colors flex items-center gap-1 text-emerald-800 font-bold">
+          <i data-lucide="map" class="w-3.5 h-3.5 text-emerald-600"></i>
+          <span>Geovisor SIG</span>
+        </a>
+        <a href="#catalogo" class="hover:text-[#0C2F5A] transition-colors flex items-center gap-1">
+          <i data-lucide="layers" class="w-3.5 h-3.5 text-emerald-600"></i>
+          <span>Bancos & KMZ</span>
+        </a>
+        <a href="#matriz" class="hover:text-[#0C2F5A] transition-colors flex items-center gap-1">
+          <i data-lucide="calculator" class="w-3.5 h-3.5 text-emerald-600"></i>
+          <span>Laboratorio Econométrico</span>
+        </a>
+        <a href="#normativa" class="hover:text-[#0C2F5A] transition-colors flex items-center gap-1">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600"></i>
+          <span>Marco Legal RAA</span>
+        </a>
+      </nav>
+
+      <!-- Right CTAs -->
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-mono-tech font-bold text-slate-700 hover:text-[#0C2F5A] px-3.5 py-2 rounded-xl border border-slate-300 hover:bg-slate-50 transition-colors">
+          <i data-lucide="landmark" class="w-3.5 h-3.5 text-slate-500"></i>
+          <span>Sitio Propietarios</span>
+        </a>
+        <a href="https://wa.me/573123661758?text=Hola%20Lonja%20de%20Avaluos,%20tengo%20una%20consulta%20tecnica%20sobre%20las%20ofertas%20y%20herramientas%20de%20DataLonja." target="_blank" rel="noopener" class="btn-brutalist bg-emerald-600 hover:bg-emerald-700 text-white font-mono-tech text-xs font-bold uppercase tracking-wider py-2.5 px-4 rounded-xl shadow-md flex items-center gap-1.5">
+          <i data-lucide="message-circle" class="w-4 h-4"></i>
+          <span>Soporte Pericial</span>
+        </a>
+        <button id="mobile-menu-toggle" class="lg:hidden p-2 text-slate-700 rounded-lg border border-slate-200 hover:bg-slate-50">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div id="mobile-nav-drawer" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm hidden lg:hidden">
+    <div class="bg-white w-4/5 max-w-sm h-full p-6 shadow-2xl flex flex-col justify-between">
+      <div>
+        <div class="flex items-center justify-between pb-4 border-b border-slate-200 mb-6">
+          <div class="flex items-center gap-2">
+            <span class="font-display font-black text-lg text-slate-900">DataLonja PRO</span>
+          </div>
+          <button id="mobile-menu-close" class="p-2 text-slate-400 hover:text-slate-700">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+        <div class="flex flex-col gap-4 font-mono-tech text-sm">
+          <a href="#catalogo" class="text-slate-800 hover:text-[#0C2F5A] font-bold py-2 border-b border-slate-100">01. Bancos de Ofertas & KMZ</a>
+          <a href="#matriz" class="text-slate-800 hover:text-[#0C2F5A] font-bold py-2 border-b border-slate-100">02. Laboratorio Econométrico</a>
+          <a href="#normativa" class="text-slate-800 hover:text-[#0C2F5A] font-bold py-2 border-b border-slate-100">03. Marco Normativo RAA</a>
+          <a href="index.html" class="text-emerald-700 font-bold py-2 flex items-center gap-1.5">
+            <i data-lucide="landmark" class="w-4 h-4"></i>
+            <span>Ir a Sitio de Propietarios</span>
+          </a>
+        </div>
+      </div>
+      <div class="pt-6 border-t border-slate-200">
+        <a href="https://wa.me/573123661758?text=Hola%20Lonja,%20requiero%20informacion%20de%20DataLonja." target="_blank" rel="noopener" class="w-full py-3 bg-[#0C2F5A] text-white font-mono-tech text-xs font-bold uppercase rounded-xl flex items-center justify-center gap-2 shadow-md">
+          <i data-lucide="message-circle" class="w-4 h-4"></i>
+          <span>WhatsApp Soporte</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ======================================================================
+         HERO SECTION: DATALONJA B2B MARKETPLACE
+         ====================================================================== -->
+    <section class="py-12 md:py-20 bg-white border-b border-slate-200 relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <div class="max-w-4xl">
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            <span class="px-2.5 py-1 bg-[#0C2F5A] text-white font-mono-tech text-xs font-bold uppercase rounded-md tracking-wider">
+              MARKETPLACE DE DATOS PERICIALES & SIG
+            </span>
+            <span class="font-mono-tech text-xs text-emerald-700 font-bold bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
+              ● RESOLUCIÓN IGAC 620 DE 2008 & LEY 1673
+            </span>
+          </div>
+
+          <h1 class="font-display font-black text-3xl sm:text-5xl lg:text-6xl text-slate-900 leading-tight mb-4 tracking-tight">
+            Inteligencia Territorial, Ofertas en KMZ y Cartografía Catastral
+          </h1>
+
+          <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-3xl mb-8">
+            Ahorra hasta <strong>16 horas de trabajo de campo por avalúo</strong>. Adquiere muestras de mercado reales investigadas, depuradas y georreferenciadas con fotos de fachada, capas catastrales de municipios del Meta y matrices periciales formuladas en Excel.
+          </p>
+
+          <!-- Municipalities / Territorios Activos Selector Bar -->
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 mb-8 shadow-sm">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0">
+                <i data-lucide="map-pin" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <span class="text-[10px] font-mono-tech uppercase font-bold text-slate-400 block">MUNICIPIOS ACTIVOS PARA ENTREGA INMEDIATA:</span>
+                <span class="font-display font-bold text-slate-900 text-sm sm:text-base">Granada (Meta) &amp; Villavicencio (Meta — Comuna 4)</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-mono-tech text-slate-700 font-bold">
+                206.051 Predios KMZ
+              </span>
+              <span class="px-3 py-1.5 bg-emerald-100 border border-emerald-300 rounded-lg text-xs font-mono-tech text-emerald-900 font-bold">
+                11 Ofertas Depuradas
+              </span>
+            </div>
+          </div>
+
+          <!-- Quick Metrics Bar -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono-tech text-xs">
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+              <span class="text-slate-400 block text-[10px] uppercase">Formato SIG:</span>
+              <span class="font-bold text-slate-800">Google Earth & QGIS</span>
+            </div>
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+              <span class="text-slate-400 block text-[10px] uppercase">Depuración:</span>
+              <span class="font-bold text-slate-800">Valor residual m²</span>
+            </div>
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+              <span class="text-slate-400 block text-[10px] uppercase">Entrega:</span>
+              <span class="font-bold text-emerald-700">Inmediata (.ZIP)</span>
+            </div>
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+              <span class="text-slate-400 block text-[10px] uppercase">Licencia:</span>
+              <span class="font-bold text-slate-800">Uso Pericial Ley 1673</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         GEOVISOR SIG PERICIAL: CATASTRO & OFERTAS DE MERCADO EN VIVO
+         ====================================================================== -->
+    <section id="geovisor" class="py-12 md:py-16 bg-slate-950 text-white border-b border-slate-800 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 pb-4 border-b border-slate-800">
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-2.5 py-0.5 bg-emerald-500 text-slate-950 font-mono-tech text-xs font-black uppercase rounded tracking-wider">
+                GEOVISOR SIG PERICIAL EN VIVO
+              </span>
+              <span class="font-mono-tech text-xs text-slate-400">
+                ● SATÉLITE DE ALTA RESOLUCIÓN + CATASTRO + OFERTAS KMZ
+              </span>
+            </div>
+            <h2 id="geovisor-muni-title" class="font-display font-black text-2xl sm:text-4xl text-white">
+              Visor Catastral y Puntos de Mercado: Granada &amp; Villavicencio (Meta)
+            </h2>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <!-- Conmutador de Municipio -->
+            <div class="inline-flex rounded-xl bg-slate-900 p-1 border border-slate-700 shadow-sm">
+              <button onclick="window.centrarMunicipio('granada')" class="px-3 py-1.5 rounded-lg text-xs font-mono-tech font-bold text-white bg-slate-800 hover:bg-slate-700 transition-all flex items-center gap-1.5 shadow">
+                <span>📍 Granada (50313)</span>
+              </button>
+              <button onclick="window.centrarMunicipio('villavicencio')" class="px-3 py-1.5 rounded-lg text-xs font-mono-tech font-bold text-emerald-300 hover:text-white hover:bg-slate-700 transition-all flex items-center gap-1.5">
+                <span>📍 Villavicencio (50001)</span>
+              </button>
+            </div>
+            <div id="geovisor-count-pill" class="flex items-center gap-1.5 font-mono-tech text-xs text-emerald-300 bg-emerald-950/60 border border-emerald-500/40 px-3 py-1.5 rounded-lg">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>11 Ofertas Georreferenciadas Visibles</span>
+            </div>
+            <div class="flex items-center gap-1.5 font-mono-tech text-xs text-blue-300 bg-blue-950/60 border border-blue-500/40 px-3 py-1.5 rounded-lg">
+              <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+              <span>API IGAC / Catastro Multipropósito: Conectado</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search Bar and Quick Test Buttons -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5 mb-5 shadow-lg">
+          <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 mb-3">
+            <div class="flex-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+              <div class="relative flex-1">
+                <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-3.5"></i>
+                <input type="text" id="geovisor-codigo-input" placeholder="Ingresa código predial nacional (ej: Tunja 15001..., Granada 50313...)" class="w-full text-xs font-mono-tech p-3 pl-9 bg-slate-950 text-white border border-slate-700 rounded-xl focus:outline-none focus:border-emerald-400" />
+              </div>
+              <button id="btn-geovisor-buscar" class="px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-mono-tech text-xs font-bold uppercase rounded-xl flex items-center justify-center gap-2 transition-all shrink-0">
+                <i data-lucide="scan" class="w-4 h-4"></i>
+                <span>Localizar Predio</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Sample Predios Buttons -->
+          <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-800/80 font-mono-tech text-xs">
+            <span class="text-slate-400 text-[11px] font-bold uppercase">Probar Lotes de Muestra:</span>
+            <button class="sample-predio-btn px-2.5 py-1 bg-emerald-900/80 hover:bg-emerald-800 text-emerald-200 rounded-lg border border-emerald-400/50 text-[11px] font-bold transition-colors flex items-center gap-1 shadow-sm" data-id="vil1">
+              📍 Villavicencio - Abajamcito (66 m²)
+            </button>
+            <button class="sample-predio-btn px-2.5 py-1 bg-blue-900/80 hover:bg-blue-800 text-blue-200 rounded-lg border border-blue-400/50 text-[11px] font-bold transition-colors flex items-center gap-1 shadow-sm" data-id="tunja1">
+              🏛️ Tunja (Boyacá) - Centro Histórico
+            </button>
+            <button class="sample-predio-btn px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-emerald-300 rounded-lg border border-slate-700 text-[11px] transition-colors" data-id="urb1">
+              📍 Granada - Urbano (198 m²)
+            </button>
+            <button class="sample-predio-btn px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-emerald-300 rounded-lg border border-slate-700 text-[11px] transition-colors" data-id="urb2">
+              📍 Granada - Comercial (227 m²)
+            </button>
+            <button class="sample-predio-btn px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-emerald-300 rounded-lg border border-slate-700 text-[11px] transition-colors" data-id="rur1">
+              🌾 Granada - Rural Finca (42.5 Ha)
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick Zone Filter & Interactive Cadastral Layer Controls Bar -->
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 mb-4 p-3.5 bg-slate-900 border border-slate-800 rounded-2xl shadow-sm font-mono-tech text-xs">
+          <!-- Ofertas Filter -->
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-slate-400 text-[11px] font-bold uppercase">Ofertas de Mercado:</span>
+            <button onclick="window.filtrarGeovisorOfertas('all')" id="filter-btn-all" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-white rounded-xl font-bold border border-slate-600 transition-all flex items-center gap-1 shadow-sm">
+              <span>📍 Todas (7)</span>
+            </button>
+            <button onclick="window.filtrarGeovisorOfertas('urbano')" id="filter-btn-urb" class="px-3 py-1.5 bg-blue-950/80 hover:bg-blue-900 text-blue-200 rounded-xl font-bold border border-blue-500/50 transition-all flex items-center gap-1.5 shadow-sm">
+              <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+              <span>🔵 Urbanas (5)</span>
+            </button>
+            <button onclick="window.filtrarGeovisorOfertas('rural')" id="filter-btn-rur" class="px-3 py-1.5 bg-emerald-950/80 hover:bg-emerald-900 text-emerald-200 rounded-xl font-bold border border-emerald-500/50 transition-all flex items-center gap-1.5 shadow-sm">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+              <span>🟢 Rurales (2)</span>
+            </button>
+          </div>
+
+          <!-- Activar Capas Catastrales en el Mapa & Descarga KMZ -->
+          <div class="flex flex-wrap items-center gap-2 pt-2 lg:pt-0 border-t lg:border-t-0 border-slate-800">
+            <span class="text-slate-400 text-[11px] font-bold uppercase">Capas Catastrales:</span>
+            
+            <!-- Capa Urbana -->
+            <div class="inline-flex rounded-xl shadow-sm">
+              <button onclick="window.toggleCapaCatastral('urbano')" id="btn-capa-urbano" class="px-3 py-1.5 bg-blue-900/60 hover:bg-blue-800 text-blue-200 rounded-l-xl font-bold border border-blue-500/50 text-[11px] flex items-center gap-1.5 transition-all">
+                <i data-lucide="layers" class="w-3.5 h-3.5 text-blue-400"></i>
+                <span id="label-capa-urbano">Ver Predios Urbanos (20k)</span>
+              </button>
+              <a href="assets/downloads/U_TERRENO_GRANADA_2026.kmz" download title="Descargar KMZ Urbano para Google Earth / QGIS" class="px-2.5 py-1.5 bg-blue-950 hover:bg-blue-900 text-blue-300 rounded-r-xl border border-l-0 border-blue-500/50 text-[10px] font-bold flex items-center gap-1">
+                <i data-lucide="download" class="w-3 h-3 text-blue-400"></i>
+                <span>KMZ</span>
+              </a>
+            </div>
+
+            <!-- Capa Rural Granada -->
+            <div class="inline-flex rounded-xl shadow-sm">
+              <button onclick="window.toggleCapaCatastral('rural')" id="btn-capa-rural" class="px-3 py-1.5 bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 rounded-l-xl font-bold border border-emerald-500/50 text-[11px] flex items-center gap-1.5 transition-all">
+                <i data-lucide="layers" class="w-3.5 h-3.5 text-emerald-400"></i>
+                <span id="label-capa-rural">Ver Predios Rurales (8.6k)</span>
+              </button>
+              <a href="assets/downloads/R_TERRENO_GRANADA_2026.kmz" download title="Descargar KMZ Rural para Google Earth / QGIS" class="px-2.5 py-1.5 bg-emerald-950 hover:bg-emerald-900 text-emerald-300 rounded-r-xl border border-l-0 border-emerald-500/50 text-[10px] font-bold flex items-center gap-1">
+                <i data-lucide="download" class="w-3 h-3 text-emerald-400"></i>
+                <span>KMZ</span>
+              </a>
+            </div>
+
+            <!-- Capas Catastrales Villavicencio -->
+            <div class="inline-flex rounded-xl shadow-sm">
+              <a href="assets/downloads/Capa_Catastral_Urbana_Villavicencio_2026.zip" download title="Descargar Capa Urbana Villavicencio (142k predios KMZ)" class="px-3 py-1.5 bg-blue-950 hover:bg-blue-900 text-blue-200 rounded-xl border border-blue-500/50 text-[11px] font-bold flex items-center gap-1.5 transition-all">
+                <i data-lucide="download" class="w-3.5 h-3.5 text-blue-400"></i>
+                <span>Villavicencio Urbana (142k)</span>
+              </a>
+            </div>
+            <div class="inline-flex rounded-xl shadow-sm">
+              <a href="assets/downloads/Capa_Catastral_Rural_Villavicencio_2026.zip" download title="Descargar Capa Rural Villavicencio (34k predios KMZ)" class="px-3 py-1.5 bg-emerald-950 hover:bg-emerald-900 text-emerald-200 rounded-xl border border-emerald-500/50 text-[11px] font-bold flex items-center gap-1.5 transition-all">
+                <i data-lucide="download" class="w-3.5 h-3.5 text-emerald-400"></i>
+                <span>Villavicencio Rural (34k)</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Map Container -->
+        <div class="relative rounded-2xl overflow-hidden border-2 border-slate-800 shadow-2xl bg-slate-950 mb-5">
+          <!-- Notification Floating Banner -->
+          <div id="geovisor-status-banner" class="hidden absolute top-4 left-1/2 -translate-x-1/2 z-30 bg-slate-900/95 border border-emerald-500/80 text-emerald-300 px-4 py-2 rounded-xl text-xs font-mono-tech shadow-2xl flex items-center gap-2 pointer-events-none"></div>
+
+          <div id="geovisor-map" style="height: 520px; width: 100%;" class="z-10"></div>
+          
+          <!-- Floating Legend / Controls Overlay -->
+          <div class="absolute bottom-4 left-4 z-20 bg-slate-950/90 backdrop-blur-md p-3.5 rounded-xl border border-slate-700 font-mono-tech text-xs text-white max-w-xs shadow-xl hidden sm:block">
+            <span class="text-[10px] text-slate-400 uppercase font-bold block mb-1.5">Convenciones Periciales:</span>
+            <div class="space-y-1.5 text-[11px]">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-blue-600 border border-white"></span>
+                <span>🔵 Suelo Urbano: 50313-U01 a U05</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-emerald-500 border border-white"></span>
+                <span>🟢 Suelo Rural: 50313-R01 y R02</span>
+              </div>
+              <div class="flex items-center gap-2 text-amber-300">
+                <span class="text-[10px]">🔒</span>
+                <span>Ficha $7k · Pack Trío $18k · Todo $35k</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded bg-amber-500/40 border border-amber-400"></span>
+                <span>🟠 Predio en Consulta (NUPRE 30d)</span>
+              </div>
+              <div class="flex items-center gap-2 text-slate-400 text-[10px] pt-1 border-t border-slate-800">
+                <span>Capa: Esri Satélite HD + Catastro 2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pericial Info Banner below Map -->
+        <div class="p-5 bg-gradient-to-r from-slate-900 to-[#0C2F5A] border border-slate-700 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 shadow-lg">
+          <div>
+            <span class="text-[10px] font-mono-tech uppercase font-bold text-emerald-400">
+              ARSENAL CARTOGRÁFICO DE GRANADA (META) 2026 DISPONIBLE
+            </span>
+            <h4 class="font-display font-bold text-white text-base mt-0.5">
+              ¿Requieres todos los 29.508 predios vectoriales y las 6 ofertas con fotos en tu Google Earth o QGIS?
+            </h4>
+            <p class="text-xs text-slate-300 mt-1">
+              Descarga directa inmediata en archivo KMZ con licencias de uso pericial bajo la Ley 1673 de 2013.
+            </p>
+          </div>
+          <div class="flex items-center gap-3 shrink-0 w-full md:w-auto">
+            <a href="#catalogo" class="btn-brutalist w-full md:w-auto px-5 py-3 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-mono-tech text-xs font-black uppercase tracking-wider rounded-xl shadow-md text-center flex items-center justify-center gap-2">
+              <i data-lucide="download" class="w-4 h-4"></i>
+              <span>Adquirir Paquete KMZ</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         CATALOG PRODUCTS & TOOLS SECTION
+         ====================================================================== -->
+    <section id="catalogo" class="py-16 md:py-24 bg-[#F8FAFC] border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-slate-200 pb-6 mb-8 gap-4">
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-2.5 py-0.5 bg-[#0C2F5A] text-white font-mono-tech text-xs font-bold uppercase rounded">
+                CATÁLOGO DE PRODUCTOS PERICIALES
+              </span>
+              <span class="font-mono-tech text-xs text-slate-500 font-semibold">● TARIFAS REGULADAS LONJA DEL META</span>
+            </div>
+            <h2 class="font-display font-black text-3xl sm:text-4xl text-slate-900">
+              Herramientas, Datos de Mercado & Modelos SIG
+            </h2>
+          </div>
+          <div class="flex items-center gap-3">
+            <span id="datalonja-count-badge" class="font-mono-tech text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200">
+              14 Recursos Disponibles
+            </span>
+          </div>
+        </div>
+
+        <!-- Filter Sub-Tabs -->
+        <div id="datalonja-filters-container" class="flex flex-wrap items-center gap-2 mb-10">
+          <!-- Injected by datalonja.js -->
+        </div>
+
+        <!-- Grid of Products -->
+        <div id="datalonja-products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          <!-- Injected by datalonja.js -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         LIVE INTERACTIVE HOMOGENIZATION MATRIX (APEXCHARTS LAB)
+         ====================================================================== -->
+    <section id="matriz" class="py-16 md:py-24 bg-white border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="max-w-3xl mb-10">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="px-2.5 py-0.5 bg-emerald-700 text-white font-mono-tech text-xs font-bold uppercase rounded">
+              LABORATORIO ECONOMÉTRICO EN VIVO
+            </span>
+            <span class="font-mono-tech text-xs text-slate-500">● PEARSON CV & FACTORES IGAC</span>
+          </div>
+          <h2 class="font-display font-black text-3xl sm:text-4xl text-slate-900 mb-3">
+            Simulador de Matriz de Homogeneización Estadística
+          </h2>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Ajusta los factores de negociación de las muestras de Granada (Meta) en tiempo real para observar el recálculo automático de la media aritmética, varianza y el <strong>Coeficiente de Variación de Pearson</strong> conforme a la Resolución IGAC 620 de 2008 (límite máximo permitido: 10%).
+          </p>
+        </div>
+
+        <div id="homogenization-tool" class="bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm">
+          
+          <div class="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-200">
+            <div>
+              <span class="text-xs font-mono-tech text-slate-500 uppercase font-bold block mb-1">CÁLCULO ECONOMÉTRICO OFICIAL:</span>
+              <span id="matrix-cv-badge" class="px-3 py-1 bg-emerald-100 text-emerald-900 border border-emerald-300 rounded-md font-mono-tech text-xs font-bold">
+                ● COEFICIENTE DE VARIACIÓN VÁLIDO (CV < 10%)
+              </span>
+            </div>
+            <div class="flex items-center gap-6">
+              <div>
+                <span class="text-[10px] font-mono-tech text-slate-400 uppercase font-bold block">Media Homogeneizada:</span>
+                <span id="matrix-result-avg" class="font-display font-black text-xl text-slate-900">$ 985.420 /m²</span>
+              </div>
+              <div>
+                <span class="text-[10px] font-mono-tech text-slate-400 uppercase font-bold block">Coeficiente CV:</span>
+                <span id="matrix-result-cv" class="font-mono-tech font-extrabold text-xl text-emerald-700">7.82 %</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Table -->
+          <div class="overflow-x-auto mb-6">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="border-b border-slate-200 text-[10px] font-mono-tech uppercase text-slate-400 bg-white">
+                  <th class="py-2.5 px-3">Muestra / Sector</th>
+                  <th class="py-2.5 px-3 text-right">Precio Pedido</th>
+                  <th class="py-2.5 px-3 text-right">Área Terreno</th>
+                  <th class="py-2.5 px-3 text-right">Valor Unitario</th>
+                  <th class="py-2.5 px-3 text-center">Factor Neg.</th>
+                  <th class="py-2.5 px-3 text-right">Valor Depurado</th>
+                </tr>
+              </thead>
+              <tbody id="matrix-table-body">
+                <!-- Injected dynamically -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="p-4 bg-white rounded-xl border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+              <span id="matrix-result-status" class="text-xs font-mono-tech text-emerald-800 font-bold block">
+                MUESTRA HOMOGÉNEA (CUMPLE RES. IGAC 620/2008)
+              </span>
+              <p class="text-[11px] text-slate-500 mt-0.5">
+                Esta lógica viene pre-programada en nuestra plantilla pericial oficial de Excel.
+              </p>
+            </div>
+            <a href="https://wa.me/573123661758?text=Hola%20Lonja,%20deseo%20adquirir%20la%20Matriz%20Pro%20de%20Homogeneizacion%20de%20Mercado%20en%20Excel." target="_blank" rel="noopener" class="btn-brutalist bg-[#0C2F5A] hover:bg-[#1E3A8A] text-white text-xs font-mono-tech font-bold uppercase py-2.5 px-4 rounded-xl shadow-md flex items-center gap-2">
+              <i data-lucide="download" class="w-4 h-4 text-emerald-300"></i>
+              <span>Adquirir Matriz Completa en Excel ($160.000 COP)</span>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         LEGAL & RAA REGULATORY FRAMEWORK
+         ====================================================================== -->
+    <section id="normativa" class="py-16 bg-[#F8FAFC] border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mb-8">
+          <span class="px-2.5 py-0.5 bg-[#0C2F5A] text-white font-mono-tech text-xs font-bold uppercase rounded">
+            MARCO JURÍDICO & TÉCNICO VIGENTE
+          </span>
+          <h3 class="font-display font-black text-2xl sm:text-3xl text-slate-900 mt-2">
+            Fundamentación Legal de las Ofertas y Cartografía
+          </h3>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center font-mono-tech font-bold text-xs mb-3">
+              01
+            </div>
+            <h4 class="font-display font-bold text-slate-900 text-sm mb-1.5">Ley 1673 de 2013</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Régimen del Avaluador en Colombia. Autorregulación pericial y responsabilidad civil profesional en la tasación de bienes inmuebles urbanos y rurales.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center font-mono-tech font-bold text-xs mb-3">
+              02
+            </div>
+            <h4 class="font-display font-bold text-slate-900 text-sm mb-1.5">Resolución IGAC 620 de 2008</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Metodologías periciales oficiales de avalúos. Obligatoriedad de sustentar el método de comparación con muestras reales depuradas y coeficiente de dispersión controlado.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center font-mono-tech font-bold text-xs mb-3">
+              03
+            </div>
+            <h4 class="font-display font-bold text-slate-900 text-sm mb-1.5">Licencia de Uso Profesional</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Los archivos KMZ y fichas PDF se licencian para su inclusión como soporte documental en tus informes y dictámenes periciales ante clientes, bancos y juzgados.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================================================================
+       MODAL DIALOG (DETAILS & CHECKOUT SIMULATOR)
+       ====================================================================== -->
+  <div id="datalonja-modal-backdrop" class="modal-backdrop fixed inset-0 z-[9999] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="modal-window bg-white border border-slate-200 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6 sm:p-8 shadow-2xl relative">
+      <button id="datalonja-modal-close" class="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-700 rounded-lg border border-slate-200 hover:bg-slate-50 transition-colors" title="Cerrar ventana">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div id="datalonja-modal-content">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       FOOTER
+       ====================================================================== -->
+  <footer class="bg-slate-950 text-white py-12 border-t border-slate-800 font-mono-tech text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div>
+        <span class="font-display font-black text-base tracking-tight text-white block">LONJA DE AVALÚOS DEL META S.A.S.</span>
+        <span class="text-slate-400 text-[11px]">NIT: 901.482.391-4 • Registro RAA: AVAL-META-2026-CO • Ley 1673 de 2013</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="index.html" class="text-emerald-400 hover:text-white font-bold transition-colors">
+          Ir a Sitio de Propietarios →
+        </a>
+        <a href="https://wa.me/573123661758" target="_blank" rel="noopener" class="text-slate-300 hover:text-white transition-colors">
+          WhatsApp: +57 312 366 1758
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/data.js?v=20261112_12"></script>
+  <script src="assets/js/datalonja.js?v=20261112_12"></script>
+</body>
+</html>

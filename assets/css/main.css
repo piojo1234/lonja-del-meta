@@ -1,0 +1,309 @@
+/* ==========================================================================
+   LONJA DE AVALÚOS DEL META S.A.S. — MODERN PROPTECH & ARCHITECTURAL STYLESHEET
+   Style: High-Contrast Modern PropTech / Cinematic Visual Hierarchy / Precision UI
+   ========================================================================== */
+
+:root {
+  --bg-bone: #FFFFFF; /* Pure Clean Modern White */
+  --bg-card: #FFFFFF;
+  --bg-card-subtle: #F8FAFC; /* Clean Crisp Slate-50 */
+  --ink-primary: #0F172A; /* Deep Charcoal Slate */
+  --ink-secondary: #334155;
+  --ink-muted: #64748B; /* WCAG AAA compliance */
+  --border-hairline: #E2E8F0;
+  --border-strong: #0C2F5A;
+  --accent-copper: #059669; /* Emerald Growth & Land Value */
+  --accent-emerald: #10B981;
+  --accent-terracotta: #D97706; /* Warm Architectural Amber */
+  --lonja-navy: #0A2540; /* High-Trust Corporate Navy */
+  --lonja-blue: #1E3A8A;
+  --lonja-sky: #38BDF8;
+  --grid-line: transparent;
+}
+
+/* Base resets & typography */
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-bone);
+  color: var(--ink-primary);
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: var(--bg-bone);
+}
+
+/* Custom font utilities inspired by PropTech leaders (Habi, Propy, Houm) */
+.font-display {
+  font-family: 'Montserrat', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: -0.025em;
+}
+
+.font-sans-body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.font-mono-tech {
+  font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+  letter-spacing: -0.02em;
+}
+
+/* Hairline Grid & Architectural Patterns (Neutralized for Visual Clarity) */
+.bg-grid-blueprint,
+.bg-grid-blueprint-dense {
+  background-image: none !important;
+}
+
+.border-hairline {
+  border-color: var(--border-hairline);
+}
+
+/* Precision Crosshairs & Rule Markers (Hidden to eliminate box clutter) */
+.crosshair-corner {
+  position: relative;
+}
+
+.crosshair-corner::before,
+.crosshair-corner::after {
+  display: none !important;
+}
+
+/* Glassmorphism & High-Tech HUD Panels */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.90);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 232, 240, 0.85);
+}
+
+.glass-panel-dark {
+  background: rgba(10, 37, 64, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Image Zoom and Presentation Effects */
+.img-zoom-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.img-zoom-container img {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+}
+
+.img-zoom-container:hover img {
+  transform: scale(1.06);
+}
+
+/* Smooth Dynamic Keyframe Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+  }
+}
+
+@keyframes radarSweep {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-float {
+  animation: floatSlow 4s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2.5s infinite;
+}
+
+/* Interactive Card & Button Enhancements */
+.card-editorial {
+  border-radius: 1rem;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Clean Modern Card & Button Styles */
+.card-editorial {
+  border-radius: 1rem;
+  border: 1px solid #E2E8F0;
+  background: #FFFFFF;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03), 0 1px 2px -1px rgba(0, 0, 0, 0.02);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.card-editorial:hover {
+  transform: translateY(-3px);
+  border-color: #CBD5E1;
+  box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.07), 0 8px 10px -6px rgba(15, 23, 42, 0.03);
+}
+
+.btn-brutalist {
+  position: relative;
+  border-radius: 0.75rem;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-brutalist:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(10, 37, 64, 0.18);
+}
+
+.btn-brutalist:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Ticker Marquee */
+.marquee-track {
+  display: flex;
+  white-space: nowrap;
+  animation: marqueeScroll 35s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeScroll {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Technical Range Slider Styling */
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  background: transparent;
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  background: #D5D2C8;
+  border-radius: 0;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  height: 18px;
+  width: 18px;
+  border-radius: 0;
+  background: var(--ink-primary);
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -7px;
+  border: 2px solid #FFF;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+  transition: transform 0.1s ease, background 0.1s ease;
+}
+
+input[type=range]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  background: var(--accent-copper);
+}
+
+/* Custom Modal Animations */
+.modal-backdrop {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.modal-window {
+  transform: scale(0.96) translateY(20px);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+}
+
+.modal-backdrop.active .modal-window {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+/* Architectural Layer Step Indicator */
+.layer-step {
+  transition: all 0.3s ease;
+}
+
+.layer-step.active {
+  background-color: var(--ink-primary);
+  color: var(--bg-bone);
+}
+
+/* Pulse beacon */
+.beacon-dot {
+  position: relative;
+}
+.beacon-dot::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 9999px;
+  border: 1.5px solid currentColor;
+  animation: beaconPulse 2s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}
+
+@keyframes beaconPulse {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* Print Styles for Technical Sheet */
+@media print {
+  nav,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #FFF;
+    color: #000;
+  }
+}

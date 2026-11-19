@@ -1,0 +1,20 @@
+{
+  "name": "lonja-de-avaluos-del-meta",
+  "version": "1.0.0",
+  "description": "Sitio Web Institucional y Ecosistema DataLonja para la Lonja de Avalúos del Meta S.A.S.",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve ."
+  },
+  "keywords": [
+    "avaluos",
+    "meta",
+    "villavicencio",
+    "catastro",
+    "datalonja",
+    "datos-periciales",
+    "proptech"
+  ],
+  "author": "Lonja de Avalúos del Meta S.A.S.",
+  "license": "UNLICENSED"
+}

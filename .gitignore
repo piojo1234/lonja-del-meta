@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+._*
+.AppleDouble
+.LSOverride
+
+# Large compressed archives exceeding GitHub 100MB limit
+fotos.7z
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Temp & logs
+*.log
+scratch/
