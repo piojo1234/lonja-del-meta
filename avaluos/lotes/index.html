@@ -488,18 +488,50 @@
 
           <!-- Poster / Cover de Carga Rápida (Ultra Liviano ~28 KB) -->
           <div id="panoPoster" class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-cover bg-center transition-opacity duration-700" style="background-image: url('../../assets/img/360/pano_thumb_01.webp');">
-            <div class="absolute inset-0 bg-slate-950/65 backdrop-blur-[2px]"></div>
-            <div class="relative z-10 text-center px-4 max-w-md">
-              <div onclick="triggerViewerLoad()" class="w-16 h-16 rounded-2xl bg-emerald-600/95 text-white flex items-center justify-center mx-auto mb-4 shadow-2xl shadow-emerald-950/60 cursor-pointer hover:scale-105 transition-transform border border-emerald-400/40">
-                <i data-lucide="rotate-3d" class="w-8 h-8 text-white"></i>
+            <div class="absolute inset-0 bg-slate-950/70 backdrop-blur-[3px]"></div>
+            
+            <!-- Estado 1: Botón Inicial Interactivo con Retroalimentación Táctil -->
+            <div id="panoInitialState" class="relative z-10 text-center px-4 max-w-md transition-all duration-300">
+              <div onclick="triggerViewerLoad()" class="group relative w-16 h-16 rounded-2xl bg-emerald-600/95 text-white flex items-center justify-center mx-auto mb-4 shadow-2xl shadow-emerald-950/80 cursor-pointer hover:scale-105 active:scale-95 transition-all border border-emerald-400/40">
+                <i data-lucide="rotate-3d" class="w-8 h-8 text-white group-hover:rotate-45 transition-transform"></i>
+                <span class="absolute -top-1 -right-1 flex h-3.5 w-3.5">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border border-slate-900"></span>
+                </span>
               </div>
-              <h3 class="font-display font-black text-xl text-white mb-1.5">Inspección Aérea 360°</h3>
+              <h3 class="font-display font-black text-xl sm:text-2xl text-white mb-1.5">Inspección Aérea 360°</h3>
               <p class="text-xs text-slate-300 mb-5 font-mono-tech">Dron DJI Aerofotogramétrico · Proyecto Campestre</p>
-              <button onclick="triggerViewerLoad()" class="btn-brutalist bg-emerald-600 hover:bg-emerald-700 text-white font-mono-tech text-xs font-bold uppercase tracking-wider py-3 px-6 rounded-xl shadow-xl transition-all inline-flex items-center gap-2 border border-emerald-400/30">
+              <button type="button" id="btnTriggerPano" onclick="triggerViewerLoad()" class="btn-brutalist bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-mono-tech text-xs font-bold uppercase tracking-wider py-3.5 px-6 rounded-xl shadow-xl transition-all inline-flex items-center gap-2 border border-emerald-400/30 cursor-pointer">
                 <i data-lucide="play" class="w-4 h-4"></i>
                 <span>Cargar y Explorar en 360°</span>
               </button>
             </div>
+
+            <!-- Estado 2: Animación Inmediata de "Cargando..." y Barra de Progreso -->
+            <div id="panoLoadingState" class="hidden relative z-10 text-center px-6 max-w-sm transition-all duration-300">
+              <!-- Radar tecnológico animado -->
+              <div class="relative w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                <div class="absolute inset-0 rounded-full border-2 border-emerald-500/25 animate-ping"></div>
+                <div class="w-14 h-14 rounded-full border-2 border-t-emerald-400 border-r-emerald-500 border-b-transparent border-l-transparent animate-spin"></div>
+                <i data-lucide="compass" class="w-6 h-6 text-emerald-400 absolute"></i>
+              </div>
+              
+              <h4 class="font-display font-black text-lg text-white mb-1">Cargando Entorno 360°</h4>
+              <p id="panoLoadingStatusText" class="text-xs text-emerald-400 font-mono-tech mb-4 animate-pulse">Procesando ortofotografía esférica...</p>
+              
+              <!-- Barra de Progreso Dinámica -->
+              <div class="w-full bg-slate-800/90 rounded-full h-2 overflow-hidden border border-slate-700 mb-2 p-0.5">
+                <div id="panoProgressBar" class="bg-gradient-to-r from-emerald-500 to-teal-300 h-full rounded-full transition-all duration-500 ease-out" style="width: 25%;"></div>
+              </div>
+              <p class="text-[10px] text-slate-400 font-mono-tech">Optimizando para pantalla móvil · Por favor espera</p>
+            </div>
+
+          </div>
+
+          <!-- Toast Flotante para Cambio de Toma -->
+          <div id="panoSwitchToast" class="hidden absolute top-4 right-4 bg-slate-900/95 backdrop-blur-md border border-emerald-500/60 text-white px-3.5 py-2 rounded-xl font-mono-tech text-xs items-center gap-2 shadow-2xl z-30">
+            <i data-lucide="loader-2" class="w-3.5 h-3.5 text-emerald-400 animate-spin"></i>
+            <span id="panoSwitchText">Cargando proyecto...</span>
           </div>
 
           <!-- Overlay Guía de Interacción Flotante (Se muestra al cargar) -->
@@ -910,16 +942,32 @@
       viewer = pannellum.viewer('panorama-viewer', config);
 
       viewer.on('load', () => {
+        const progressBar = document.getElementById('panoProgressBar');
+        if (progressBar) progressBar.style.width = '100%';
+
+        setTimeout(() => {
+          const poster = document.getElementById('panoPoster');
+          if (poster) {
+            poster.classList.add('opacity-0', 'pointer-events-none');
+            setTimeout(() => { poster.style.display = 'none'; }, 600);
+          }
+          const notice = document.getElementById('panoOverlayNotice');
+          if (notice) {
+            notice.classList.remove('hidden');
+            notice.classList.add('flex');
+          }
+          const switchToast = document.getElementById('panoSwitchToast');
+          if (switchToast) {
+            switchToast.classList.add('hidden');
+            switchToast.classList.remove('flex');
+          }
+        }, 200);
+      });
+
+      viewer.on('error', (err) => {
+        console.warn('Pannellum status:', err);
         const poster = document.getElementById('panoPoster');
-        if (poster) {
-          poster.classList.add('opacity-0', 'pointer-events-none');
-          setTimeout(() => { poster.style.display = 'none'; }, 700);
-        }
-        const notice = document.getElementById('panoOverlayNotice');
-        if (notice) {
-          notice.classList.remove('hidden');
-          notice.classList.add('flex');
-        }
+        if (poster) poster.style.display = 'none';
       });
 
       const titleBadge = document.getElementById('panoTitleBadge');
@@ -928,11 +976,40 @@
       }
     }
 
-    function triggerViewerLoad() {
-      if (!viewerLoaded) {
-        viewerLoaded = true;
-        initViewer(currentPanoId);
+    function triggerViewerLoad(targetPanoId) {
+      if (targetPanoId) currentPanoId = targetPanoId;
+      if (viewerLoaded) return;
+      viewerLoaded = true;
+
+      // 1. Respuesta visual táctil e inmediata (< 30ms)
+      const initialState = document.getElementById('panoInitialState');
+      const loadingState = document.getElementById('panoLoadingState');
+      const progressBar = document.getElementById('panoProgressBar');
+      const statusText = document.getElementById('panoLoadingStatusText');
+
+      if (initialState && loadingState) {
+        initialState.classList.add('hidden');
+        loadingState.classList.remove('hidden');
+        loadingState.classList.add('flex', 'flex-col', 'items-center', 'justify-center');
       }
+
+      // 2. Simulación fluida de barra de progreso
+      if (progressBar) {
+        progressBar.style.width = '40%';
+        setTimeout(() => {
+          if (progressBar && viewerLoaded) progressBar.style.width = '75%';
+          if (statusText) statusText.textContent = 'Decodificando textura esférica 360°...';
+        }, 250);
+        setTimeout(() => {
+          if (progressBar && viewerLoaded) progressBar.style.width = '92%';
+          if (statusText) statusText.textContent = 'Renderizando perspectiva aérea...';
+        }, 550);
+      }
+
+      if (window.lucide) lucide.createIcons();
+
+      // 3. Inicializar motor WebGL de Pannellum
+      initViewer(currentPanoId);
     }
 
     function switchPanorama(id) {
@@ -948,23 +1025,40 @@
       }
 
       if (viewerLoaded) {
+        const switchToast = document.getElementById('panoSwitchToast');
+        const switchText = document.getElementById('panoSwitchText');
+        if (switchToast && switchText) {
+          switchText.textContent = `Cargando Proyecto #${id}...`;
+          switchToast.classList.remove('hidden');
+          switchToast.classList.add('flex');
+          if (window.lucide) lucide.createIcons();
+        }
         initViewer(id);
       } else {
-        const poster = document.getElementById('panoPoster');
-        if (poster) {
-          poster.style.backgroundImage = `url('${panoImages[id].thumb}')`;
-        }
-        const titleBadge = document.getElementById('panoTitleBadge');
-        if (titleBadge) {
-          titleBadge.textContent = panoImages[id].title;
-        }
+        // Si no se ha abierto el visor, iniciar directamente con esta toma
+        triggerViewerLoad(id);
       }
+    }
+
+    // Precarga silenciosa en caché del navegador (sin saturar la red)
+    function preloadPanoramas() {
+      const p1 = new Image();
+      p1.src = panoImages[1].url;
+      const p2 = new Image();
+      p2.src = panoImages[2].url;
     }
 
     document.addEventListener('DOMContentLoaded', () => {
       if (window.lucide) lucide.createIcons();
 
-      // Lazy Loading Inteligente: Inicializa el visor solo cuando el usuario hace scroll hacia él
+      // Iniciar precarga de imágenes cuando el hilo principal esté libre
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(preloadPanoramas, { timeout: 2500 });
+      } else {
+        setTimeout(preloadPanoramas, 1500);
+      }
+
+      // Lazy Loading Inteligente: Inicializa el visor al hacer scroll cerca
       const viewerElem = document.getElementById('panorama-viewer');
       if (viewerElem && 'IntersectionObserver' in window) {
         const observer = new IntersectionObserver((entries) => {
@@ -974,7 +1068,7 @@
               observer.disconnect();
             }
           });
-        }, { rootMargin: '250px' });
+        }, { rootMargin: '100px' });
         observer.observe(viewerElem);
       }
     });
