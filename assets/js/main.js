@@ -7,6 +7,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   initStagingGatekeeper();
   initHeroSimulator();
+  initBusinessHoursStatus();
   initDataLonjaCatalog();
   initHomogenizationCalculator();
   initPropertyLookup();
@@ -166,8 +167,8 @@ function initHeroSimulator() {
     if (lonjaFeeDisplay) lonjaFeeDisplay.textContent = fmt.format(lonjaFee) + ' (Tarifa RAA)';
     if (unitPrice) unitPrice.textContent = type === 'maquinaria' ? fmt.format(Math.round(basePerM2)) + ' / unid.' : fmt.format(Math.round(basePerM2)) + ' / m²';
     if (negFactor) negFactor.textContent = (factorNeg * 100).toFixed(0) + '% (Desc. medio 7%)';
-    if (precisionIndex) precisionIndex.textContent = '99.2% (Norma RAA)';
-    if (latLongDisplay) latLongDisplay.textContent = sector.coords;
+    if (precisionIndex) precisionIndex.textContent = 'Perito RAA Certificado';
+    if (latLongDisplay) latLongDisplay.textContent = 'Ley 1673 / Res. 620';
 
     // Visual Cost Distribution Breakdown Bar
     const grandTotal = totalHomogenized + notarialCosts + lonjaFee;
@@ -1021,6 +1022,13 @@ function initDataLonjaCatalog() {
     });
   }
 
+  // Close on Escape key press
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalBackdrop && modalBackdrop.classList.contains('active')) {
+      closeModal();
+    }
+  });
+
   // Initial setup
   updateAudienceUI();
 }
@@ -1671,7 +1679,66 @@ function initMobileMenu() {
 }
 
 /* ==========================================================================
-   10. STAGING GATEKEEPER & ACCESS CONTROL
+   10. BUSINESS HOURS & REAL-TIME AVAILABILITY STATUS (UTC-5 COLOMBIA)
+   ========================================================================== */
+function initBusinessHoursStatus() {
+  function updateStatus() {
+    // Current time in Colombia (UTC-5)
+    const now = new Date();
+    const utcTime = now.getTime() + (now.getTimezoneOffset() * 60000);
+    const colTime = new Date(utcTime - (5 * 3600000));
+    
+    const day = colTime.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+    const hours = colTime.getHours();
+    const minutes = colTime.getMinutes();
+    const currentMins = hours * 60 + minutes;
+
+    // Horario Oficial de Atención Comercial y Pericial:
+    // Lunes a Viernes: 7:30 AM (450 mins) a 5:30 PM (1050 mins)
+    // Sábados: 8:00 AM (480 mins) a 12:00 PM (720 mins)
+    // Domingos y Festivos: Cerrado
+    let isOpen = false;
+    if (day >= 1 && day <= 5) {
+      if (currentMins >= 450 && currentMins <= 1050) {
+        isOpen = true;
+      }
+    } else if (day === 6) {
+      if (currentMins >= 480 && currentMins <= 720) {
+        isOpen = true;
+      }
+    }
+
+    const floatingDot = document.getElementById('floating-status-dot');
+    const floatingText = document.getElementById('floating-status-text');
+    const heroStatusTag = document.getElementById('hero-status-tag');
+    const simStatusTag = document.getElementById('sim-status-tag');
+
+    if (isOpen) {
+      if (floatingText) floatingText.textContent = 'Perito RAA de turno disponible · Respuesta en 15 min';
+      if (floatingDot) {
+        floatingDot.className = 'w-2 h-2 rounded-full bg-emerald-500 animate-pulse';
+      }
+      if (heroStatusTag) heroStatusTag.textContent = '(Respuesta en 15 min)';
+      if (simStatusTag) simStatusTag.textContent = '(Respuesta en 15 min)';
+    } else {
+      if (floatingText) floatingText.textContent = 'Fuera de horario comercial · Responderemos a primera hora';
+      if (floatingDot) {
+        floatingDot.className = 'w-2 h-2 rounded-full bg-amber-400';
+      }
+      const responseTimeNotice = (day === 6 && currentMins > 720) || day === 0
+        ? '(Respuesta lunes a primera hora)' 
+        : '(Respuesta mañana a primera hora)';
+      if (heroStatusTag) heroStatusTag.textContent = responseTimeNotice;
+      if (simStatusTag) simStatusTag.textContent = responseTimeNotice;
+    }
+  }
+
+  updateStatus();
+  setInterval(updateStatus, 60000);
+}
+
+/* ==========================================================================
+   11. STAGING GATEKEEPER & ACCESS CONTROL
    ========================================================================== */
 function initStagingGatekeeper() {
   const gatekeeper = document.getElementById('staging-gatekeeper');

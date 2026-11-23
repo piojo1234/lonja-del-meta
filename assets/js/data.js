@@ -122,7 +122,7 @@ const LONJA_DATA = {
       name: "Avalúo Comercial Certificado RAA",
       badge: "Aprobado por Bancos & Juzgados",
       targetAudience: "Propietarios, Compradores y Empresas en Villavicencio y Meta",
-      priceDisplay: "Tarifa Oficial RAA según Ley 1673",
+      priceDisplay: "Desde $750.000 COP · Según valor del predio",
       priceValue: 750000,
       format: "Dictamen Técnico Certificado RAA con Póliza",
       summary: "Tasación pericial oficial para casas, apartamentos, locales y bodegas en el Meta. Válido para créditos hipotecarios, sucesiones, compraventas y estados financieros NIIF.",
