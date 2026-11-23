@@ -243,25 +243,114 @@
           </div>
         </a>
 
-        <!-- Desktop Navigation Links (Optimizado horizontalmente para evitar saltos de línea) -->
-        <nav class="hidden lg:flex items-center gap-4 xl:gap-6 text-xs font-mono-tech font-semibold tracking-wider text-slate-700 whitespace-nowrap">
-          <a href="#servicios" class="hover:text-[#0C2F5A] transition-colors whitespace-nowrap">
-            <span>Servicios</span>
+        <!-- Desktop Navigation Links (Single-Line Header con Dropdowns Accesibles) -->
+        <nav class="hidden lg:flex items-center gap-3 xl:gap-5 text-xs font-mono-tech font-semibold tracking-wider text-slate-700 whitespace-nowrap">
+          <a href="#" class="hover:text-[#0C2F5A] transition-colors py-2">
+            <span>Inicio</span>
           </a>
-          <a href="#proceso" class="hover:text-[#0C2F5A] transition-colors whitespace-nowrap">
-            <span>El Proceso</span>
+
+          <!-- Dropdown: Avalúos -->
+          <div class="relative group py-2">
+            <button type="button" class="flex items-center gap-1 hover:text-[#0C2F5A] transition-colors focus:outline-none">
+              <span>Avalúos</span>
+              <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400 group-hover:text-[#0C2F5A] transition-transform group-hover:rotate-180"></i>
+            </button>
+            <div class="absolute top-full left-0 w-72 bg-white rounded-2xl shadow-xl border border-slate-200/90 p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50 transform -translate-y-1 group-hover:translate-y-0">
+              <a href="avaluos/vivienda/" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors">
+                <div class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0">
+                  <i data-lucide="home" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-slate-900 leading-snug">Vivienda Urbana PH</div>
+                  <div class="text-[10px] text-slate-500 font-sans">Casas y aptos · Crédito y venta</div>
+                </div>
+              </a>
+              <a href="avaluos/fincas/" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors">
+                <div class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0">
+                  <i data-lucide="trees" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-slate-900 leading-snug">Fincas & Predios Rurales</div>
+                  <div class="text-[10px] text-slate-500 font-sans">Agropecuarias · Con Dron RTK</div>
+                </div>
+              </a>
+              <a href="avaluos/lotes/" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors">
+                <div class="w-7 h-7 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center shrink-0">
+                  <i data-lucide="map" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-slate-900 leading-snug">Lotes & Terrenos</div>
+                  <div class="text-[10px] text-slate-500 font-sans">Campestres · Parcelaciones POT</div>
+                </div>
+              </a>
+              <a href="avaluos/comerciales/" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors">
+                <div class="w-7 h-7 rounded-lg bg-sky-50 text-[#0C2F5A] flex items-center justify-center shrink-0">
+                  <i data-lucide="building-2" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-slate-900 leading-snug">Locales & Bodegas</div>
+                  <div class="text-[10px] text-slate-500 font-sans">Comercio, oficinas · NIIF / Renta</div>
+                </div>
+              </a>
+              <a href="avaluos/peritaje-judicial/" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors">
+                <div class="w-7 h-7 rounded-lg bg-purple-50 text-purple-700 flex items-center justify-center shrink-0">
+                  <i data-lucide="scale" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-slate-900 leading-snug">Peritaje Judicial</div>
+                  <div class="text-[10px] text-slate-500 font-sans">Art. 226 CGP · Sustentación en juicio</div>
+                </div>
+              </a>
+              <a href="avaluos/revision-catastral/" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors">
+                <div class="w-7 h-7 rounded-lg bg-rose-50 text-rose-700 flex items-center justify-center shrink-0">
+                  <i data-lucide="file-check-2" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-slate-900 leading-snug">Revisión Catastral</div>
+                  <div class="text-[10px] text-slate-500 font-sans">Reclamo IGAC · Bajar impuesto predial</div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Dropdown: Compra Segura -->
+          <div class="relative group py-2">
+            <button type="button" class="flex items-center gap-1 hover:text-[#0C2F5A] transition-colors focus:outline-none">
+              <span>Compra Segura</span>
+              <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400 group-hover:text-[#0C2F5A] transition-transform group-hover:rotate-180"></i>
+            </button>
+            <div class="absolute top-full left-0 w-72 bg-white rounded-2xl shadow-xl border border-slate-200/90 p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50 transform -translate-y-1 group-hover:translate-y-0">
+              <a href="compra-segura/titulos/" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors">
+                <div class="w-7 h-7 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center shrink-0">
+                  <i data-lucide="shield-check" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-slate-900 leading-snug">Estudio de Títulos</div>
+                  <div class="text-[10px] text-slate-500 font-sans">20 y 30 años · Semáforo de riesgo</div>
+                </div>
+              </a>
+              <a href="compra-segura/finca/" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors">
+                <div class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0">
+                  <i data-lucide="shield-alert" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-slate-900 leading-snug">Finca Segura</div>
+                  <div class="text-[10px] text-slate-500 font-sans">Diagnóstico ANT · Baldíos y Ley 2da</div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <a href="topografia/" class="hover:text-[#0C2F5A] transition-colors py-2">
+            <span>Topografía</span>
           </a>
-          <a href="tarifas/" class="hover:text-[#0C2F5A] transition-colors whitespace-nowrap text-[#0C2F5A] font-bold">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 inline-block animate-pulse mr-1"></span>
-            <span>Tarifas Oficiales</span>
+
+          <a href="tarifas/" class="hover:text-[#0C2F5A] transition-colors text-[#0C2F5A] font-bold py-2 flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 inline-block animate-pulse"></span>
+            <span>Tarifas</span>
           </a>
-          <a href="#calculadora" class="hover:text-[#0C2F5A] transition-colors whitespace-nowrap">
-            <span>Calculadora</span>
-          </a>
-          <a href="#casos" class="hover:text-[#0C2F5A] transition-colors whitespace-nowrap">
-            <span>Casos Reales</span>
-          </a>
-          <a href="datalonja.html" class="hover:text-emerald-700 transition-colors flex items-center gap-1.5 font-bold text-slate-700 bg-slate-100 hover:bg-emerald-50 px-2.5 py-1 rounded-lg border border-slate-200 whitespace-nowrap">
+
+          <a href="datalonja.html" class="hover:text-emerald-700 transition-colors flex items-center gap-1.5 font-bold text-slate-700 bg-slate-100 hover:bg-emerald-50 px-2.5 py-1 rounded-lg border border-slate-200">
             <span class="px-1 py-0.2 text-[9px] bg-emerald-600 text-white rounded font-bold uppercase">PRO</span>
             <span>DataLonja</span>
           </a>
@@ -292,34 +381,100 @@
   </header>
 
   <!-- Mobile Drawer Menu -->
-  <div id="mobile-menu-drawer" class="fixed inset-y-0 right-0 w-80 bg-white border-l border-slate-200 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 p-6 flex flex-col justify-between">
+  <div id="mobile-menu-drawer" class="fixed inset-y-0 right-0 w-80 bg-white border-l border-slate-200 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 p-6 flex flex-col justify-between overflow-y-auto">
     <div>
-      <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-4">
         <span class="font-mono-tech text-xs text-slate-500 font-bold">MENÚ DE NAVEGACIÓN</span>
         <button id="mobile-menu-close" aria-label="Cerrar menú" class="min-w-[44px] min-h-[44px] flex items-center justify-center border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
-      <nav class="flex flex-col gap-4 font-mono-tech text-sm font-semibold">
-        <a href="#servicios" class="mobile-nav-link py-2 border-b border-slate-100 hover:text-[#0C2F5A]">01. Especialidades Periciales</a>
-        <a href="#proceso" class="mobile-nav-link py-2 border-b border-slate-100 hover:text-[#0C2F5A]">02. El Proceso (4 Capas)</a>
-        <a href="tarifas/" class="mobile-nav-link py-2 border-b border-slate-100 text-[#0C2F5A] font-bold">03. Tarifas Oficiales 2026</a>
-        <a href="#calculadora" class="mobile-nav-link py-2 border-b border-slate-100 hover:text-[#0C2F5A]">04. Matriz Homogeneización</a>
-        <a href="#casos" class="mobile-nav-link py-2 border-b border-slate-100 hover:text-[#0C2F5A]">05. Casos y Portafolio</a>
-        <a href="#diagnostico" class="mobile-nav-link py-2 border-b border-slate-100 hover:text-[#0C2F5A]">06. Diagnóstico Predial</a>
-        <a href="#contacto" class="mobile-nav-link py-2 border-b border-slate-100 hover:text-[#0C2F5A]">07. Contacto & Peritos</a>
-        <a href="datalonja.html" class="mobile-nav-link py-2.5 px-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-900 font-bold flex items-center justify-between mt-2">
-          <span class="flex items-center gap-2">
-            <span class="px-1.5 py-0.5 text-[9px] bg-emerald-600 text-white rounded font-bold uppercase">PRO</span>
-            <span>DataLonja (Peritos & Datos)</span>
-          </span>
-          <i data-lucide="arrow-right" class="w-4 h-4 text-emerald-600"></i>
-        </a>
+
+      <nav class="flex flex-col font-mono-tech">
+        <!-- Categoría 1: Avalúos -->
+        <div class="mb-4">
+          <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-1">01. AVALÚOS CERTIFICADOS</span>
+          <div class="flex flex-col gap-0.5">
+            <a href="avaluos/vivienda/" class="mobile-nav-link py-2 px-2 text-xs font-semibold text-slate-800 hover:text-[#0C2F5A] hover:bg-slate-50 rounded-lg flex items-center justify-between">
+              <span>Vivienda PH (Casas y Aptos)</span>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+            </a>
+            <a href="avaluos/fincas/" class="mobile-nav-link py-2 px-2 text-xs font-semibold text-slate-800 hover:text-[#0C2F5A] hover:bg-slate-50 rounded-lg flex items-center justify-between">
+              <span>Fincas & Predios Rurales</span>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+            </a>
+            <a href="avaluos/lotes/" class="mobile-nav-link py-2 px-2 text-xs font-semibold text-slate-800 hover:text-[#0C2F5A] hover:bg-slate-50 rounded-lg flex items-center justify-between">
+              <span>Lotes & Parcelaciones</span>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+            </a>
+            <a href="avaluos/comerciales/" class="mobile-nav-link py-2 px-2 text-xs font-semibold text-slate-800 hover:text-[#0C2F5A] hover:bg-slate-50 rounded-lg flex items-center justify-between">
+              <span>Locales & Bodegas Comerciales</span>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+            </a>
+            <a href="avaluos/peritaje-judicial/" class="mobile-nav-link py-2 px-2 text-xs font-semibold text-slate-800 hover:text-[#0C2F5A] hover:bg-slate-50 rounded-lg flex items-center justify-between">
+              <span>Peritaje Judicial (Art. 226 CGP)</span>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+            </a>
+            <a href="avaluos/revision-catastral/" class="mobile-nav-link py-2 px-2 text-xs font-semibold text-slate-800 hover:text-[#0C2F5A] hover:bg-slate-50 rounded-lg flex items-center justify-between">
+              <span>Revisión Catastral (Bajar Predial)</span>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Categoría 2: Compra Segura & Topografía -->
+        <div class="mb-4 pt-3 border-t border-slate-100">
+          <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-1">02. COMPRA SEGURA & TOPOGRAFÍA</span>
+          <div class="flex flex-col gap-0.5">
+            <a href="compra-segura/titulos/" class="mobile-nav-link py-2 px-2 text-xs font-semibold text-slate-800 hover:text-[#0C2F5A] hover:bg-slate-50 rounded-lg flex items-center justify-between">
+              <span>Estudio de Títulos (20-30 años)</span>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+            </a>
+            <a href="compra-segura/finca/" class="mobile-nav-link py-2 px-2 text-xs font-semibold text-slate-800 hover:text-[#0C2F5A] hover:bg-slate-50 rounded-lg flex items-center justify-between">
+              <span>Finca Segura (Diagnóstico Jurídico)</span>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+            </a>
+            <a href="topografia/" class="mobile-nav-link py-2 px-2 text-xs font-semibold text-slate-800 hover:text-[#0C2F5A] hover:bg-slate-50 rounded-lg flex items-center justify-between">
+              <span>Topografía y Dron RTK</span>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Categoría 3: Tarifas & Metodología -->
+        <div class="mb-4 pt-3 border-t border-slate-100">
+          <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-1">03. TARIFAS & HERRAMIENTAS</span>
+          <div class="flex flex-col gap-0.5">
+            <a href="tarifas/" class="mobile-nav-link py-2 px-2 text-xs font-bold text-emerald-800 hover:bg-emerald-50 rounded-lg flex items-center justify-between">
+              <span>Tarifas Oficiales 2026</span>
+              <span class="text-[9px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded font-bold">TABLA</span>
+            </a>
+            <a href="#calculadora" class="mobile-nav-link py-2 px-2 text-xs font-semibold text-slate-800 hover:text-[#0C2F5A] hover:bg-slate-50 rounded-lg flex items-center justify-between">
+              <span>Matriz de Homogeneización</span>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+            </a>
+            <a href="#casos" class="mobile-nav-link py-2 px-2 text-xs font-semibold text-slate-800 hover:text-[#0C2F5A] hover:bg-slate-50 rounded-lg flex items-center justify-between">
+              <span>Casos Reales en Campo</span>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Categoría 4: DataLonja PRO -->
+        <div class="pt-2">
+          <a href="datalonja.html" class="mobile-nav-link py-2.5 px-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-900 font-bold flex items-center justify-between">
+            <span class="flex items-center gap-2">
+              <span class="px-1.5 py-0.5 text-[9px] bg-emerald-600 text-white rounded font-bold uppercase">PRO</span>
+              <span class="text-xs">DataLonja (Peritos & Datos)</span>
+            </span>
+            <i data-lucide="arrow-right" class="w-4 h-4 text-emerald-600"></i>
+          </a>
+        </div>
       </nav>
     </div>
-    <div class="pt-6 border-t border-slate-100">
-      <a href="https://wa.me/573123661758" target="_blank" rel="noopener" class="btn-brutalist w-full bg-[#2C4A3E] hover:bg-[#1E3A2F] text-white py-3 text-center font-mono-tech text-xs font-bold uppercase tracking-wider block mb-2 rounded-xl shadow-md">
-        WhatsApp Inmediato
+    <div class="pt-6 border-t border-slate-100 mt-4">
+      <a href="https://wa.me/573123661758?text=Hola%20Lonja%20de%20Aval%C3%BAos,%20necesito%20cotizar%20un%20aval%C3%BAo%20certificado." target="_blank" rel="noopener" class="btn-brutalist w-full bg-[#0C2F5A] hover:bg-[#1E3A8A] text-white py-3 text-center font-mono-tech text-xs font-bold uppercase tracking-wider block mb-2 rounded-xl shadow-md">
+        Cotizar por WhatsApp
       </a>
       <p class="text-xs font-mono-tech text-slate-400 font-semibold text-center">
         Lunes a Viernes: 7:30 AM - 5:30 PM
@@ -423,7 +578,7 @@
                   <label for="quick-prop-type" class="block font-mono-tech text-xs font-bold uppercase text-slate-700 mb-1">
                     Tipo de Inmueble:
                   </label>
-                  <select id="quick-prop-type" class="w-full bg-white border border-slate-300 rounded-lg p-2.5 text-base sm:text-xs font-mono-tech font-semibold text-slate-800 focus:border-[#0C2F5A] focus:outline-none shadow-sm">
+                  <select id="quick-prop-type" class="w-full bg-white border border-slate-300 rounded-lg p-2.5 text-base sm:text-sm font-mono-tech font-semibold text-slate-800 focus:border-[#0C2F5A] focus:outline-none shadow-sm">
                     <option value="urbano">Casa o Apartamento PH (Urbano)</option>
                     <option value="rural">Finca Agropecuaria o Campestre (Rural)</option>
                     <option value="comercial">Local Comercial o Bodega Industrial</option>
@@ -436,7 +591,7 @@
                   <label for="quick-sector" class="block font-mono-tech text-xs font-bold uppercase text-slate-700 mb-1">
                     Municipio en el Meta:
                   </label>
-                  <select id="quick-sector" class="w-full bg-white border border-slate-300 rounded-lg p-2.5 text-base sm:text-xs font-mono-tech font-semibold text-slate-800 focus:border-[#0C2F5A] focus:outline-none shadow-sm">
+                  <select id="quick-sector" class="w-full bg-white border border-slate-300 rounded-lg p-2.5 text-base sm:text-sm font-mono-tech font-semibold text-slate-800 focus:border-[#0C2F5A] focus:outline-none shadow-sm">
                     <option value="villavicencio-barzal">Villavicencio — Barzal / Centro Médico</option>
                     <option value="villavicencio-trapiche">Villavicencio — Trapiche / Caudal PH</option>
                     <option value="villavicencio-buque">Villavicencio — Buque / Trapiche Campestre</option>
@@ -455,7 +610,7 @@
                     Área Estimada:
                   </label>
                   <div class="relative">
-                    <input type="number" id="quick-area" placeholder="Ej. 120" value="120" min="10" max="100000" class="w-full bg-white border border-slate-300 rounded-lg p-2.5 pr-14 text-base sm:text-xs font-mono-tech font-bold text-slate-900 focus:border-[#0C2F5A] focus:outline-none shadow-sm">
+                    <input type="number" id="quick-area" placeholder="Ej. 120" value="120" min="10" max="100000" class="w-full bg-white border border-slate-300 rounded-lg p-2.5 pr-14 text-base sm:text-sm font-mono-tech font-bold text-slate-900 focus:border-[#0C2F5A] focus:outline-none shadow-sm">
                     <span id="quick-area-unit-label" class="absolute right-3 top-2.5 text-xs font-mono-tech text-slate-400 font-bold">m²</span>
                   </div>
                 </div>
@@ -534,7 +689,7 @@
               </div>
               <div class="glass-panel-dark px-3 py-1.5 rounded-xl border border-emerald-400/30 text-right">
                 <span class="text-[10px] font-mono-tech text-slate-300 block uppercase">Cartera Tasada</span>
-                <span class="font-display font-extrabold text-sm sm:text-base text-emerald-400">+$520.000M COP</span>
+                <span class="font-display font-extrabold text-sm sm:text-base text-emerald-400">+$520.000 Millones COP</span>
               </div>
             </div>
           </div>
@@ -590,7 +745,7 @@
               <span class="font-mono-tech text-xs sm:text-sm font-bold text-slate-500 uppercase tracking-wider block">Millones de pesos</span>
             </div>
             <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              En activos tasados y peritados con plena aceptación bancaria, hipotecaria y tributaria.
+              En activos tasados y peritados con plena aceptación bancaria, hipotecaria y tributaria desde 2018.
             </p>
           </div>
 
@@ -863,7 +1018,7 @@
               </div>
               <h3 class="font-display font-black text-xl text-slate-900 mb-1">Servicios Jurídicos</h3>
               <p class="text-xs font-mono-tech text-[#8E5B4C] font-bold uppercase mb-3">
-                Estudios de títulos y saneamiento
+                Estudios de títulos y compra segura
               </p>
               <p class="text-xs text-slate-600 leading-relaxed mb-4">
                 Blindaje patrimonial antes de desembolsar o firmar escrituras. Trazabilidad a 20 y 30 años, aclaración de linderos y saneamiento de falsa tradición.
@@ -878,17 +1033,20 @@
                 </li>
                 <li class="flex items-center gap-1.5">
                   <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
-                  <span>Saneamiento y aclaración de falsa tradición</span>
+                  <a href="compra-segura/finca/" class="text-emerald-800 font-bold hover:underline inline-flex items-center gap-1">
+                    <span>Finca Segura: Diagnóstico ANT, baldíos y Ley 2da</span>
+                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-emerald-600"></i>
+                  </a>
                 </li>
               </ul>
             </div>
             <div class="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
               <div>
                 <span class="text-[10px] font-mono-tech text-slate-400 font-bold block uppercase">Servicio:</span>
-                <span class="font-display font-black text-sm text-slate-900">Blindaje Legal</span>
+                <span class="font-display font-black text-sm text-slate-900">Desde $850.000</span>
               </div>
-              <a href="https://wa.me/573123661758?text=Hola,%20deseo%20solicitar%20un%20estudio%20de%20t%C3%ADtulos%20o%20asesor%C3%ADa%20jur%C3%ADdica." target="_blank" rel="noopener" class="btn-brutalist bg-[#0A2540] hover:bg-[#1E3A8A] text-white text-xs font-bold font-mono-tech py-2.5 px-3.5 rounded-xl shadow-sm inline-flex items-center gap-1">
-                <span>Consultar</span>
+              <a href="compra-segura/titulos/" class="btn-brutalist bg-[#0A2540] hover:bg-[#1E3A8A] text-white text-xs font-bold font-mono-tech py-2.5 px-3.5 rounded-xl shadow-sm inline-flex items-center gap-1">
+                <span>Ver Servicio</span>
                 <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-amber-300"></i>
               </a>
             </div>
@@ -906,7 +1064,7 @@
               <div class="w-10 h-10 rounded-xl bg-sky-100 text-[#0C2F5A] flex items-center justify-center mb-3">
                 <i data-lucide="map-pin" class="w-5 h-5"></i>
               </div>
-              <h3 class="font-display font-black text-xl text-slate-900 mb-1">Catastro & Territorio</h3>
+              <h3 class="font-display font-black text-xl text-slate-900 mb-1">Catastro & Topografía</h3>
               <p class="text-xs font-mono-tech text-[#2C4A3E] font-bold uppercase mb-3">
                 Topografía de precisión y SIG
               </p>
@@ -916,11 +1074,17 @@
               <ul class="space-y-1.5 text-xs text-slate-700 mb-4">
                 <li class="flex items-center gap-1.5">
                   <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
-                  <span>Ortofotomapas con dron de precisión centimétrica</span>
+                  <a href="topografia/" class="text-teal-900 font-bold hover:underline inline-flex items-center gap-1">
+                    <span>Ortofotomapas con dron RTK y estación GNSS</span>
+                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-teal-700"></i>
+                  </a>
                 </li>
                 <li class="flex items-center gap-1.5">
                   <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
-                  <span>Conciliación: cabida física vs. IGAC vs. SNR</span>
+                  <a href="topografia/" class="text-slate-800 font-semibold hover:underline inline-flex items-center gap-1">
+                    <span>Conciliación de cabida física IGAC vs. SNR</span>
+                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-slate-500"></i>
+                  </a>
                 </li>
               </ul>
             </div>
@@ -948,21 +1112,27 @@
               <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-800 flex items-center justify-center mb-3">
                 <i data-lucide="trending-up" class="w-5 h-5"></i>
               </div>
-              <h3 class="font-display font-black text-xl text-slate-900 mb-1">Negocios Inmobiliarios</h3>
+              <h3 class="font-display font-black text-xl text-slate-900 mb-1">Comercial & Terrenos</h3>
               <p class="text-xs font-mono-tech text-[#0C2F5A] font-bold uppercase mb-3">
-                Comercialización e inversiones
+                Locales, bodegas, oficinas y lotes
               </p>
               <p class="text-xs text-slate-600 leading-relaxed mb-4">
-                Intermediación corporativa respaldada en avalúos técnicos, no en intuición. Conectamos propietarios de fincas y bodegas con compradores calificados.
+                Tasación corporativa bajo normas NIIF y enfoque de renta (Cap Rate) para activos comerciales, y análisis normativo POT para lotes y terrenos.
               </p>
               <ul class="space-y-1.5 text-xs text-slate-700 mb-4">
                 <li class="flex items-center gap-1.5">
                   <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
-                  <span>Comercialización selectiva de fincas y lotes</span>
+                  <a href="avaluos/comerciales/" class="text-purple-900 font-bold hover:underline inline-flex items-center gap-1">
+                    <span>Locales, bodegas y oficinas (NIIF / Renta)</span>
+                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-purple-700"></i>
+                  </a>
                 </li>
                 <li class="flex items-center gap-1.5">
                   <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
-                  <span>Modelación de rentabilidad (Cap Rate, TIR, VPN)</span>
+                  <a href="avaluos/lotes/" class="text-slate-800 font-bold hover:underline inline-flex items-center gap-1">
+                    <span>Lotes campestres y parcelaciones POT</span>
+                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-emerald-600"></i>
+                  </a>
                 </li>
               </ul>
             </div>
@@ -982,39 +1152,45 @@
           <div class="card-editorial border border-slate-200/90 p-6 bg-white rounded-2xl shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
             <div>
               <div class="flex items-center justify-between mb-3">
-                <span class="font-mono-tech text-[10px] text-slate-500 font-bold uppercase">SERVICIO 05 / GESTIÓN</span>
+                <span class="font-mono-tech text-[10px] text-slate-500 font-bold uppercase">SERVICIO 05 / JUDICIAL &amp; CATASTRO</span>
                 <span class="text-[10px] font-mono-tech px-2 py-0.5 bg-emerald-50 text-emerald-800 rounded font-bold border border-emerald-200">
-                  IGAC & SNR
+                  IGAC &amp; CGP
                 </span>
               </div>
               <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center mb-3">
                 <i data-lucide="check-square" class="w-5 h-5"></i>
               </div>
-              <h3 class="font-display font-black text-xl text-slate-900 mb-1">Trámites Prediales</h3>
+              <h3 class="font-display font-black text-xl text-slate-900 mb-1">Peritaje &amp; Defensa Predial</h3>
               <p class="text-xs font-mono-tech text-slate-600 font-bold uppercase mb-3">
-                Viabilidad y diagnósticos normativos
+                Pruebas en estrados y reclamos IGAC
               </p>
               <p class="text-xs text-slate-600 leading-relaxed mb-4">
-                Gestión directa ante instituciones territoriales: cédulas catastrales, licencias de parcelación y conceptos normativos bajo POT municipal.
+                Dictámenes periciales técnicos para juzgados con comparecencia de perito RAA, y reclamaciones formales ante el IGAC para ajustar el avalúo catastral y bajar el predial.
               </p>
               <ul class="space-y-1.5 text-xs text-slate-700 mb-4">
                 <li class="flex items-center gap-1.5">
                   <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
-                  <span>Incorporación de mejoras en ficha catastral</span>
+                  <a href="avaluos/peritaje-judicial/" class="text-slate-900 font-bold hover:underline inline-flex items-center gap-1">
+                    <span>Peritaje judicial oficial (Art. 226 CGP)</span>
+                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-emerald-600"></i>
+                  </a>
                 </li>
                 <li class="flex items-center gap-1.5">
                   <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
-                  <span>Conceptos técnicos POT y licencias</span>
+                  <a href="avaluos/revision-catastral/" class="text-rose-900 font-bold hover:underline inline-flex items-center gap-1">
+                    <span>Revisión avalúo para bajar predial IGAC</span>
+                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-rose-700"></i>
+                  </a>
                 </li>
               </ul>
             </div>
             <div class="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
               <div>
-                <span class="text-[10px] font-mono-tech text-slate-400 font-bold block uppercase">Gestión:</span>
-                <span class="font-display font-black text-sm text-slate-900">Directa IGAC</span>
+                <span class="text-[10px] font-mono-tech text-slate-400 font-bold block uppercase">Defensa:</span>
+                <span class="font-display font-black text-sm text-slate-900">Pericial &amp; Tributaria</span>
               </div>
-              <a href="https://wa.me/573123661758?text=Hola,%20necesito%20gestionar%20un%20tr%C3%A1mite%20predial%20o%20estudio%20de%20viabilidad." target="_blank" rel="noopener" class="btn-brutalist bg-[#0A2540] hover:bg-[#1E3A8A] text-white text-xs font-bold font-mono-tech py-2.5 px-3.5 rounded-xl shadow-sm inline-flex items-center gap-1">
-                <span>Tramitar</span>
+              <a href="avaluos/peritaje-judicial/" class="btn-brutalist bg-[#0A2540] hover:bg-[#1E3A8A] text-white text-xs font-bold font-mono-tech py-2.5 px-3.5 rounded-xl shadow-sm inline-flex items-center gap-1">
+                <span>Peritaje Judicial</span>
                 <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-emerald-300"></i>
               </a>
             </div>
@@ -1024,12 +1200,28 @@
           <div class="card-editorial border-2 border-dashed border-emerald-500/40 p-6 bg-emerald-50/50 rounded-2xl flex flex-col justify-between shadow-sm">
             <div>
               <span class="font-mono-tech text-[10px] text-emerald-800 font-bold uppercase tracking-wider block mb-2">
-                CATÁLOGO REGULADO & HERRAMIENTAS
+                CATÁLOGO REGULADO &amp; HERRAMIENTAS
               </span>
-              <h3 class="font-display font-black text-xl text-slate-900 mb-2">Tarifas Oficiales & DataLonja</h3>
+              <h3 class="font-display font-black text-xl text-slate-900 mb-2">Tarifas Oficiales 2026</h3>
               <p class="text-xs text-slate-600 leading-relaxed mb-4">
-                Consulta los honorarios exactos, entregables y pólizas vigentes para tu predio, o accede a las herramientas técnicas para avaluadores colegiados.
+                Consulta los honorarios exactos, entregables y pólizas vigentes para tu predio en nuestra tabla maestra interactiva, o accede al portal DataLonja PRO.
               </p>
+              <ul class="space-y-1.5 text-xs text-slate-700 mb-4">
+                <li class="flex items-center gap-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
+                  <a href="tarifas/" class="text-emerald-900 font-bold hover:underline inline-flex items-center gap-1">
+                    <span>Tabla interactiva de honorarios oficiales</span>
+                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-emerald-700"></i>
+                  </a>
+                </li>
+                <li class="flex items-center gap-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
+                  <a href="datalonja.html" class="text-slate-800 font-semibold hover:underline inline-flex items-center gap-1">
+                    <span>Portal DataLonja PRO para peritos</span>
+                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-slate-500"></i>
+                  </a>
+                </li>
+              </ul>
             </div>
             <div class="pt-4 border-t border-emerald-200/60 flex flex-col gap-2">
               <a href="tarifas/" class="btn-brutalist bg-[#0C2F5A] hover:bg-[#1E3A8A] text-white text-xs font-bold font-mono-tech py-3 px-4 rounded-xl shadow-md text-center flex items-center justify-center gap-2">
@@ -1045,78 +1237,73 @@
     </section>
 
     <!-- ======================================================================
-         6. SERVICIOS INSTITUCIONALES & TARIFAS OFICIALES LONJA DEL META
+         6. CATÁLOGO REGULADO & TARIFAS TRANSPARENTES
          ====================================================================== -->
-    <section id="servicios-lonja" class="py-16 md:py-24 border-b border-slate-200/60 bg-[#F8FAFC] relative">
+    <section id="servicios-lonja" class="py-12 md:py-16 border-b border-slate-200/60 bg-[#F8FAFC]">
       <a id="datalonja" class="sr-only"></a>
       <a id="avaluapp" class="sr-only"></a>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <!-- Section Header -->
-        <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-slate-200 pb-6 mb-8">
-          <div>
-            <div class="flex items-center gap-2 mb-2">
-              <span class="px-2.5 py-1 bg-[#0C2F5A] text-white font-mono-tech text-xs font-bold uppercase tracking-wider rounded-md">
-                DATALONJA PRO • TARIFAS OFICIALES REGULADAS
-              </span>
-              <span class="font-mono-tech text-xs text-[#2C4A3E] font-semibold">● RAA LEY 1673 • LONJA DE AVALÚOS DEL META</span>
+        <!-- Showcase Box for Official Rates and Transparency -->
+        <div class="bg-white border border-slate-200/90 rounded-3xl p-8 sm:p-12 shadow-sm relative overflow-hidden">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <div class="lg:col-span-7">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="px-2.5 py-1 bg-[#0C2F5A] text-white font-mono-tech text-[11px] font-bold uppercase tracking-wider rounded-md">
+                  TARIFAS REGULADAS RAA 2026
+                </span>
+                <span class="text-xs font-mono-tech text-emerald-700 font-bold">● RESOLUCIÓN IGAC 620 &amp; LEY 1673</span>
+              </div>
+              <h2 class="font-display font-black text-2xl sm:text-4xl text-slate-900 leading-tight mb-4">
+                Transparencia total en honorarios periciales. Sin sorpresas ni sobrecostos.
+              </h2>
+              <p class="text-sm text-slate-600 leading-relaxed mb-6">
+                Todos nuestros dictámenes se rigen por la tabla maestra de honorarios supervisada por la Lonja de Avalúos del Meta S.A.S. Consulta los plazos de entrega, pólizas de responsabilidad civil y entregables oficiales en nuestra tabla interactiva.
+              </p>
+              
+              <div class="flex flex-wrap items-center gap-3">
+                <a href="tarifas/" class="btn-brutalist bg-[#0C2F5A] hover:bg-[#1E3A8A] text-white font-mono-tech text-xs font-bold uppercase tracking-wider py-3.5 px-6 rounded-xl shadow-md inline-flex items-center gap-2 transition-all">
+                  <span>Ver Tabla Maestra de Tarifas</span>
+                  <i data-lucide="arrow-right" class="w-4 h-4 text-emerald-300"></i>
+                </a>
+                <a href="https://wa.me/573123661758?text=Hola%20Lonja%20de%20Aval%C3%BAos,%20deseo%20consultar%20la%20tarifa%20oficial%20para%20mi%20inmueble." target="_blank" rel="noopener" class="btn-brutalist bg-emerald-600 hover:bg-emerald-700 text-white font-mono-tech text-xs font-bold uppercase tracking-wider py-3.5 px-6 rounded-xl shadow-md inline-flex items-center gap-2 transition-all">
+                  <i data-lucide="message-circle" class="w-4 h-4"></i>
+                  <span>Cotizar con un Perito</span>
+                </a>
+              </div>
             </div>
-            <h2 class="font-display font-black text-3xl sm:text-5xl text-slate-900">
-              Catálogo Pericial & DataLonja
-            </h2>
-          </div>
-          <p class="text-xs sm:text-sm text-slate-600 max-w-sm mt-4 md:mt-0 font-normal">
-            Tasación certificada, saneamiento predial en el Meta y soluciones técnicas con tarifas transparentes y reguladas bajo la supervisión de la Lonja de Avalúos del Meta S.A.S.
-          </p>
-        </div>
 
-        <!-- Master Audience Segmented Switcher (Separates General Clients from Appraisers) -->
-        <div class="flex flex-col sm:flex-row items-stretch justify-center p-1.5 bg-slate-200/80 rounded-2xl max-w-2xl mx-auto mb-8 border border-slate-300/70 shadow-inner">
-          <button id="audience-tab-clientes" class="audience-tab-btn flex-1 py-3.5 px-6 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 bg-[#0C2F5A] text-white shadow-md" data-audience="cliente">
-            <i data-lucide="shield-check" class="w-4 h-4 text-emerald-300"></i>
-            <span>🏛️ Para Propietarios & Clientes Finales</span>
-          </button>
-          <button id="audience-tab-avaluadores" class="audience-tab-btn flex-1 py-3.5 px-6 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 text-slate-700 hover:text-slate-900 hover:bg-white/60" data-audience="avaluador">
-            <i data-lucide="compass" class="w-4 h-4 text-[#0C2F5A]"></i>
-            <span>📐 Para Avaluadores & Peritos RAA</span>
-          </button>
-        </div>
-
-        <!-- Audience Context Box -->
-        <div id="audience-context-banner" class="bg-white border border-slate-200/90 rounded-2xl p-6 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm">
-          <div class="max-w-3xl">
-            <div class="flex items-center gap-2 mb-1.5">
-              <span id="audience-context-badge" class="text-[11px] font-mono-tech uppercase font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-md border border-emerald-200">
-                SERVICIOS PERICIALES CERTIFICADOS
-              </span>
-              <span id="audience-context-subtitle" class="text-xs font-mono-tech text-slate-500 font-semibold">● RAA LEY 1673 • LONJA DE AVALÚOS DEL META</span>
+            <div class="lg:col-span-5">
+              <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 space-y-4 font-mono-tech text-xs">
+                <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+                  <span class="text-slate-500 font-semibold uppercase">Vivienda Urbana PH</span>
+                  <span class="font-bold text-slate-900">Desde $750.000 · 3-5 días</span>
+                </div>
+                <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+                  <span class="text-slate-500 font-semibold uppercase">Fincas Agropecuarias</span>
+                  <span class="font-bold text-emerald-800">Desde $1.800.000 · Con Dron RTK</span>
+                </div>
+                <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+                  <span class="text-slate-500 font-semibold uppercase">Estudio de Títulos</span>
+                  <span class="font-bold text-amber-800">Desde $850.000 · 20-30 años</span>
+                </div>
+                <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+                  <span class="text-slate-500 font-semibold uppercase">Peritaje Judicial CGP</span>
+                  <span class="font-bold text-purple-800">Desde $2.500.000 · Sustentación</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-500 font-semibold uppercase">Revisión Catastral</span>
+                  <span class="font-bold text-sky-800">Defensa Impuesto Predial</span>
+                </div>
+              </div>
             </div>
-            <h3 id="audience-context-title" class="font-display font-extrabold text-xl sm:text-2xl text-slate-900 mb-1">
-              Servicios periciales oficiales y blindaje patrimonial para tu inmueble en el Meta
-            </h3>
-            <p id="audience-context-desc" class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Contrata directamente a un avaluador colegiado RAA para avalúos comerciales, créditos hipotecarios, particiones judiciales, compras seguras de fincas y saneamiento de linderos.
-            </p>
-          </div>
-          <div class="shrink-0 flex items-center gap-2 font-mono-tech text-xs text-slate-700 bg-slate-50 px-4 py-2.5 rounded-xl border border-slate-200 self-start md:self-center">
-            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i>
-            <span id="audience-context-count">7 Servicios Disponibles</span>
+
           </div>
         </div>
-
-        <!-- Filter Sub-Tabs (Pills updated based on Audience) -->
-        <div id="catalog-filters-container" class="flex flex-wrap items-center gap-2 mb-10 font-mono-tech text-xs">
-          <!-- Populated by assets/js/main.js -->
-        </div>
-
-        <!-- Dynamic Product Cards Grid -->
-        <div id="lonja-products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          <!-- Populated by assets/js/main.js using LONJA_DATA -->
-        </div>
-        <div id="avaluapp-products-grid" class="hidden"></div>
 
         <!-- Banner de Enlace Profesional para Peritos y Entidades (DataLonja PRO) -->
-        <div class="p-6 sm:p-7 bg-gradient-to-r from-slate-950 via-[#0C2F5A] to-slate-950 rounded-2xl text-white flex flex-col md:flex-row items-center justify-between gap-5 border border-slate-700 shadow-xl">
+        <div class="mt-8 p-6 sm:p-7 bg-gradient-to-r from-slate-950 via-[#0C2F5A] to-slate-950 rounded-2xl text-white flex flex-col md:flex-row items-center justify-between gap-5 border border-slate-700 shadow-xl">
           <div class="flex items-start sm:items-center gap-4">
             <div class="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center shrink-0">
               <i data-lucide="database" class="w-6 h-6 text-emerald-400"></i>
@@ -1124,11 +1311,11 @@
             <div>
               <span class="text-[10px] font-mono-tech uppercase font-bold text-emerald-400 tracking-wider block mb-0.5">PORTAL ESPECIALIZADO PARA PROFESIONALES</span>
               <h4 class="font-display font-black text-lg sm:text-xl text-white">¿Eres Perito RAA, Topógrafo o Entidad Financiera?</h4>
-              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-2xl">Consulta el banco de datos georreferenciados de ofertas, descarga capas catastrales KMZ para QGIS y utiliza la matriz oficial de homogeneización en Excel en nuestro portal técnico.</p>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-2xl">Accede a DataLonja PRO: bancos de datos georreferenciados de ofertas, capas catastrales KMZ para QGIS y matriz oficial de homogeneización.</p>
             </div>
           </div>
           <a href="datalonja.html" class="btn-brutalist bg-emerald-600 hover:bg-emerald-500 text-white font-mono-tech text-xs font-bold uppercase tracking-wider py-3.5 px-6 rounded-xl shrink-0 inline-flex items-center gap-2 shadow-lg transition-all">
-            <span>Acceder a DataLonja PRO</span>
+            <span>DataLonja PRO</span>
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </a>
         </div>
@@ -1579,17 +1766,17 @@
               <form id="contact-main-form" class="space-y-4 font-mono-tech text-xs">
                 <div>
                   <label for="c-name" class="block text-slate-300 uppercase text-xs font-semibold mb-1">Nombre Completo o Empresa:</label>
-                  <input type="text" id="c-name" required placeholder="Ej. Dr. Carlos Mendoza / Inversiones Llanos S.A." class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3.5 py-2.5 text-white placeholder-slate-500 focus:border-sky-400 focus:outline-none text-base sm:text-xs">
+                  <input type="text" id="c-name" required placeholder="Ej. Dr. Carlos Mendoza / Inversiones Llanos S.A." class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3.5 py-2.5 text-white placeholder-slate-500 focus:border-sky-400 focus:outline-none text-base sm:text-sm">
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label for="c-phone" class="block text-slate-300 uppercase text-xs font-semibold mb-1">Teléfono / WhatsApp:</label>
-                    <input type="tel" id="c-phone" required placeholder="Ej. 312 123 4567" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3.5 py-2.5 text-white placeholder-slate-500 focus:border-sky-400 focus:outline-none text-base sm:text-xs">
+                    <input type="tel" id="c-phone" required placeholder="Ej. 312 123 4567" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3.5 py-2.5 text-white placeholder-slate-500 focus:border-sky-400 focus:outline-none text-base sm:text-sm">
                   </div>
                   <div>
                     <label for="c-service" class="block text-slate-300 uppercase text-xs font-semibold mb-1">Servicio Requerido:</label>
-                    <select id="c-service" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3.5 py-2.5 text-white focus:border-sky-400 focus:outline-none text-base sm:text-xs">
+                    <select id="c-service" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3.5 py-2.5 text-white focus:border-sky-400 focus:outline-none text-base sm:text-sm">
                       <option value="Avalúo Comercial Certificado">Avalúo Comercial Certificado</option>
                       <option value="Compra Segura (Diagnóstico)">Compra Segura (Diagnóstico)</option>
                       <option value="Finca Segura (Rural)">Finca Segura (Rural)</option>
@@ -1603,7 +1790,7 @@
 
                 <div>
                   <label for="c-message" class="block text-slate-300 uppercase text-xs font-semibold mb-1">Detalles del Predio o Encargo:</label>
-                  <textarea id="c-message" rows="3" placeholder="Indique municipio, área aproximada y finalidad del avalúo..." class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3.5 py-2.5 text-white placeholder-slate-500 focus:border-sky-400 focus:outline-none text-base sm:text-xs"></textarea>
+                  <textarea id="c-message" rows="3" placeholder="Indique municipio, área aproximada y finalidad del avalúo..." class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3.5 py-2.5 text-white placeholder-slate-500 focus:border-sky-400 focus:outline-none text-base sm:text-sm"></textarea>
                 </div>
 
                 <button type="submit" class="btn-brutalist w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-mono-tech text-xs font-bold uppercase tracking-wider py-3.5 px-4 text-center flex items-center justify-center gap-2 rounded-xl shadow-lg transition-all">
@@ -1665,28 +1852,26 @@
 
         <!-- Quick Links -->
         <div class="md:col-span-3 font-mono-tech text-xs">
-          <span class="font-bold text-slate-900 block uppercase tracking-wider mb-3">Servicios</span>
+          <span class="font-bold text-slate-900 block uppercase tracking-wider mb-3">Avalúos Certificados</span>
           <ul class="space-y-2 text-slate-600">
             <li><a href="avaluos/vivienda/" class="text-slate-900 font-bold hover:underline">Casas y Apartamentos PH (Vivienda)</a></li>
-            <li><a href="avaluos/fincas/" class="text-emerald-700 font-bold hover:underline">Avalúo de Fincas y Predios Rurales</a></li>
-            <li><a href="avaluos/comerciales/" class="text-amber-800 font-bold hover:underline">Locales, Bodegas y Comercio</a></li>
-            <li><a href="compra-segura/titulos/" class="text-amber-800 font-bold hover:underline">Estudio de Títulos & Saneamiento</a></li>
+            <li><a href="avaluos/fincas/" class="text-emerald-700 font-bold hover:underline">Fincas y Predios Rurales (Dron RTK)</a></li>
+            <li><a href="avaluos/lotes/" class="text-slate-800 font-semibold hover:underline">Lotes y Parcelaciones Campestres</a></li>
+            <li><a href="avaluos/comerciales/" class="text-amber-800 font-bold hover:underline">Locales, Bodegas y Oficinas NIIF</a></li>
             <li><a href="avaluos/peritaje-judicial/" class="text-purple-800 font-bold hover:underline">Peritaje Judicial (Art. 226 CGP)</a></li>
-            <li><a href="topografia/" class="text-teal-700 font-bold hover:underline">Topografía y Ortomosaicos Dron RTK</a></li>
-            <li><a href="tarifas/" class="text-emerald-700 font-bold hover:underline">Tarifas Oficiales Reguladas RAA</a></li>
+            <li><a href="avaluos/revision-catastral/" class="text-rose-800 font-bold hover:underline">Revisión Catastral (Bajar Predial)</a></li>
           </ul>
         </div>
 
         <!-- Soluciones Periciales Lonja Links -->
         <div class="md:col-span-4 font-mono-tech text-xs">
-          <span class="font-bold text-slate-900 block uppercase tracking-wider mb-3">Soluciones Periciales Lonja</span>
+          <span class="font-bold text-slate-900 block uppercase tracking-wider mb-3">Compra Segura &amp; Topografía</span>
           <ul class="space-y-2 text-slate-600">
+            <li><a href="compra-segura/titulos/" class="text-amber-800 font-bold hover:underline">Estudio de Títulos a 20 y 30 años</a></li>
+            <li><a href="compra-segura/finca/" class="text-emerald-800 font-bold hover:underline">Finca Segura (Diagnóstico Jurídico ANT)</a></li>
+            <li><a href="topografia/" class="text-teal-700 font-bold hover:underline">Topografía y Ortomosaicos Dron RTK</a></li>
             <li><a href="tarifas/" class="text-emerald-700 font-bold hover:underline">Tarifas Oficiales Reguladas RAA 2026</a></li>
-            <li><a href="#servicios-lonja" class="hover:text-[#0C2F5A] transition-colors">Compra Segura & Finca Segura (Llanos)</a></li>
-            <li><a href="#servicios-lonja" class="hover:text-[#0C2F5A] transition-colors">Predio al Día & Defensa Valor Predial</a></li>
-            <li><a href="#servicios-lonja" class="hover:text-[#0C2F5A] transition-colors">Dictamen Pericial Judicial (Art. 226 CGP)</a></li>
-            <li><a href="#servicios-lonja" class="hover:text-[#0C2F5A] transition-colors">Herramientas & Plantillas para Avaluadores RAA</a></li>
-            <li><a href="#servicios-lonja" class="hover:text-[#0C2F5A] transition-colors">Modelos Cartográficos Prediales (QGIS)</a></li>
+            <li><a href="datalonja.html" class="text-slate-800 font-bold hover:underline inline-flex items-center gap-1.5"><span class="px-1 py-0.2 text-[9px] bg-emerald-600 text-white rounded font-bold uppercase">PRO</span><span>DataLonja para Peritos RAA</span></a></li>
           </ul>
         </div>
 
