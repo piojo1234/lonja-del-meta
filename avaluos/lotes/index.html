@@ -61,6 +61,8 @@
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="../../assets/css/main.css">
+  <!-- Pannellum 360 Viewer CSS -->
+  <link rel="stylesheet" href="../../assets/vendor/pannellum/pannellum.css">
 
   <style>
     .font-mono-tech { font-family: 'JetBrains Mono', monospace; }
@@ -446,6 +448,101 @@
     </section>
 
     <!-- ======================================================================
+         VISOR INTERACTIVO 360° · DRON EN PROYECTOS DE LOTES Y PARCELACIONES
+         ====================================================================== -->
+    <section class="py-14 md:py-20 bg-slate-900 text-white relative overflow-hidden border-b border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 font-mono-tech text-xs uppercase tracking-wider text-emerald-400 font-bold mb-3">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>TECNOLOGÍA PERICIAL INMERSIVA</span>
+            </div>
+            <h2 class="font-display font-black text-2xl sm:text-4xl text-white tracking-tight">
+              Visor Aéreo Interactivo 360° de Lotes y Terrenos
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-300 max-w-2xl mt-2 font-normal leading-relaxed">
+              Explora en 360 grados la inspección aerofotogramétrica real de proyectos campestres en el Meta. Arrastra con el mouse o mueve tu celular para verificar linderos, relieve, vías y entorno natural.
+            </p>
+          </div>
+
+          <!-- Selector de Panorámicas -->
+          <div class="flex items-center gap-2 p-1.5 bg-slate-800/90 rounded-2xl border border-slate-700/80 font-mono-tech text-xs shrink-0">
+            <button id="btnPano1" onclick="switchPanorama(1)" class="px-4 py-2 rounded-xl font-bold transition-all bg-emerald-600 text-white shadow-md flex items-center gap-2">
+              <i data-lucide="compass" class="w-3.5 h-3.5"></i>
+              <span>Proyecto #1 · Vista General</span>
+            </button>
+            <button id="btnPano2" onclick="switchPanorama(2)" class="px-4 py-2 rounded-xl font-bold transition-all text-slate-300 hover:text-white hover:bg-slate-700/60 flex items-center gap-2">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+              <span>Proyecto #2 · Parcelación & Linderos</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Contenedor del Visor 360 -->
+        <div class="relative rounded-3xl overflow-hidden border border-slate-700 shadow-2xl bg-black">
+          
+          <!-- Canvas Pannellum -->
+          <div id="panorama-viewer" class="w-full h-[450px] sm:h-[550px] lg:h-[620px] bg-slate-950"></div>
+
+          <!-- Overlay Guía de Interacción Flotante -->
+          <div id="panoOverlayNotice" class="absolute top-4 left-4 bg-slate-900/85 backdrop-blur-md border border-slate-700/80 text-white px-3.5 py-2.5 rounded-xl font-mono-tech text-xs flex items-center gap-2.5 pointer-events-none shadow-lg z-20">
+            <i data-lucide="rotate-3d" class="w-4 h-4 text-emerald-400 animate-spin" style="animation-duration: 6s;"></i>
+            <span class="text-[11px]"><strong>Modo Interactivo:</strong> Arrastra para girar 360° · Zoom con rueda o pellizco</span>
+          </div>
+
+          <!-- Chips Técnicos de Metadatos Inferiores -->
+          <div class="absolute bottom-4 left-4 right-4 flex flex-wrap items-center justify-between gap-3 pointer-events-none z-20">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="px-3 py-1.5 rounded-xl bg-slate-900/90 backdrop-blur-md border border-slate-700 font-mono-tech text-[10px] sm:text-xs text-slate-200 font-bold flex items-center gap-1.5 shadow-md">
+                <i data-lucide="crosshair" class="w-3.5 h-3.5 text-emerald-400"></i>
+                <span id="panoTitleBadge">DJI Aerofotogramétrico · 4096x2048 Equirrectangular</span>
+              </span>
+              <span class="hidden sm:inline-flex px-3 py-1.5 rounded-xl bg-slate-900/90 backdrop-blur-md border border-slate-700 font-mono-tech text-[10px] sm:text-xs text-slate-300">
+                Giroscopio Móvil Activo
+              </span>
+            </div>
+
+            <div class="pointer-events-auto">
+              <a href="https://wa.me/573123661758?text=Hola%20Lonja%20de%20Aval%C3%BAos,%20vi%20el%20visor%20360%20y%20deseo%20cotizar%20un%20aval%C3%BAo%20con%20inspecci%C3%B3n%20a%C3%A9rea%20para%20un%20lote." target="_blank" rel="noopener" class="btn-brutalist inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-mono-tech text-xs font-bold uppercase tracking-wider py-2.5 px-4 rounded-xl shadow-xl transition-all border border-emerald-400/30">
+                <i data-lucide="message-circle" class="w-4 h-4"></i>
+                <span>Cotizar avalúo de mi lote</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Ventajas del peritaje con registro 360 -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 font-mono-tech text-xs text-slate-300">
+          <div class="p-4 rounded-2xl bg-slate-800/60 border border-slate-800 flex items-start gap-3">
+            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+            <div>
+              <strong class="text-white block font-display">Trazabilidad Total de Linderos</strong>
+              <span class="text-slate-400 text-[11px]">Inspección panorámica perimetral que elimina ambigüedades sobre cercas, caminos y colindancias reales.</span>
+            </div>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-800/60 border border-slate-800 flex items-start gap-3">
+            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+            <div>
+              <strong class="text-white block font-display">Prueba Pericial para Juzgados y Bancos</strong>
+              <span class="text-slate-400 text-[11px]">Evidencia fotográfica inalterable para procesos de partición, sucesión o desembolso de crédito constructor.</span>
+            </div>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-800/60 border border-slate-800 flex items-start gap-3">
+            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+            <div>
+              <strong class="text-white block font-display">Detección de Relieve y Drenajes</strong>
+              <span class="text-slate-400 text-[11px]">Evaluación de escorrentías naturales, pendientes aprovechables y zonas de protección hídrica.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
          CASO REAL DE AVALÚO DE LOTE
          ====================================================================== -->
     <section class="py-14 md:py-20 bg-slate-50 border-b border-slate-200">
@@ -754,9 +851,63 @@
     </a>
   </div>
 
+  <!-- Pannellum 360 Viewer JS -->
+  <script src="../../assets/vendor/pannellum/pannellum.js"></script>
   <script>
+    let viewer = null;
+    const panoImages = {
+      1: {
+        url: '../../assets/img/360/pano_lotes_01.jpg',
+        title: 'DJI Aerofotogramétrico · Proyecto Campestre Vista Aérea 360°'
+      },
+      2: {
+        url: '../../assets/img/360/pano_lotes_02.jpg',
+        title: 'DJI Aerofotogramétrico · Topografía & Linderos de Parcelación 360°'
+      }
+    };
+
+    function initViewer(panoId) {
+      const config = {
+        type: 'equirectangular',
+        panorama: panoImages[panoId].url,
+        autoLoad: true,
+        autoRotate: -1.5,
+        compass: true,
+        showZoomCtrl: true,
+        showFullscreenCtrl: true,
+        hfov: 100,
+        minHfov: 40,
+        maxHfov: 120,
+        pitch: -15,
+        yaw: 0
+      };
+
+      if (viewer) {
+        viewer.destroy();
+      }
+      viewer = pannellum.viewer('panorama-viewer', config);
+      const titleBadge = document.getElementById('panoTitleBadge');
+      if (titleBadge) {
+        titleBadge.textContent = panoImages[panoId].title;
+      }
+    }
+
+    function switchPanorama(id) {
+      const btn1 = document.getElementById('btnPano1');
+      const btn2 = document.getElementById('btnPano2');
+      if (id === 1) {
+        btn1.className = 'px-4 py-2 rounded-xl font-bold transition-all bg-emerald-600 text-white shadow-md flex items-center gap-2';
+        btn2.className = 'px-4 py-2 rounded-xl font-bold transition-all text-slate-300 hover:text-white hover:bg-slate-700/60 flex items-center gap-2';
+      } else {
+        btn2.className = 'px-4 py-2 rounded-xl font-bold transition-all bg-emerald-600 text-white shadow-md flex items-center gap-2';
+        btn1.className = 'px-4 py-2 rounded-xl font-bold transition-all text-slate-300 hover:text-white hover:bg-slate-700/60 flex items-center gap-2';
+      }
+      initViewer(id);
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       if (window.lucide) lucide.createIcons();
+      initViewer(1);
     });
   </script>
 

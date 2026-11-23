@@ -1,28 +1,17 @@
 # ==============================================================================
-# AMBIENTE PRIVADO DE PRUEBAS / STAGING - LONJA DE AVALÚOS DEL META S.A.S.
-# PROHIBIDA LA INDEXACIÓN Y RASTREO POR PARTE DE BUSCADORES WEB
+# LONJA DE AVALÚOS DEL META S.A.S. - ROBOTS.TXT OFICIAL
+# Permite rastreo e indexación para buscadores y redes sociales
 # ==============================================================================
 
 User-agent: *
-Disallow: /
+Allow: /
+Disallow: /scratch/
+Disallow: /._*
 
 User-agent: Googlebot
-Disallow: /
-
-User-agent: Bingbot
-Disallow: /
-
-User-agent: Slurp
-Disallow: /
-
-User-agent: DuckDuckBot
-Disallow: /
-
-User-agent: Baiduspider
-Disallow: /
-
-User-agent: YandexBot
-Disallow: /
+Allow: /
 
 User-agent: facebookexternalhit
-Disallow: /
+Allow: /
+
+Sitemap: https://lonjadelmeta.com/sitemap.xml
