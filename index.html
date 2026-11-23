@@ -170,7 +170,7 @@
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
   <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="assets/css/main.css?v=20261112_02">
+  <link rel="stylesheet" href="assets/css/main.css?v=20261122_05">
 </head>
 <body class="bg-white text-slate-900 selection:bg-[#0C2F5A] selection:text-white">
 
@@ -417,7 +417,7 @@
               </div>
 
               <!-- Formulario de 3 Campos -->
-              <form id="hero-quick-estimator-form" class="space-y-3.5">
+              <form id="hero-quick-estimator-form" onsubmit="window.runQuickEstimate && window.runQuickEstimate(event); return false;" class="space-y-3.5">
                 <!-- Campo 1: Tipo de Inmueble -->
                 <div>
                   <label for="quick-prop-type" class="block font-mono-tech text-xs font-bold uppercase text-slate-700 mb-1">
@@ -461,7 +461,7 @@
                 </div>
 
                 <!-- Botón de Acción -->
-                <button type="submit" id="quick-calc-btn" class="btn-brutalist w-full bg-[#0C2F5A] hover:bg-[#1E3A8A] text-white py-3 px-4 rounded-xl font-mono-tech text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-md transition-all">
+                <button type="button" id="quick-calc-btn" onclick="window.runQuickEstimate && window.runQuickEstimate(event)" class="btn-brutalist w-full bg-[#0C2F5A] hover:bg-[#1E3A8A] text-white py-3 px-4 rounded-xl font-mono-tech text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer">
                   <span>Ver Rango Estimado</span>
                   <i data-lucide="arrow-right" class="w-4 h-4 text-emerald-300"></i>
                 </button>
@@ -546,16 +546,16 @@
               Galería en Sitio:
             </span>
             <div class="flex items-center gap-2 shrink-0">
-              <button class="hero-thumb-btn px-3 py-1 rounded-lg bg-emerald-600 text-white font-bold transition-all" data-src="assets/img/drone_rural_01.webp" data-category="Fincas & Haciendas" data-title="Inspección Aérea Dron — San Martín & Restrepo">
+              <button type="button" class="hero-thumb-btn px-3 py-1 rounded-lg bg-emerald-600 text-white font-bold transition-all cursor-pointer" data-src="assets/img/drone_rural_01.webp" data-category="Fincas & Haciendas" data-title="Inspección Aérea Dron — San Martín & Restrepo" onclick="window.switchInspectionPhoto && window.switchInspectionPhoto(this)">
                 Fincas Rurales
               </button>
-              <button class="hero-thumb-btn px-3 py-1 rounded-lg bg-white/10 text-slate-300 font-semibold hover:bg-emerald-600 hover:text-white transition-all" data-src="assets/img/facade_commercial.webp" data-category="PH Urbano & Edificios" data-title="Avalúo Comercial PH — Torre Empresarial Villavicencio">
+              <button type="button" class="hero-thumb-btn px-3 py-1 rounded-lg bg-white/10 text-slate-300 font-semibold hover:bg-emerald-600 hover:text-white transition-all cursor-pointer" data-src="assets/img/facade_commercial.webp" data-category="PH Urbano & Edificios" data-title="Avalúo Comercial PH — Torre Empresarial Villavicencio" onclick="window.switchInspectionPhoto && window.switchInspectionPhoto(this)">
                 Torres PH
               </button>
-              <button class="hero-thumb-btn px-3 py-1 rounded-lg bg-white/10 text-slate-300 font-semibold hover:bg-emerald-600 hover:text-white transition-all" data-src="assets/img/sample_machinery.webp" data-category="Maquinaria Pesada" data-title="Tasación Pericial — Plantas de Proceso & Equipos">
+              <button type="button" class="hero-thumb-btn px-3 py-1 rounded-lg bg-white/10 text-slate-300 font-semibold hover:bg-emerald-600 hover:text-white transition-all cursor-pointer" data-src="assets/img/sample_machinery.webp" data-category="Maquinaria Pesada" data-title="Tasación Pericial — Plantas de Proceso & Equipos" onclick="window.switchInspectionPhoto && window.switchInspectionPhoto(this)">
                 Maquinaria
               </button>
-              <button class="hero-thumb-btn px-3 py-1 rounded-lg bg-white/10 text-slate-300 font-semibold hover:bg-emerald-600 hover:text-white transition-all" data-src="assets/img/cadastral_map_bg.webp" data-category="Cartografía Catastral" data-title="Ortofotomapa Georreferenciado — IGAC & Curadurías">
+              <button type="button" class="hero-thumb-btn px-3 py-1 rounded-lg bg-white/10 text-slate-300 font-semibold hover:bg-emerald-600 hover:text-white transition-all cursor-pointer" data-src="assets/img/cadastral_map_bg.webp" data-category="Cartografía Catastral" data-title="Ortofotomapa Georreferenciado — IGAC & Curadurías" onclick="window.switchInspectionPhoto && window.switchInspectionPhoto(this)">
                 Catastro SIG
               </button>
             </div>
@@ -1855,7 +1855,7 @@
   </div>
 
   <!-- Application Scripts -->
-  <script src="assets/js/data.js?v=20261112_02"></script>
-  <script src="assets/js/main.js?v=20261112_02"></script>
+  <script src="assets/js/data.js?v=20261122_05"></script>
+  <script src="assets/js/main.js?v=20261122_05"></script>
 </body>
 </html>

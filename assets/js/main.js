@@ -4,36 +4,21 @@
  * Art Direction: Architectural Precision & Radical Transparency
  */
 
-document.addEventListener('DOMContentLoaded', () => {
-  initStagingGatekeeper();
-  initHeroQuickEstimator();
-  initFieldInspectionGallery();
-  initHeroSimulator();
-  initBusinessHoursStatus();
-  initDataLonjaCatalog();
-  initHomogenizationCalculator();
-  initPropertyLookup();
-  initPortfolioGallery();
-  initContactForm();
-  initMobileMenu();
-  lucide.createIcons();
-});
-
 /* ==========================================================================
-   1. HERO QUICK ESTIMATOR (3 CAMPOS - RESULTADOS SÓLO AL CLIC)
+   GLOBAL RUNNERS (ACCESSIBLE INLINE AND VIA EVENT LISTENERS)
    ========================================================================== */
-function initHeroQuickEstimator() {
-  const form = document.getElementById('hero-quick-estimator-form');
+
+// 1. HERO QUICK ESTIMATOR GLOBAL RUNNER
+window.runQuickEstimate = function(e) {
+  if (e && e.preventDefault) e.preventDefault();
+
   const typeSelect = document.getElementById('quick-prop-type');
   const sectorSelect = document.getElementById('quick-sector');
   const areaInput = document.getElementById('quick-area');
-  const areaUnitLabel = document.getElementById('quick-area-unit-label');
   const resultBox = document.getElementById('quick-estimator-result');
   const valRangeDisplay = document.getElementById('quick-val-range');
   const unitValDisplay = document.getElementById('quick-unit-val');
   const whatsappLeadBtn = document.getElementById('quick-whatsapp-lead-btn');
-
-  if (!form || !typeSelect || !sectorSelect || !areaInput) return;
 
   const sectorData = {
     'villavicencio-barzal': { name: "Villavicencio — Barzal / Centro Médico", baseUrbano: 3400000, baseRural: 65000 },
@@ -47,99 +32,147 @@ function initHeroQuickEstimator() {
     'granada': { name: "Granada — Ariari Comercial y Residencial", baseUrbano: 2200000, baseRural: 32000 }
   };
 
-  typeSelect.addEventListener('change', () => {
-    const val = typeSelect.value;
-    if (val === 'rural') {
-      if (parseFloat(areaInput.value) <= 120) areaInput.value = '10000';
-      if (areaUnitLabel) areaUnitLabel.textContent = 'm²';
-    } else if (val === 'urbano') {
-      if (parseFloat(areaInput.value) >= 5000) areaInput.value = '120';
-      if (areaUnitLabel) areaUnitLabel.textContent = 'm²';
-    }
-  });
+  const type = typeSelect ? typeSelect.value : 'urbano';
+  const sectorKey = sectorSelect ? sectorSelect.value : 'villavicencio-barzal';
+  const sector = sectorData[sectorKey] || sectorData['villavicencio-barzal'];
+  const area = parseFloat(areaInput ? areaInput.value : 120) || 120;
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const type = typeSelect.value;
-    const sectorKey = sectorSelect.value;
-    const sector = sectorData[sectorKey] || sectorData['villavicencio-barzal'];
-    const area = parseFloat(areaInput.value) || 120;
+  let baseRate = sector.baseUrbano;
+  let typeName = 'Casa / Apartamento PH';
+  if (type === 'rural') {
+    baseRate = sector.baseRural;
+    typeName = 'Predio Rural / Finca Agropecuaria';
+  } else if (type === 'comercial') {
+    baseRate = Math.round(sector.baseUrbano * 1.35);
+    typeName = 'Local Comercial / Bodega Industrial';
+  } else if (type === 'lote') {
+    baseRate = Math.round(sector.baseUrbano * 0.72);
+    typeName = 'Lote / Terreno de Expansión';
+  }
 
-    let baseRate = sector.baseUrbano;
-    let typeName = 'Casa / Apartamento PH';
-    if (type === 'rural') {
-      baseRate = sector.baseRural;
-      typeName = 'Predio Rural / Finca Agropecuaria';
-    } else if (type === 'comercial') {
-      baseRate = Math.round(sector.baseUrbano * 1.35);
-      typeName = 'Local Comercial / Bodega Industrial';
-    } else if (type === 'lote') {
-      baseRate = Math.round(sector.baseUrbano * 0.72);
-      typeName = 'Lote / Terreno de Expansión';
-    }
+  const calculatedTotal = baseRate * area;
+  const minVal = Math.round((calculatedTotal * 0.94) / 1000000) * 1000000;
+  const maxVal = Math.round((calculatedTotal * 1.06) / 1000000) * 1000000;
 
-    const calculatedTotal = baseRate * area;
-    const minVal = Math.round((calculatedTotal * 0.94) / 1000000) * 1000000;
-    const maxVal = Math.round((calculatedTotal * 1.06) / 1000000) * 1000000;
+  const fmt = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 });
 
-    const fmt = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 });
+  if (valRangeDisplay) {
+    valRangeDisplay.textContent = `${fmt.format(minVal)} – ${fmt.format(maxVal)}`;
+  }
+  if (unitValDisplay) {
+    unitValDisplay.textContent = `Valor referencial ponderado: ≈ ${fmt.format(baseRate)} / m² en ${sector.name}`;
+  }
 
-    if (valRangeDisplay) {
-      valRangeDisplay.textContent = `${fmt.format(minVal)} – ${fmt.format(maxVal)}`;
-    }
-    if (unitValDisplay) {
-      unitValDisplay.textContent = `Valor referencial ponderado: ≈ ${fmt.format(baseRate)} / m² en ${sector.name}`;
-    }
+  if (whatsappLeadBtn) {
+    const waMsg = `🏛️ *LONJA DE AVALÚOS DEL META S.A.S.*\nSolicitud de Asignación de Perito RAA:\n\n• *Tipo de Inmueble:* ${typeName}\n• *Ubicación:* ${sector.name}\n• *Área:* ${area} m²\n• *Rango Orientativo Estimado:* ${fmt.format(minVal)} a ${fmt.format(maxVal)}\n\nPor favor indiquen los requisitos para agendar la visita pericial en campo y expedir el Dictamen Certificado RAA con validez bancaria y judicial.`;
+    whatsappLeadBtn.href = `https://wa.me/573123661758?text=${encodeURIComponent(waMsg)}`;
+  }
 
-    if (whatsappLeadBtn) {
-      const waMsg = `🏛️ *LONJA DE AVALÚOS DEL META S.A.S.*\nSolicitud de Asignación de Perito RAA:\n\n• *Tipo de Inmueble:* ${typeName}\n• *Ubicación:* ${sector.name}\n• *Área:* ${area} m²\n• *Rango Orientativo Estimado:* ${fmt.format(minVal)} a ${fmt.format(maxVal)}\n\nPor favor indiquen los requisitos para agendar la visita pericial en campo y expedir el Dictamen Certificado RAA con validez bancaria y judicial.`;
-      whatsappLeadBtn.href = `https://wa.me/573123661758?text=${encodeURIComponent(waMsg)}`;
-    }
+  if (resultBox) {
+    resultBox.classList.remove('hidden');
+    resultBox.style.display = 'block';
+  }
 
-    if (resultBox) {
-      resultBox.classList.remove('hidden');
-    }
+  playAudioTick('chime');
+  return false;
+};
 
-    playAudioTick('chime');
-  });
-}
-
-/* ==========================================================================
-   2. FIELD INSPECTION DRONE & PANORAMIC GALLERY
-   ========================================================================== */
-function initFieldInspectionGallery() {
+// 2. FIELD INSPECTION GALLERY GLOBAL RUNNER
+window.switchInspectionPhoto = function(btn) {
+  if (!btn) return;
   const heroFeatureImg = document.getElementById('hero-feature-img');
   const heroFeatureCategory = document.getElementById('hero-feature-category');
   const heroFeatureTitle = document.getElementById('hero-feature-title');
   const heroThumbBtns = document.querySelectorAll('.hero-thumb-btn');
 
-  if (!heroFeatureImg || heroThumbBtns.length === 0) return;
+  const src = btn.getAttribute('data-src');
+  const category = btn.getAttribute('data-category');
+  const title = btn.getAttribute('data-title');
+
+  if (heroFeatureImg && src) {
+    heroFeatureImg.style.opacity = '0.3';
+    setTimeout(() => {
+      heroFeatureImg.src = src;
+      heroFeatureImg.style.opacity = '1';
+    }, 120);
+  }
+
+  if (heroFeatureCategory && category) heroFeatureCategory.textContent = '● ' + category;
+  if (heroFeatureTitle && title) heroFeatureTitle.textContent = title;
+
+  if (heroThumbBtns && heroThumbBtns.length) {
+    heroThumbBtns.forEach(b => {
+      b.classList.remove('bg-emerald-600', 'text-white', 'font-bold');
+      b.classList.add('bg-white/10', 'text-slate-300', 'font-semibold');
+    });
+  }
+  btn.classList.remove('bg-white/10', 'text-slate-300', 'font-semibold');
+  btn.classList.add('bg-emerald-600', 'text-white', 'font-bold');
+
+  playAudioTick('soft');
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  try { initStagingGatekeeper(); } catch(err) { console.warn("Gatekeeper:", err); }
+  try { initHeroQuickEstimator(); } catch(err) { console.warn("HeroQuickEstimator:", err); }
+  try { initFieldInspectionGallery(); } catch(err) { console.warn("FieldGallery:", err); }
+  try { initHeroSimulator(); } catch(err) { console.warn("HeroSimulator:", err); }
+  try { initBusinessHoursStatus(); } catch(err) { console.warn("BusinessHours:", err); }
+  try { initDataLonjaCatalog(); } catch(err) { console.warn("DataLonjaCatalog:", err); }
+  try { initHomogenizationCalculator(); } catch(err) { console.warn("Homogenization:", err); }
+  try { initPropertyLookup(); } catch(err) { console.warn("PropertyLookup:", err); }
+  try { initPortfolioGallery(); } catch(err) { console.warn("PortfolioGallery:", err); }
+  try { initContactForm(); } catch(err) { console.warn("ContactForm:", err); }
+  try { initMobileMenu(); } catch(err) { console.warn("MobileMenu:", err); }
+  try { if (window.lucide) lucide.createIcons(); } catch(err) { console.warn("Lucide:", err); }
+});
+
+/* ==========================================================================
+   1. HERO QUICK ESTIMATOR INITIALIZER
+   ========================================================================== */
+function initHeroQuickEstimator() {
+  const form = document.getElementById('hero-quick-estimator-form');
+  const calcBtn = document.getElementById('quick-calc-btn');
+  const typeSelect = document.getElementById('quick-prop-type');
+  const areaInput = document.getElementById('quick-area');
+  const areaUnitLabel = document.getElementById('quick-area-unit-label');
+
+  if (typeSelect && areaInput) {
+    typeSelect.addEventListener('change', () => {
+      const val = typeSelect.value;
+      if (val === 'rural') {
+        if (parseFloat(areaInput.value) <= 120) areaInput.value = '10000';
+        if (areaUnitLabel) areaUnitLabel.textContent = 'm²';
+      } else if (val === 'urbano') {
+        if (parseFloat(areaInput.value) >= 5000) areaInput.value = '120';
+        if (areaUnitLabel) areaUnitLabel.textContent = 'm²';
+      }
+    });
+  }
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      if (window.runQuickEstimate) window.runQuickEstimate(e);
+    });
+  }
+  if (calcBtn) {
+    calcBtn.addEventListener('click', (e) => {
+      if (window.runQuickEstimate) window.runQuickEstimate(e);
+    });
+  }
+}
+
+/* ==========================================================================
+   2. FIELD INSPECTION DRONE & PANORAMIC GALLERY INITIALIZER
+   ========================================================================== */
+function initFieldInspectionGallery() {
+  const heroThumbBtns = document.querySelectorAll('.hero-thumb-btn');
+  if (!heroThumbBtns.length) return;
 
   heroThumbBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const src = btn.getAttribute('data-src');
-      const category = btn.getAttribute('data-category');
-      const title = btn.getAttribute('data-title');
-
-      if (src) {
-        heroFeatureImg.style.opacity = '0.3';
-        setTimeout(() => {
-          heroFeatureImg.src = src;
-          heroFeatureImg.style.opacity = '1';
-        }, 150);
-      }
-
-      if (heroFeatureCategory && category) heroFeatureCategory.textContent = '● ' + category;
-      if (heroFeatureTitle && title) heroFeatureTitle.textContent = title;
-
-      heroThumbBtns.forEach(b => {
-        b.classList.remove('bg-emerald-600', 'text-white', 'font-bold');
-        b.classList.add('bg-white/10', 'text-slate-300', 'font-semibold');
-      });
-      btn.classList.remove('bg-white/10', 'text-slate-300', 'font-semibold');
-      btn.classList.add('bg-emerald-600', 'text-white', 'font-bold');
-
-      playAudioTick('soft');
+    btn.addEventListener('click', (e) => {
+      if (e && e.preventDefault) e.preventDefault();
+      if (window.switchInspectionPhoto) window.switchInspectionPhoto(btn);
     });
   });
 }
@@ -1868,51 +1901,57 @@ function initBusinessHoursStatus() {
    11. STAGING GATEKEEPER & ACCESS CONTROL
    ========================================================================== */
 function initStagingGatekeeper() {
-  const gatekeeper = document.getElementById('staging-gatekeeper');
-  if (!gatekeeper) return;
+  try {
+    const gatekeeper = document.getElementById('staging-gatekeeper');
+    if (!gatekeeper) return;
 
-  const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-  const isAuthorized = sessionStorage.getItem('lonja_staging_authorized') === 'true' || localStorage.getItem('lonja_staging_authorized') === 'true';
+    let isAuthorized = false;
+    try {
+      isAuthorized = sessionStorage.getItem('lonja_staging_authorized') === 'true' || localStorage.getItem('lonja_staging_authorized') === 'true';
+    } catch(err) {
+      isAuthorized = true;
+    }
 
-  if (isAuthorized) {
-    gatekeeper.classList.add('hidden');
-    document.body.style.overflow = '';
-    return;
-  }
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 
-  // On localhost keep it accessible for immediate local testing
-  if (isLocal) {
-    gatekeeper.classList.add('hidden');
-    return;
-  }
+    if (isAuthorized || isLocal) {
+      gatekeeper.classList.add('hidden');
+      document.body.style.overflow = '';
+      return;
+    }
 
-  // On staging / remote domains, require password
-  gatekeeper.classList.remove('hidden');
-  document.body.style.overflow = 'hidden';
+    // Require password only if explicit staging mode or gatekeeper is present
+    gatekeeper.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
 
-  const form = document.getElementById('staging-gate-form');
-  const input = document.getElementById('staging-pass-input');
-  const errorMsg = document.getElementById('staging-error-msg');
+    const form = document.getElementById('staging-gate-form');
+    const input = document.getElementById('staging-pass-input');
+    const errorMsg = document.getElementById('staging-error-msg');
 
-  if (form && input) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const entered = input.value.trim().toLowerCase();
-      // Valid access passwords: lonja2026, meta2026, lonja, admin2026
-      if (entered === 'lonja2026' || entered === 'meta2026' || entered === 'lonja' || entered === 'admin2026') {
-        sessionStorage.setItem('lonja_staging_authorized', 'true');
-        localStorage.setItem('lonja_staging_authorized', 'true');
-        gatekeeper.classList.add('transition-opacity', 'duration-300', 'opacity-0');
-        setTimeout(() => {
-          gatekeeper.classList.add('hidden');
-          document.body.style.overflow = '';
-        }, 300);
-      } else {
-        if (errorMsg) {
-          errorMsg.classList.remove('hidden');
-          input.classList.add('border-rose-500');
+    if (form && input) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const entered = input.value.trim().toLowerCase();
+        // Valid access passwords: lonja2026, meta2026, lonja, admin2026
+        if (entered === 'lonja2026' || entered === 'meta2026' || entered === 'lonja' || entered === 'admin2026') {
+          try {
+            sessionStorage.setItem('lonja_staging_authorized', 'true');
+            localStorage.setItem('lonja_staging_authorized', 'true');
+          } catch(err) {}
+          gatekeeper.classList.add('transition-opacity', 'duration-300', 'opacity-0');
+          setTimeout(() => {
+            gatekeeper.classList.add('hidden');
+            document.body.style.overflow = '';
+          }, 300);
+        } else {
+          if (errorMsg) {
+            errorMsg.classList.remove('hidden');
+            input.classList.add('border-rose-500');
+          }
         }
-      }
-    });
+      });
+    }
+  } catch(e) {
+    console.warn("Gatekeeper safe bypass:", e);
   }
 }
