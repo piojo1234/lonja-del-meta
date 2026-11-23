@@ -1625,7 +1625,7 @@ function initContactForm() {
 
           <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-white/10 text-xs text-slate-400">
             <span>¿Prefiere llamada directa?</span>
-            <a href="tel:+573123661758" class="text-emerald-400 hover:underline font-bold">+57 310 852 3904</a>
+            <a href="tel:+573123661758" class="text-emerald-400 hover:underline font-bold">+57 312 366 1758</a>
           </div>
         </div>
       `;

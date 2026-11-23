@@ -18,7 +18,7 @@
   - **Código General del Proceso (CGP)**: Artículo 226 (Dictamen pericial y contradicción en juicio).
 - **Sede Principal**: Calle 38 # 31-20, Edificio Barzal Empresarial, Villavicencio, Meta, Colombia.
 - **Canales Oficiales**:
-  - **WhatsApp Directo**: `+57 310 852 3904` (`573108523904`)
+  - **WhatsApp Directo**: `+57 312 366 1758` (`573123661758`)
   - **Correo Electrónico**: `contacto@lonjadeavaluosdelmeta.com`
   - **Sitio Web Oficial**: `https://lonjadeavaluosdelmeta.com/`
   - **Despliegue Activo en Hostinger (Staging / Producción)**: `https://lightblue-eagle-832588.hostingersite.com/`

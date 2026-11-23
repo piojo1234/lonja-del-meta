@@ -166,7 +166,7 @@ function initPortfolioTabs() {
       card.innerHTML = `
         <div>
           <div class="relative h-52 overflow-hidden bg-slate-900">
-            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" onerror="this.src='lonja_banner_full.jpg';" />
+            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" loading="lazy" decoding="async" onerror="this.src='lonja_banner_full.jpg';" />
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
             <div class="absolute top-3 left-3">
               <span class="px-2.5 py-1 bg-white/90 backdrop-blur-md text-slate-900 font-mono-tech text-[10px] font-bold uppercase rounded-md shadow-sm">

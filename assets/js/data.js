@@ -1448,7 +1448,7 @@ const LONJA_DATA = {
       area: "340 Hectáreas",
       methodology: "Comparación de Mercado + Renta Potencial",
       purpose: "Garantía Bancaria Hipotecaria",
-      image: "assets/img/drone_rural_01.jpg",
+      image: "assets/img/drone_rural_01.webp",
       badge: "Vuelo Dron RTK",
       description: "Levantamiento aerofotogramétrico de alta resolución, determinación de capacidad agrológica del suelo y tasación de infraestructura de corrales y pasturas mejoradas."
     },
@@ -1461,7 +1461,7 @@ const LONJA_DATA = {
       area: "48 Hectáreas",
       methodology: "Costo de Reposición + Comparación",
       purpose: "Estructuración de Inversión",
-      image: "assets/img/drone_rural_02.jpg",
+      image: "assets/img/drone_rural_02.webp",
       badge: "Afectación Ambiental",
       description: "Delimitación de áreas de preservación de bosque nativo, zona de amortiguamiento y valoración comercial de cabañas de recreo y fuentes hídricas."
     },
@@ -1474,7 +1474,7 @@ const LONJA_DATA = {
       area: "4.200 m² construidos",
       methodology: "Flujo de Caja Descontado + Mercado",
       purpose: "NIIF / Estados Financieros",
-      image: "assets/img/facade_commercial.jpg",
+      image: "assets/img/facade_commercial.webp",
       badge: "Propiedad Horizontal",
       description: "Valoración de locales en planta baja, oficinas ejecutivas y sótanos de parqueadero. Homogeneización de rentas corporativas del sector corporativo."
     },
@@ -1487,7 +1487,7 @@ const LONJA_DATA = {
       area: "12.500 m²",
       methodology: "Residual Dinámico de Desarrollo",
       purpose: "Partición Hereditaria",
-      image: "assets/img/estate_gate.jpg",
+      image: "assets/img/estate_gate.webp",
       badge: "Viabilidad POT",
       description: "Evaluación de parcelación con acceso a vía pavimentada, portal de acceso en mampostería, servicios públicos y cálculo de rentabilidad para desarrollador."
     },
@@ -1500,7 +1500,7 @@ const LONJA_DATA = {
       area: "192 m² + 40 m² terraza",
       methodology: "Comparación de Mercado Homogeneizada",
       purpose: "Compraventa Segura",
-      image: "assets/img/interior_residential.jpg",
+      image: "assets/img/interior_residential.webp",
       badge: "Acabados Alta Gama",
       description: "Inspección técnica detallada de acabados, estado de carpintería y ductos hidrosanitarios. Determinación del valor unitario exacto por metro cuadrado."
     },
@@ -1513,7 +1513,7 @@ const LONJA_DATA = {
       area: "18.4 km lineales",
       methodology: "Daño Emergente y Lucro Cesante",
       purpose: "Expropiación Concertada",
-      image: "assets/img/drone_rural_03.jpg",
+      image: "assets/img/drone_rural_03.webp",
       badge: "Peritaje Judicial",
       description: "Determinación de indemnizaciones por paso de redes de alta tensión y ampliación de doble calzada con afectación en predios privados."
     }
