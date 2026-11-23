@@ -481,13 +481,29 @@
         </div>
 
         <!-- Contenedor del Visor 360 -->
-        <div class="relative rounded-3xl overflow-hidden border border-slate-700 shadow-2xl bg-black">
+        <div id="panoContainer" class="relative rounded-3xl overflow-hidden border border-slate-700 shadow-2xl bg-black">
           
           <!-- Canvas Pannellum -->
           <div id="panorama-viewer" class="w-full h-[450px] sm:h-[550px] lg:h-[620px] bg-slate-950"></div>
 
-          <!-- Overlay Guía de Interacción Flotante -->
-          <div id="panoOverlayNotice" class="absolute top-4 left-4 bg-slate-900/85 backdrop-blur-md border border-slate-700/80 text-white px-3.5 py-2.5 rounded-xl font-mono-tech text-xs flex items-center gap-2.5 pointer-events-none shadow-lg z-20">
+          <!-- Poster / Cover de Carga Rápida (Ultra Liviano ~28 KB) -->
+          <div id="panoPoster" class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-cover bg-center transition-opacity duration-700" style="background-image: url('../../assets/img/360/pano_thumb_01.webp');">
+            <div class="absolute inset-0 bg-slate-950/65 backdrop-blur-[2px]"></div>
+            <div class="relative z-10 text-center px-4 max-w-md">
+              <div onclick="triggerViewerLoad()" class="w-16 h-16 rounded-2xl bg-emerald-600/95 text-white flex items-center justify-center mx-auto mb-4 shadow-2xl shadow-emerald-950/60 cursor-pointer hover:scale-105 transition-transform border border-emerald-400/40">
+                <i data-lucide="rotate-3d" class="w-8 h-8 text-white"></i>
+              </div>
+              <h3 class="font-display font-black text-xl text-white mb-1.5">Inspección Aérea 360°</h3>
+              <p class="text-xs text-slate-300 mb-5 font-mono-tech">Dron DJI Aerofotogramétrico · Proyecto Campestre</p>
+              <button onclick="triggerViewerLoad()" class="btn-brutalist bg-emerald-600 hover:bg-emerald-700 text-white font-mono-tech text-xs font-bold uppercase tracking-wider py-3 px-6 rounded-xl shadow-xl transition-all inline-flex items-center gap-2 border border-emerald-400/30">
+                <i data-lucide="play" class="w-4 h-4"></i>
+                <span>Cargar y Explorar en 360°</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Overlay Guía de Interacción Flotante (Se muestra al cargar) -->
+          <div id="panoOverlayNotice" class="hidden absolute top-4 left-4 bg-slate-900/85 backdrop-blur-md border border-slate-700/80 text-white px-3.5 py-2.5 rounded-xl font-mono-tech text-xs items-center gap-2.5 pointer-events-none shadow-lg z-20">
             <i data-lucide="rotate-3d" class="w-4 h-4 text-emerald-400 animate-spin" style="animation-duration: 6s;"></i>
             <span class="text-[11px]"><strong>Modo Interactivo:</strong> Arrastra para girar 360° · Zoom con rueda o pellizco</span>
           </div>
@@ -497,7 +513,7 @@
             <div class="flex flex-wrap items-center gap-2">
               <span class="px-3 py-1.5 rounded-xl bg-slate-900/90 backdrop-blur-md border border-slate-700 font-mono-tech text-[10px] sm:text-xs text-slate-200 font-bold flex items-center gap-1.5 shadow-md">
                 <i data-lucide="crosshair" class="w-3.5 h-3.5 text-emerald-400"></i>
-                <span id="panoTitleBadge">DJI Aerofotogramétrico · 4096x2048 Equirrectangular</span>
+                <span id="panoTitleBadge">DJI Aerofotogramétrico · Proyecto Campestre Vista Aérea 360°</span>
               </span>
               <span class="hidden sm:inline-flex px-3 py-1.5 rounded-xl bg-slate-900/90 backdrop-blur-md border border-slate-700 font-mono-tech text-[10px] sm:text-xs text-slate-300">
                 Giroscopio Móvil Activo
@@ -855,18 +871,24 @@
   <script src="../../assets/vendor/pannellum/pannellum.js"></script>
   <script>
     let viewer = null;
+    let viewerLoaded = false;
+    let currentPanoId = 1;
+
     const panoImages = {
       1: {
-        url: '../../assets/img/360/pano_lotes_01.jpg',
+        url: '../../assets/img/360/pano_lotes_01.webp',
+        thumb: '../../assets/img/360/pano_thumb_01.webp',
         title: 'DJI Aerofotogramétrico · Proyecto Campestre Vista Aérea 360°'
       },
       2: {
-        url: '../../assets/img/360/pano_lotes_02.jpg',
+        url: '../../assets/img/360/pano_lotes_02.webp',
+        thumb: '../../assets/img/360/pano_thumb_02.webp',
         title: 'DJI Aerofotogramétrico · Topografía & Linderos de Parcelación 360°'
       }
     };
 
     function initViewer(panoId) {
+      currentPanoId = panoId;
       const config = {
         type: 'equirectangular',
         panorama: panoImages[panoId].url,
@@ -886,13 +908,35 @@
         viewer.destroy();
       }
       viewer = pannellum.viewer('panorama-viewer', config);
+
+      viewer.on('load', () => {
+        const poster = document.getElementById('panoPoster');
+        if (poster) {
+          poster.classList.add('opacity-0', 'pointer-events-none');
+          setTimeout(() => { poster.style.display = 'none'; }, 700);
+        }
+        const notice = document.getElementById('panoOverlayNotice');
+        if (notice) {
+          notice.classList.remove('hidden');
+          notice.classList.add('flex');
+        }
+      });
+
       const titleBadge = document.getElementById('panoTitleBadge');
       if (titleBadge) {
         titleBadge.textContent = panoImages[panoId].title;
       }
     }
 
+    function triggerViewerLoad() {
+      if (!viewerLoaded) {
+        viewerLoaded = true;
+        initViewer(currentPanoId);
+      }
+    }
+
     function switchPanorama(id) {
+      currentPanoId = id;
       const btn1 = document.getElementById('btnPano1');
       const btn2 = document.getElementById('btnPano2');
       if (id === 1) {
@@ -902,12 +946,37 @@
         btn2.className = 'px-4 py-2 rounded-xl font-bold transition-all bg-emerald-600 text-white shadow-md flex items-center gap-2';
         btn1.className = 'px-4 py-2 rounded-xl font-bold transition-all text-slate-300 hover:text-white hover:bg-slate-700/60 flex items-center gap-2';
       }
-      initViewer(id);
+
+      if (viewerLoaded) {
+        initViewer(id);
+      } else {
+        const poster = document.getElementById('panoPoster');
+        if (poster) {
+          poster.style.backgroundImage = `url('${panoImages[id].thumb}')`;
+        }
+        const titleBadge = document.getElementById('panoTitleBadge');
+        if (titleBadge) {
+          titleBadge.textContent = panoImages[id].title;
+        }
+      }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
       if (window.lucide) lucide.createIcons();
-      initViewer(1);
+
+      // Lazy Loading Inteligente: Inicializa el visor solo cuando el usuario hace scroll hacia él
+      const viewerElem = document.getElementById('panorama-viewer');
+      if (viewerElem && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !viewerLoaded) {
+              triggerViewerLoad();
+              observer.disconnect();
+            }
+          });
+        }, { rootMargin: '250px' });
+        observer.observe(viewerElem);
+      }
     });
   </script>
 
