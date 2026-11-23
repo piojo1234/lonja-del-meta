@@ -6,6 +6,8 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initStagingGatekeeper();
+  initHeroQuickEstimator();
+  initFieldInspectionGallery();
   initHeroSimulator();
   initBusinessHoursStatus();
   initDataLonjaCatalog();
@@ -18,7 +20,132 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==========================================================================
-   1. HERO LIVE TECHNICAL VALUATION SHEET SIMULATOR
+   1. HERO QUICK ESTIMATOR (3 CAMPOS - RESULTADOS SÓLO AL CLIC)
+   ========================================================================== */
+function initHeroQuickEstimator() {
+  const form = document.getElementById('hero-quick-estimator-form');
+  const typeSelect = document.getElementById('quick-prop-type');
+  const sectorSelect = document.getElementById('quick-sector');
+  const areaInput = document.getElementById('quick-area');
+  const areaUnitLabel = document.getElementById('quick-area-unit-label');
+  const resultBox = document.getElementById('quick-estimator-result');
+  const valRangeDisplay = document.getElementById('quick-val-range');
+  const unitValDisplay = document.getElementById('quick-unit-val');
+  const whatsappLeadBtn = document.getElementById('quick-whatsapp-lead-btn');
+
+  if (!form || !typeSelect || !sectorSelect || !areaInput) return;
+
+  const sectorData = {
+    'villavicencio-barzal': { name: "Villavicencio — Barzal / Centro Médico", baseUrbano: 3400000, baseRural: 65000 },
+    'villavicencio-trapiche': { name: "Villavicencio — Trapiche / Caudal Residencial PH", baseUrbano: 4200000, baseRural: 80000 },
+    'villavicencio-buque': { name: "Villavicencio — Buque / Trapiche Campestre", baseUrbano: 4600000, baseRural: 85000 },
+    'restrepo': { name: "Restrepo — Corredor Campestre y Ecoturístico", baseUrbano: 2800000, baseRural: 52000 },
+    'acacias': { name: "Acacías — Casco Urbano y Agroindustrial", baseUrbano: 2600000, baseRural: 45000 },
+    'puerto-lopez': { name: "Puerto López — Altillanura y Fincas Extensivas", baseUrbano: 1900000, baseRural: 28000 },
+    'san-martin': { name: "San Martín — Eje Ganadero y Agropecuario", baseUrbano: 1800000, baseRural: 25000 },
+    'cumaral': { name: "Cumaral — Zona Campestre y Descanso", baseUrbano: 2300000, baseRural: 38000 },
+    'granada': { name: "Granada — Ariari Comercial y Residencial", baseUrbano: 2200000, baseRural: 32000 }
+  };
+
+  typeSelect.addEventListener('change', () => {
+    const val = typeSelect.value;
+    if (val === 'rural') {
+      if (parseFloat(areaInput.value) <= 120) areaInput.value = '10000';
+      if (areaUnitLabel) areaUnitLabel.textContent = 'm²';
+    } else if (val === 'urbano') {
+      if (parseFloat(areaInput.value) >= 5000) areaInput.value = '120';
+      if (areaUnitLabel) areaUnitLabel.textContent = 'm²';
+    }
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const type = typeSelect.value;
+    const sectorKey = sectorSelect.value;
+    const sector = sectorData[sectorKey] || sectorData['villavicencio-barzal'];
+    const area = parseFloat(areaInput.value) || 120;
+
+    let baseRate = sector.baseUrbano;
+    let typeName = 'Casa / Apartamento PH';
+    if (type === 'rural') {
+      baseRate = sector.baseRural;
+      typeName = 'Predio Rural / Finca Agropecuaria';
+    } else if (type === 'comercial') {
+      baseRate = Math.round(sector.baseUrbano * 1.35);
+      typeName = 'Local Comercial / Bodega Industrial';
+    } else if (type === 'lote') {
+      baseRate = Math.round(sector.baseUrbano * 0.72);
+      typeName = 'Lote / Terreno de Expansión';
+    }
+
+    const calculatedTotal = baseRate * area;
+    const minVal = Math.round((calculatedTotal * 0.94) / 1000000) * 1000000;
+    const maxVal = Math.round((calculatedTotal * 1.06) / 1000000) * 1000000;
+
+    const fmt = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 });
+
+    if (valRangeDisplay) {
+      valRangeDisplay.textContent = `${fmt.format(minVal)} – ${fmt.format(maxVal)}`;
+    }
+    if (unitValDisplay) {
+      unitValDisplay.textContent = `Valor referencial ponderado: ≈ ${fmt.format(baseRate)} / m² en ${sector.name}`;
+    }
+
+    if (whatsappLeadBtn) {
+      const waMsg = `🏛️ *LONJA DE AVALÚOS DEL META S.A.S.*\nSolicitud de Asignación de Perito RAA:\n\n• *Tipo de Inmueble:* ${typeName}\n• *Ubicación:* ${sector.name}\n• *Área:* ${area} m²\n• *Rango Orientativo Estimado:* ${fmt.format(minVal)} a ${fmt.format(maxVal)}\n\nPor favor indiquen los requisitos para agendar la visita pericial en campo y expedir el Dictamen Certificado RAA con validez bancaria y judicial.`;
+      whatsappLeadBtn.href = `https://wa.me/573123661758?text=${encodeURIComponent(waMsg)}`;
+    }
+
+    if (resultBox) {
+      resultBox.classList.remove('hidden');
+    }
+
+    playAudioTick('chime');
+  });
+}
+
+/* ==========================================================================
+   2. FIELD INSPECTION DRONE & PANORAMIC GALLERY
+   ========================================================================== */
+function initFieldInspectionGallery() {
+  const heroFeatureImg = document.getElementById('hero-feature-img');
+  const heroFeatureCategory = document.getElementById('hero-feature-category');
+  const heroFeatureTitle = document.getElementById('hero-feature-title');
+  const heroThumbBtns = document.querySelectorAll('.hero-thumb-btn');
+
+  if (!heroFeatureImg || heroThumbBtns.length === 0) return;
+
+  heroThumbBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const src = btn.getAttribute('data-src');
+      const category = btn.getAttribute('data-category');
+      const title = btn.getAttribute('data-title');
+
+      if (src) {
+        heroFeatureImg.style.opacity = '0.3';
+        setTimeout(() => {
+          heroFeatureImg.src = src;
+          heroFeatureImg.style.opacity = '1';
+        }, 150);
+      }
+
+      if (heroFeatureCategory && category) heroFeatureCategory.textContent = '● ' + category;
+      if (heroFeatureTitle && title) heroFeatureTitle.textContent = title;
+
+      heroThumbBtns.forEach(b => {
+        b.classList.remove('bg-emerald-600', 'text-white', 'font-bold');
+        b.classList.add('bg-white/10', 'text-slate-300', 'font-semibold');
+      });
+      btn.classList.remove('bg-white/10', 'text-slate-300', 'font-semibold');
+      btn.classList.add('bg-emerald-600', 'text-white', 'font-bold');
+
+      playAudioTick('soft');
+    });
+  });
+}
+
+/* ==========================================================================
+   3. ADVANCED TECHNICAL VALUATION SHEET SIMULATOR
    ========================================================================== */
 function initHeroSimulator() {
   const propertyTypeSelect = document.getElementById('sim-prop-type');

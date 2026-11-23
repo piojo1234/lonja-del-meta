@@ -229,68 +229,60 @@
       <div class="flex items-center justify-between h-20">
         
         <!-- Target Anchor where Intro Logo Morphs -->
-        <a href="#" id="nav-logo-target" class="flex items-center gap-3 group transition-opacity duration-300">
-          <div class="w-10 h-10 shrink-0">
+        <a href="#" id="nav-logo-target" class="flex items-center gap-2.5 sm:gap-3 group shrink-0 whitespace-nowrap transition-opacity duration-300">
+          <div class="w-9 h-9 sm:w-10 sm:h-10 shrink-0">
             <img src="assets/img/logo-symbol.svg" alt="Lonja de Avalúos" class="w-full h-full object-contain">
           </div>
-          <div class="flex flex-col">
-            <span class="font-display font-extrabold text-lg sm:text-xl tracking-tight text-[#0C2F5A] leading-tight group-hover:text-slate-900 transition-colors">
+          <div class="flex flex-col whitespace-nowrap">
+            <span class="font-display font-black text-base sm:text-lg tracking-tight text-[#0C2F5A] leading-none group-hover:text-slate-900 transition-colors">
               LONJA DE AVALÚOS
             </span>
-            <span class="font-mono-tech text-[11px] sm:text-xs tracking-widest uppercase text-slate-500 font-bold">
+            <span class="font-mono-tech text-[10px] sm:text-[11px] tracking-wider uppercase text-slate-500 font-bold mt-1">
               DEL META S.A.S. • RAA
             </span>
           </div>
         </a>
 
-        <!-- Desktop Navigation Links -->
-        <nav class="hidden lg:flex items-center gap-7 text-xs font-mono-tech font-semibold tracking-wider text-slate-700">
-          <a href="#servicios" class="hover:text-[#0C2F5A] transition-colors flex items-center gap-1">
-            <span class="text-slate-400 font-bold">01.</span>
-            <span>Especialidades</span>
+        <!-- Desktop Navigation Links (Optimizado horizontalmente para evitar saltos de línea) -->
+        <nav class="hidden lg:flex items-center gap-4 xl:gap-6 text-xs font-mono-tech font-semibold tracking-wider text-slate-700 whitespace-nowrap">
+          <a href="#servicios" class="hover:text-[#0C2F5A] transition-colors whitespace-nowrap">
+            <span>Servicios</span>
           </a>
-          <a href="#proceso" class="hover:text-[#0C2F5A] transition-colors flex items-center gap-1">
-            <span class="text-slate-400 font-bold">02.</span>
+          <a href="#proceso" class="hover:text-[#0C2F5A] transition-colors whitespace-nowrap">
             <span>El Proceso</span>
           </a>
-          <a href="#servicios-lonja" class="hover:text-[#0C2F5A] transition-colors flex items-center gap-1 text-[#0C2F5A] font-bold">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 inline-block animate-pulse"></span>
-            <span>03. Tarifas Oficiales</span>
+          <a href="#servicios-lonja" class="hover:text-[#0C2F5A] transition-colors whitespace-nowrap text-[#0C2F5A] font-bold">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 inline-block animate-pulse mr-1"></span>
+            <span>Tarifas Oficiales</span>
           </a>
-          <a href="#calculadora" class="hover:text-[#0C2F5A] transition-colors flex items-center gap-1">
-            <span class="text-slate-400 font-bold">04.</span>
+          <a href="#calculadora" class="hover:text-[#0C2F5A] transition-colors whitespace-nowrap">
             <span>Calculadora</span>
           </a>
-          <a href="#casos" class="hover:text-[#0C2F5A] transition-colors flex items-center gap-1">
-            <span class="text-slate-400 font-bold">05.</span>
+          <a href="#casos" class="hover:text-[#0C2F5A] transition-colors whitespace-nowrap">
             <span>Casos Reales</span>
           </a>
-          <a href="#diagnostico" class="hover:text-[#0C2F5A] transition-colors flex items-center gap-1">
-            <span class="text-slate-400 font-bold">06.</span>
-            <span>Diagnóstico</span>
-          </a>
-          <a href="datalonja.html" class="hover:text-emerald-700 transition-colors flex items-center gap-1.5 font-bold text-slate-700 bg-slate-100 hover:bg-emerald-50 px-2.5 py-1 rounded-lg border border-slate-200">
+          <a href="datalonja.html" class="hover:text-emerald-700 transition-colors flex items-center gap-1.5 font-bold text-slate-700 bg-slate-100 hover:bg-emerald-50 px-2.5 py-1 rounded-lg border border-slate-200 whitespace-nowrap">
             <span class="px-1 py-0.2 text-[9px] bg-emerald-600 text-white rounded font-bold uppercase">PRO</span>
             <span>DataLonja</span>
           </a>
         </nav>
 
         <!-- Right Header Actions -->
-        <div class="flex items-center gap-2 sm:gap-3">
+        <div class="flex items-center gap-2 sm:gap-3 shrink-0 whitespace-nowrap">
           <!-- Mobile Direct Cotizar CTA -->
-          <a href="https://wa.me/573123661758?text=Hola%20Lonja%20de%20Aval%C3%BAos,%20necesito%20cotizar%20un%20aval%C3%BAo%20certificado." target="_blank" rel="noopener" class="btn-brutalist sm:hidden inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-mono-tech font-bold uppercase tracking-wider py-2 px-3 rounded-lg shadow-sm transition-all">
+          <a href="https://wa.me/573123661758?text=Hola%20Lonja%20de%20Aval%C3%BAos,%20necesito%20cotizar%20un%20aval%C3%BAo%20certificado." target="_blank" rel="noopener" class="btn-brutalist sm:hidden inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-mono-tech font-bold uppercase tracking-wider py-2 px-3 rounded-lg shadow-sm transition-all whitespace-nowrap">
             <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
             <span>Cotizar</span>
           </a>
 
           <!-- Desktop Direct WhatsApp CTA -->
-          <a href="https://wa.me/573123661758?text=Hola%20Lonja%20de%20Aval%C3%BAos,%20necesito%20cotizar%20un%20aval%C3%BAo%20certificado." target="_blank" rel="noopener" class="btn-brutalist hidden sm:inline-flex items-center gap-2 bg-[#0C2F5A] hover:bg-[#1E3A8A] text-white text-xs font-mono-tech font-bold uppercase tracking-wider py-2.5 px-4 rounded-xl shadow-md transition-all">
+          <a href="https://wa.me/573123661758?text=Hola%20Lonja%20de%20Aval%C3%BAos,%20necesito%20cotizar%20un%20aval%C3%BAo%20certificado." target="_blank" rel="noopener" class="btn-brutalist hidden sm:inline-flex items-center gap-2 bg-[#0C2F5A] hover:bg-[#1E3A8A] text-white text-xs font-mono-tech font-bold uppercase tracking-wider py-2.5 px-4 rounded-xl shadow-md transition-all whitespace-nowrap shrink-0">
             <i data-lucide="message-circle" class="w-3.5 h-3.5 text-emerald-400"></i>
             <span>Cotizar Avalúo</span>
           </a>
 
           <!-- Mobile Hamburger with Apple/Google 44x44px minimum tap target -->
-          <button id="mobile-menu-btn" aria-label="Abrir menú de navegación" class="lg:hidden min-w-[44px] min-h-[44px] flex items-center justify-center border border-slate-200 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors">
+          <button id="mobile-menu-btn" aria-label="Abrir menú de navegación" class="lg:hidden min-w-[44px] min-h-[44px] flex items-center justify-center border border-slate-200 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors shrink-0">
             <i data-lucide="menu" class="w-5 h-5"></i>
           </button>
         </div>
@@ -354,302 +346,150 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           
-          <!-- Left Column: Typographic Hook & Visual Drone Showcase -->
-          <div class="lg:col-span-7 flex flex-col justify-between">
-            <div>
-              <div class="inline-flex items-center gap-2 mb-3">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span class="font-mono-tech text-xs sm:text-sm uppercase tracking-widest text-[#059669] font-extrabold">
-                  Precisión Arquitectónica & Inteligencia Territorial
-                </span>
-              </div>
-
-              <!-- Main Typographic Headline (Optimizado CRO - Ley de Hick) -->
-              <h1 class="font-display font-black text-3xl sm:text-5xl xl:text-6xl leading-[1.08] text-[#0F172A] tracking-tight mb-4">
-                Avalúos Comerciales Certificados RAA en el Meta con Validez Bancaria y Judicial
-              </h1>
-
-              <!-- Subheadline (Beneficio Tangible & Tiempo) -->
-              <p class="text-sm sm:text-base text-[#334155] leading-relaxed max-w-2xl mb-6 font-normal">
-                Tasamos tu finca, vivienda o lote en 3 a 5 días hábiles. Dictamen oficial bajo Ley 1673 con visita en campo y dron.
-              </p>
-
-              <!-- EYE-CATCHING CINEMATIC VISUAL SHOWCASE CARD -->
-              <div class="relative rounded-2xl overflow-hidden shadow-xl border border-slate-200 mb-7 group bg-[#0A2540]">
-                <div class="h-60 sm:h-72 w-full relative overflow-hidden">
-                  <img id="hero-feature-img" src="assets/img/drone_rural_01.webp" alt="Vuelo Aerofotogramétrico Dron Lonja del Meta" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="eager" fetchpriority="high" decoding="async">
-                  <div class="absolute inset-0 bg-gradient-to-t from-[#0A2540] via-[#0A2540]/35 to-transparent"></div>
-                  
-                  <!-- Top Photo Badge -->
-                  <div class="absolute top-3 left-3 right-3 flex items-center justify-between text-[11px] font-mono-tech text-white">
-                    <div class="glass-panel-dark px-3 py-1 rounded-full flex items-center gap-2 border border-white/20">
-                      <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-                      <span class="font-bold tracking-wider">INSPECCIÓN EN CAMPO & DRON</span>
-                    </div>
-                    <div class="hidden sm:flex glass-panel-dark px-3 py-1 rounded-full items-center gap-1.5 text-slate-200 border border-white/20">
-                      <i data-lucide="map-pin" class="w-3.5 h-3.5 text-emerald-400"></i>
-                      <span>Villavicencio & Departamento del Meta</span>
-                    </div>
-                  </div>
-
-                  <!-- Floating Live Stats Over Photo -->
-                  <div class="absolute bottom-3 left-4 right-4 flex flex-wrap items-end justify-between gap-2 text-white">
-                    <div>
-                      <span id="hero-feature-category" class="text-[11px] font-mono-tech text-emerald-300 uppercase tracking-wider block font-bold">
-                        ● Vuelo Pericial Certificado
-                      </span>
-                      <h4 id="hero-feature-title" class="font-display font-black text-base sm:text-xl text-white drop-shadow-md">
-                        Inspección Catastral & Avalúos en Campo (Restrepo / San Martín)
-                      </h4>
-                    </div>
-                    <div class="glass-panel-dark px-3 py-1.5 rounded-xl border border-emerald-400/30 text-right">
-                      <span class="text-[10px] font-mono-tech text-slate-300 block uppercase">Cartera Tasada</span>
-                      <span class="font-display font-extrabold text-sm sm:text-base text-emerald-400">+$520.000M COP</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Interactive Visual Category Strip -->
-                <div class="bg-[#0A2540] px-3.5 py-2.5 flex items-center justify-between gap-2 overflow-x-auto text-[11px] font-mono-tech border-t border-white/10">
-                  <span class="text-slate-400 font-bold uppercase shrink-0 flex items-center gap-1">
-                    <i data-lucide="camera" class="w-3.5 h-3.5 text-emerald-400"></i>
-                    Galería en Sitio:
-                  </span>
-                  <div class="flex items-center gap-1.5 shrink-0">
-                    <button class="hero-thumb-btn px-2.5 py-1 rounded-lg bg-emerald-600 text-white font-bold transition-all" data-src="assets/img/drone_rural_01.webp" data-category="Fincas & Haciendas" data-title="Inspección Aérea Dron — San Martín & Restrepo">
-                      Fincas Rurales
-                    </button>
-                    <button class="hero-thumb-btn px-2.5 py-1 rounded-lg bg-white/10 text-slate-300 font-semibold hover:bg-emerald-600 hover:text-white transition-all" data-src="assets/img/facade_commercial.webp" data-category="PH Urbano & Edificios" data-title="Avalúo Comercial PH — Torre Empresarial Villavicencio">
-                      Torres PH
-                    </button>
-                    <button class="hero-thumb-btn px-2.5 py-1 rounded-lg bg-white/10 text-slate-300 font-semibold hover:bg-emerald-600 hover:text-white transition-all" data-src="assets/img/sample_machinery.webp" data-category="Maquinaria Amarilla" data-title="Tasación Pericial — Plantas de Proceso & Equipos Pesados">
-                      Maquinaria
-                    </button>
-                    <button class="hero-thumb-btn px-2.5 py-1 rounded-lg bg-white/10 text-slate-300 font-semibold hover:bg-emerald-600 hover:text-white transition-all" data-src="assets/img/cadastral_map_bg.webp" data-category="Cartografía Catastral" data-title="Ortofotomapa Georreferenciado — IGAC & Curadurías">
-                      Catastro SIG
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- CTA Group (Optimizado CRO - WhatsApp First + Formulario) -->
-              <div class="flex flex-wrap items-center gap-3.5 mb-6">
-                <a href="https://wa.me/573123661758?text=Hola%20Lonja%20de%20Aval%C3%BAos,%20necesito%20cotizar%20un%20aval%C3%BAo%20certificado." target="_blank" rel="noopener" class="btn-brutalist bg-emerald-600 hover:bg-emerald-700 text-white font-mono-tech text-xs sm:text-sm font-bold uppercase tracking-wider py-3.5 px-6 rounded-xl inline-flex items-center gap-2 shadow-lg shadow-emerald-900/20 transition-all">
-                  <i data-lucide="message-circle" class="w-4 h-4 text-emerald-200"></i>
-                  <span>Cotizar mi Avalúo por WhatsApp <span id="hero-status-tag" class="font-normal opacity-90">(Respuesta en 15 min)</span></span>
-                </a>
-                <a href="#contacto" class="btn-brutalist bg-white hover:bg-slate-50 text-[#0F172A] font-mono-tech text-xs sm:text-sm font-bold uppercase tracking-wider py-3.5 px-6 rounded-xl border border-slate-200 inline-flex items-center gap-2 shadow-sm transition-all">
-                  <span>Radicar Encargo Formal</span>
-                  <i data-lucide="arrow-down" class="w-4 h-4 text-slate-500"></i>
-                </a>
-              </div>
+          <!-- Left Column: Typographic Hook & Immediate CTA (Above the Fold) -->
+          <div class="lg:col-span-7 flex flex-col justify-center">
+            <div class="inline-flex items-center gap-2 mb-3">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span class="font-mono-tech text-xs sm:text-sm uppercase tracking-wider text-[#0C2F5A] font-bold">
+                Avaluadores Colegiados RAA · Departamento del Meta
+              </span>
             </div>
 
-            <!-- Architectural Institutional Badges -->
-            <div class="border-t border-slate-100 pt-5 grid grid-cols-2 sm:grid-cols-3 gap-4 font-mono-tech text-xs text-[#334155]">
-              <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center shrink-0">
-                  <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i>
-                </div>
-                <div>
-                  <span class="text-[11px] text-[#64748B] font-bold block uppercase">Validez Jurídica</span>
-                  <span class="font-extrabold text-[#0F172A] text-xs">Art. 226 CGP / NIIF</span>
-                </div>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-lg bg-blue-50 border border-blue-200 flex items-center justify-center shrink-0">
-                  <i data-lucide="navigation" class="w-4 h-4 text-blue-600"></i>
-                </div>
-                <div>
-                  <span class="text-[11px] text-[#64748B] font-bold block uppercase">Fotogrametría</span>
-                  <span class="font-extrabold text-[#0F172A] text-xs">Dron GNSS RTK</span>
-                </div>
-              </div>
-              <div class="col-span-2 sm:col-span-1 flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-lg bg-amber-50 border border-amber-200 flex items-center justify-center shrink-0">
-                  <i data-lucide="clock" class="w-4 h-4 text-amber-600"></i>
-                </div>
-                <div>
-                  <span class="text-[11px] text-[#64748B] font-bold block uppercase">Tiempo Promedio</span>
-                  <span class="font-extrabold text-emerald-700 text-xs">3 a 5 Días Hábiles</span>
-                </div>
-              </div>
+            <!-- Main Typographic Headline -->
+            <h1 class="font-display font-black text-3xl sm:text-5xl xl:text-6xl leading-[1.08] text-[#0F172A] tracking-tight mb-4">
+              Avalúos Comerciales Certificados RAA en el Meta con Validez Bancaria y Judicial
+            </h1>
+
+            <!-- Subheadline -->
+            <p class="text-sm sm:text-base text-[#334155] leading-relaxed max-w-xl mb-6 font-normal">
+              Tasamos tu finca, vivienda o lote en <strong>3 a 5 días hábiles</strong>. Dictamen pericial oficial expedido bajo la Ley 1673 con visita en campo y aerofotogrametría con dron RTK.
+            </p>
+
+            <!-- CTA Group Directo (Visible inmediatamente en primer pliegue) -->
+            <div class="flex flex-wrap items-center gap-3.5 mb-6">
+              <a href="https://wa.me/573123661758?text=Hola%20Lonja%20de%20Aval%C3%BAos,%20necesito%20cotizar%20un%20aval%C3%BAo%20certificado." target="_blank" rel="noopener" class="btn-brutalist bg-emerald-600 hover:bg-emerald-700 text-white font-mono-tech text-xs sm:text-sm font-bold uppercase tracking-wider py-3.5 px-6 rounded-xl inline-flex items-center gap-2 shadow-lg shadow-emerald-900/20 transition-all">
+                <i data-lucide="message-circle" class="w-4 h-4 text-emerald-200"></i>
+                <span>Cotizar mi avalúo · Desde $750.000</span>
+              </a>
+              <a href="tel:+573123661758" class="btn-brutalist bg-white hover:bg-slate-50 text-[#0F172A] font-mono-tech text-xs sm:text-sm font-bold uppercase tracking-wider py-3.5 px-5 rounded-xl border border-slate-200 inline-flex items-center gap-2 shadow-sm transition-all">
+                <i data-lucide="phone-call" class="w-4 h-4 text-slate-700"></i>
+                <span>Llamar a un Perito</span>
+              </a>
+            </div>
+
+            <!-- Trust Badges (Franja única horizontal) -->
+            <div class="pt-4 border-t border-slate-200/80 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs font-mono-tech text-slate-600">
+              <span class="flex items-center gap-1.5 font-semibold">
+                <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i>
+                <span>Validez Bancaria & Art. 226 CGP</span>
+              </span>
+              <span class="flex items-center gap-1.5 font-semibold">
+                <i data-lucide="navigation" class="w-4 h-4 text-sky-600"></i>
+                <span>Inspección en Campo & Dron RTK</span>
+              </span>
+              <span class="flex items-center gap-1.5 font-semibold">
+                <i data-lucide="clock" class="w-4 h-4 text-amber-600"></i>
+                <span>Entrega en 3 a 5 Días</span>
+              </span>
             </div>
           </div>
 
-          <!-- Right Column: Interactive Modern Glass Valuation Simulator -->
+          <!-- Right Column: Micro-Estimador Orientativo Rápido (3 campos, sin cifras previas) -->
           <div class="lg:col-span-5">
-            <div class="bg-white border border-slate-200/90 p-6 sm:p-7 rounded-2xl shadow-xl shadow-slate-200/50 relative">
-              
-              <!-- Card Header -->
-              <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
-                <div>
-                  <span class="font-mono-tech text-xs uppercase tracking-wider text-slate-500 font-bold block">ESTIMACIÓN PRELIMINAR</span>
-                  <h3 class="font-display font-black text-xl text-slate-900">Visor Técnico de Avalúo</h3>
+            <div class="bg-slate-50/90 border border-slate-200/90 p-5 sm:p-6 rounded-2xl shadow-sm relative">
+              <div class="border-b border-slate-200 pb-3 mb-4">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-[10px] font-mono-tech uppercase tracking-wider text-slate-500 font-bold">
+                    HERRAMIENTA ORIENTATIVA
+                  </span>
+                  <span class="text-[10px] font-mono-tech px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded font-bold">
+                    ⚡ 10 Segundos
+                  </span>
                 </div>
-                <div class="flex items-center gap-1.5 text-xs font-mono-tech text-[#2C4A3E] bg-emerald-50 px-2.5 py-1 border border-emerald-200 rounded-full font-semibold">
-                  <span class="w-2 h-2 rounded-full bg-[#2C4A3E]"></span>
-                  <span>CÁLCULO ORIENTATIVO</span>
-                </div>
-              </div>
-
-              <!-- Interactive Controls -->
-              <div class="space-y-4 text-xs font-mono-tech">
-                
-                <!-- Property Type Selection -->
-                <div>
-                  <label for="sim-prop-type" class="block font-bold uppercase text-slate-800 mb-1">
-                    Tipo de Activo:
-                  </label>
-                  <select id="sim-prop-type" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-base sm:text-xs font-mono-tech font-semibold text-slate-800 focus:bg-white focus:border-[#0C2F5A] focus:outline-none">
-                    <option value="urbano">Inmueble Urbano (Casa / Apartamento PH)</option>
-                    <option value="rural">Predio Rural / Finca Agropecuaria</option>
-                    <option value="comercial">Comercial / Local / Bodega Industrial</option>
-                    <option value="maquinaria">Maquinaria Pesada / Equipo Fijo</option>
-                  </select>
-                </div>
-
-                <!-- Sector / Municipality (Meta + Cobertura Nacional) -->
-                <div>
-                  <label for="sim-sector" class="block font-bold uppercase text-slate-800 mb-1">
-                    Ubicación Georreferenciada (Meta & Nacional):
-                  </label>
-                  <select id="sim-sector" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-base sm:text-xs font-mono-tech font-semibold text-slate-800 focus:bg-white focus:border-[#0C2F5A] focus:outline-none">
-                    <optgroup label="📍 Sede Principal — Meta & Orinoquía (Peritaje Local)">
-                      <option value="villavicencio-barzal">Villavicencio — Sector Barzal / Centro Médico</option>
-                      <option value="villavicencio-trapiche">Villavicencio — Trapiche / Caudal Residencial PH</option>
-                      <option value="villavicencio-buque">Villavicencio — Buque / Trapiche Campestre</option>
-                      <option value="restrepo">Restrepo — Corredor Campestre y Ecoturístico</option>
-                      <option value="acacias">Acacías — Casco Urbano y Agroindustrial</option>
-                      <option value="puerto-lopez">Puerto López — Altillanura y Fincas Extensivas</option>
-                      <option value="san-martin">San Martín — Eje Ganadero y Agropecuario</option>
-                      <option value="cumaral">Cumaral — Zona Campestre y Descanso</option>
-                    </optgroup>
-                    <optgroup label="🇨🇴 Cobertura Nacional (Red Habimetro & Avalúo en Línea)">
-                      <option value="bogota-chico">Bogotá D.C. — Chicó / Rosales / Virrey</option>
-                      <option value="bogota-cedritos">Bogotá D.C. — Cedritos / Usaquén</option>
-                      <option value="bogota-colina">Bogotá D.C. — Colina Campestre / Suba</option>
-                      <option value="bogota-salitre">Bogotá D.C. — Ciudad Salitre / Teusaquillo</option>
-                      <option value="chia-sabana">Chía & Sabana Norte — Cundinamarca</option>
-                      <option value="medellin-poblado">Medellín — El Poblado / Milla de Oro</option>
-                      <option value="medellin-laureles">Medellín — Laureles / Estadio</option>
-                      <option value="envigado-aburra">Envigado & Sabaneta — Antioquia</option>
-                      <option value="cali-ciudadjardin">Cali — Ciudad Jardín / Pance</option>
-                      <option value="cali-granada">Cali — Granada / El Peñón</option>
-                      <option value="barranquilla-riomar">Barranquilla — Riomar / El Golf</option>
-                      <option value="bucaramanga-cabecera">Bucaramanga — Cabecera / Cañaveral</option>
-                      <option value="cartagena-bocagrande">Cartagena — Bocagrande / Castillogrande</option>
-                      <option value="pereira-pinares">Pereira — Pinares / Dosquebradas</option>
-                    </optgroup>
-                  </select>
-                </div>
-
-                <!-- Area Input & Range -->
-                <div>
-                  <div class="flex justify-between items-center mb-1">
-                    <label for="sim-area" class="font-bold uppercase text-slate-800">
-                      Área Estimada (<span id="sim-area-unit">m²</span>):
-                    </label>
-                    <input type="number" id="sim-area" value="120" min="20" max="100000" class="w-24 text-right bg-slate-50 border border-slate-200 rounded-lg px-2 py-1 font-bold text-base sm:text-xs text-slate-800 focus:bg-white focus:border-[#0C2F5A] focus:outline-none">
-                  </div>
-                  <input type="range" id="sim-area-range" min="30" max="1000" value="120" class="mt-2">
-                </div>
-
-                <!-- Quality / Finishes -->
-                <div>
-                  <span class="block font-bold uppercase text-slate-800 mb-1">Nivel de Acabados / Conservación:</span>
-                  <div class="grid grid-cols-3 gap-2">
-                    <label class="border border-slate-200 rounded-lg p-2 text-center cursor-pointer hover:border-slate-300 has-[:checked]:bg-[#0C2F5A] has-[:checked]:text-white has-[:checked]:border-[#0C2F5A] transition-colors">
-                      <input type="radio" name="sim-finish" value="economico" class="sr-only">
-                      <span class="text-xs font-bold block">Básico</span>
-                    </label>
-                    <label class="border border-slate-200 rounded-lg p-2 text-center cursor-pointer hover:border-slate-300 has-[:checked]:bg-[#0C2F5A] has-[:checked]:text-white has-[:checked]:border-[#0C2F5A] transition-colors">
-                      <input type="radio" name="sim-finish" value="medio" checked class="sr-only">
-                      <span class="text-xs font-bold block">Medio</span>
-                    </label>
-                    <label class="border border-slate-200 rounded-lg p-2 text-center cursor-pointer hover:border-slate-300 has-[:checked]:bg-[#0C2F5A] has-[:checked]:text-white has-[:checked]:border-[#0C2F5A] transition-colors">
-                      <input type="radio" name="sim-finish" value="alto" class="sr-only">
-                      <span class="text-xs font-bold block">Superior</span>
-                    </label>
-                  </div>
-                </div>
-
-              </div>
-
-              <!-- Output Box -->
-              <div class="mt-6 pt-5 border-t border-slate-200 bg-slate-50/80 rounded-xl p-4.5">
-                <span class="text-xs font-mono-tech uppercase text-slate-500 font-bold block">01. RANGO DE VALOR ESTIMADO (COP):</span>
-                <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 my-1">
-                  <span id="sim-val-min" class="font-display font-black text-2xl text-slate-900">$385.000.000</span>
-                  <span class="text-xs font-mono-tech text-slate-400 font-medium">hasta</span>
-                  <span id="sim-val-max" class="font-display font-black text-2xl text-[#0C2F5A]">$415.000.000</span>
-                </div>
-
-                <!-- Triple Projection Metrics: Renta Mensual + Gastos Notariales + Tarifa Avalúo Lonja -->
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-3 pt-3 border-t border-slate-200/80">
-                  <div class="bg-white p-2.5 border border-slate-200/80 rounded-lg shadow-sm">
-                    <span class="text-[10px] font-mono-tech text-slate-500 font-bold uppercase block">Renta Estimada:</span>
-                    <span id="sim-rent-val" class="font-bold text-xs text-[#0C2F5A]">$2.200.000 / mes</span>
-                  </div>
-                  <div class="bg-white p-2.5 border border-slate-200/80 rounded-lg shadow-sm">
-                    <span class="text-[10px] font-mono-tech text-slate-500 font-bold uppercase block">Gastos Notaría:</span>
-                    <span id="sim-notarial-val" class="font-bold text-xs text-[#8E5B4C]">~$9.400.000 (SNR+Dpto)</span>
-                  </div>
-                  <div class="bg-white p-2.5 border border-slate-200/80 rounded-lg shadow-sm">
-                    <span class="text-[10px] font-mono-tech text-slate-500 font-bold uppercase block">Tarifa Oficial Avalúo:</span>
-                    <span id="sim-lonja-fee" class="font-bold text-xs text-[#2C4A3E]">$1.423.500 (Regulado)</span>
-                  </div>
-                </div>
-
-                <div class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-slate-200/80 text-xs font-mono-tech text-slate-700">
-                  <div>
-                    <span class="text-slate-400 block text-[11px] font-bold">VALOR UNITARIO BASE:</span>
-                    <span id="sim-unit-price" class="font-bold text-slate-900 text-xs">$3.400.000 / m²</span>
-                  </div>
-                  <div>
-                    <span class="text-slate-400 block text-[11px] font-bold">FACTOR NEGOCIACIÓN:</span>
-                    <span id="sim-neg-factor" class="font-bold text-slate-900 text-xs">93% (-7%)</span>
-                  </div>
-                  <div>
-                    <span class="text-slate-400 block text-[11px] font-bold">MARCO NORMATIVO:</span>
-                    <span id="sim-coords" class="font-bold text-slate-900 text-xs">Ley 1673 / Res. 620</span>
-                  </div>
-                  <div>
-                    <span class="text-slate-400 block text-[11px] font-bold">RESPALDO LEGAL:</span>
-                    <span id="sim-precision" class="font-bold text-[#2C4A3E] text-xs">Perito RAA Certificado</span>
-                  </div>
-                </div>
-
-                <!-- Visual Cost Distribution Bar -->
-                <div class="mt-3 pt-3 border-t border-slate-200/80">
-                  <div class="flex justify-between items-center text-[10px] font-mono-tech text-slate-500 font-bold uppercase mb-1.5">
-                    <span>Estructura de Cierre Estimada:</span>
-                    <span id="sim-ratio-label" class="text-[#0C2F5A]">Inmueble 97.4% | Cierre 2.6%</span>
-                  </div>
-                  <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden flex" title="Distribución de Valor">
-                    <div id="sim-bar-prop" class="bg-[#0C2F5A] h-full transition-all duration-300" style="width: 97.4%"></div>
-                    <div id="sim-bar-notary" class="bg-[#8E5B4C] h-full transition-all duration-300" style="width: 2.2%"></div>
-                    <div id="sim-bar-lonja" class="bg-[#2C4A3E] h-full transition-all duration-300" style="width: 0.4%"></div>
-                  </div>
-                  <div class="flex items-center justify-between text-[9px] font-mono-tech text-slate-500 mt-1">
-                    <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-[#0C2F5A]"></span>Activo</span>
-                    <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-[#8E5B4C]"></span>Notaría/SNR</span>
-                    <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-[#2C4A3E]"></span>Tarifa Lonja</span>
-                  </div>
-                </div>
-
-                <p class="text-[10px] text-slate-500 italic mt-2.5 text-center leading-tight">
-                  * Valores y honorarios orientativos. El dictamen pericial vinculante se expide con visita en campo y firma colegiada RAA.
+                <h3 class="font-display font-black text-lg sm:text-xl text-slate-900 leading-tight">
+                  ¿Cuánto vale tu inmueble?
+                </h3>
+                <p class="text-xs text-slate-500 mt-1">
+                  Calcula una estimación orientativa antes de agendar la visita del perito.
                 </p>
               </div>
 
-              <!-- Card Action Button (Optimizado CRO - WhatsApp First) -->
-              <a id="sim-whatsapp-btn" href="https://wa.me/573123661758?text=Hola%20Lonja%20de%20Aval%C3%BAos,%20deseo%20cotizar%20mi%20aval%C3%BAo%20formal." target="_blank" rel="noopener" class="btn-brutalist mt-5 w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3.5 px-4 font-mono-tech text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2 rounded-xl shadow-lg shadow-emerald-900/20 transition-all">
-                <i data-lucide="message-circle" class="w-4 h-4 text-emerald-200"></i>
-                <span>Cotizar mi Avalúo por WhatsApp <span id="sim-status-tag" class="font-normal opacity-90">(Respuesta en 15 min)</span></span>
-              </a>
+              <!-- Formulario de 3 Campos -->
+              <form id="hero-quick-estimator-form" class="space-y-3.5">
+                <!-- Campo 1: Tipo de Inmueble -->
+                <div>
+                  <label for="quick-prop-type" class="block font-mono-tech text-xs font-bold uppercase text-slate-700 mb-1">
+                    Tipo de Inmueble:
+                  </label>
+                  <select id="quick-prop-type" class="w-full bg-white border border-slate-300 rounded-lg p-2.5 text-base sm:text-xs font-mono-tech font-semibold text-slate-800 focus:border-[#0C2F5A] focus:outline-none shadow-sm">
+                    <option value="urbano">Casa o Apartamento PH (Urbano)</option>
+                    <option value="rural">Finca Agropecuaria o Campestre (Rural)</option>
+                    <option value="comercial">Local Comercial o Bodega Industrial</option>
+                    <option value="lote">Lote o Terreno de Expansión</option>
+                  </select>
+                </div>
+
+                <!-- Campo 2: Municipio / Ubicación -->
+                <div>
+                  <label for="quick-sector" class="block font-mono-tech text-xs font-bold uppercase text-slate-700 mb-1">
+                    Municipio en el Meta:
+                  </label>
+                  <select id="quick-sector" class="w-full bg-white border border-slate-300 rounded-lg p-2.5 text-base sm:text-xs font-mono-tech font-semibold text-slate-800 focus:border-[#0C2F5A] focus:outline-none shadow-sm">
+                    <option value="villavicencio-barzal">Villavicencio — Barzal / Centro Médico</option>
+                    <option value="villavicencio-trapiche">Villavicencio — Trapiche / Caudal PH</option>
+                    <option value="villavicencio-buque">Villavicencio — Buque / Trapiche Campestre</option>
+                    <option value="restrepo">Restrepo — Zona Campestre & Urbana</option>
+                    <option value="acacias">Acacías — Casco Urbano & Rural</option>
+                    <option value="san-martin">San Martín — Eje Ganadero</option>
+                    <option value="puerto-lopez">Puerto López — Altillanura</option>
+                    <option value="cumaral">Cumaral — Ecoturístico & Campestre</option>
+                    <option value="granada">Granada — Ariari Comercial</option>
+                  </select>
+                </div>
+
+                <!-- Campo 3: Área aproximada -->
+                <div>
+                  <label for="quick-area" class="block font-mono-tech text-xs font-bold uppercase text-slate-700 mb-1">
+                    Área Estimada:
+                  </label>
+                  <div class="relative">
+                    <input type="number" id="quick-area" placeholder="Ej. 120" value="120" min="10" max="100000" class="w-full bg-white border border-slate-300 rounded-lg p-2.5 pr-14 text-base sm:text-xs font-mono-tech font-bold text-slate-900 focus:border-[#0C2F5A] focus:outline-none shadow-sm">
+                    <span id="quick-area-unit-label" class="absolute right-3 top-2.5 text-xs font-mono-tech text-slate-400 font-bold">m²</span>
+                  </div>
+                </div>
+
+                <!-- Botón de Acción -->
+                <button type="submit" id="quick-calc-btn" class="btn-brutalist w-full bg-[#0C2F5A] hover:bg-[#1E3A8A] text-white py-3 px-4 rounded-xl font-mono-tech text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-md transition-all">
+                  <span>Ver Rango Estimado</span>
+                  <i data-lucide="arrow-right" class="w-4 h-4 text-emerald-300"></i>
+                </button>
+              </form>
+
+              <!-- Resultado Inicialmente OCULTO (Sin cifras que compitan con el H1) -->
+              <div id="quick-estimator-result" class="hidden mt-4 pt-4 border-t border-slate-200">
+                <div class="bg-white border border-slate-200 p-4 rounded-xl shadow-sm">
+                  <span class="text-[10px] font-mono-tech uppercase text-slate-400 font-bold block mb-1">
+                    Rango Orientativo Estimado:
+                  </span>
+                  <div class="font-display font-black text-xl text-slate-900 mb-1" id="quick-val-range">
+                    <!-- Dinámico -->
+                  </div>
+                  <span class="text-xs font-mono-tech text-slate-500 block mb-3" id="quick-unit-val">
+                    <!-- Dinámico $/m² -->
+                  </span>
+                  
+                  <div class="p-2.5 bg-amber-50 border border-amber-200 rounded-lg text-[11px] text-amber-900 leading-tight mb-3">
+                    <strong>Aviso legal:</strong> Esto es una aproximación estadística. Bancos, juzgados y notarías solo admiten el <strong>Dictamen Oficial RAA</strong> con visita pericial en campo.
+                  </div>
+
+                  <a id="quick-whatsapp-lead-btn" href="https://wa.me/573123661758" target="_blank" rel="noopener" class="btn-brutalist w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2.5 px-3 rounded-lg font-mono-tech text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 text-center shadow-md">
+                    <i data-lucide="message-circle" class="w-4 h-4"></i>
+                    <span>Pedir Avalúo Certificado RAA</span>
+                  </a>
+                </div>
+              </div>
 
             </div>
           </div>
@@ -660,7 +500,73 @@
     </section>
 
     <!-- ======================================================================
-         3. EDITORIAL BROADSHEET METRICS (FINANCIAL NEWSPAPER STYLE)
+         3. FRANJA PANORÁMICA DE INSPECCIÓN TÉCNICA EN CAMPO & DRON RTK
+         ====================================================================== -->
+    <section class="border-b border-slate-100 bg-[#0A2540] py-8 text-white relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 group">
+          <div class="h-64 sm:h-80 w-full relative overflow-hidden">
+            <img id="hero-feature-img" src="assets/img/drone_rural_01.webp" alt="Vuelo Aerofotogramétrico Dron Lonja del Meta" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="eager" fetchpriority="high" decoding="async">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0A2540] via-[#0A2540]/35 to-transparent"></div>
+            
+            <!-- Top Photo Badge -->
+            <div class="absolute top-3 left-3 right-3 flex items-center justify-between text-[11px] font-mono-tech text-white">
+              <div class="glass-panel-dark px-3 py-1 rounded-full flex items-center gap-2 border border-white/20">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span class="font-bold tracking-wider">INSPECCIÓN EN CAMPO & DRON RTK</span>
+              </div>
+              <div class="hidden sm:flex glass-panel-dark px-3 py-1 rounded-full items-center gap-1.5 text-slate-200 border border-white/20">
+                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-emerald-400"></i>
+                <span>Villavicencio & Departamento del Meta</span>
+              </div>
+            </div>
+
+            <!-- Floating Live Stats Over Photo -->
+            <div class="absolute bottom-3 left-4 right-4 flex flex-wrap items-end justify-between gap-2 text-white">
+              <div>
+                <span id="hero-feature-category" class="text-[11px] font-mono-tech text-emerald-300 uppercase tracking-wider block font-bold">
+                  ● Vuelo Pericial Certificado
+                </span>
+                <h4 id="hero-feature-title" class="font-display font-black text-base sm:text-xl text-white drop-shadow-md">
+                  Inspección Catastral & Avalúos en Campo (Restrepo / San Martín)
+                </h4>
+              </div>
+              <div class="glass-panel-dark px-3 py-1.5 rounded-xl border border-emerald-400/30 text-right">
+                <span class="text-[10px] font-mono-tech text-slate-300 block uppercase">Cartera Tasada</span>
+                <span class="font-display font-extrabold text-sm sm:text-base text-emerald-400">+$520.000M COP</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Visual Category Strip -->
+          <div class="bg-[#071B2F] px-4 py-3 flex items-center justify-between gap-2 overflow-x-auto text-[11px] font-mono-tech border-t border-white/10">
+            <span class="text-slate-400 font-bold uppercase shrink-0 flex items-center gap-1">
+              <i data-lucide="camera" class="w-3.5 h-3.5 text-emerald-400"></i>
+              Galería en Sitio:
+            </span>
+            <div class="flex items-center gap-2 shrink-0">
+              <button class="hero-thumb-btn px-3 py-1 rounded-lg bg-emerald-600 text-white font-bold transition-all" data-src="assets/img/drone_rural_01.webp" data-category="Fincas & Haciendas" data-title="Inspección Aérea Dron — San Martín & Restrepo">
+                Fincas Rurales
+              </button>
+              <button class="hero-thumb-btn px-3 py-1 rounded-lg bg-white/10 text-slate-300 font-semibold hover:bg-emerald-600 hover:text-white transition-all" data-src="assets/img/facade_commercial.webp" data-category="PH Urbano & Edificios" data-title="Avalúo Comercial PH — Torre Empresarial Villavicencio">
+                Torres PH
+              </button>
+              <button class="hero-thumb-btn px-3 py-1 rounded-lg bg-white/10 text-slate-300 font-semibold hover:bg-emerald-600 hover:text-white transition-all" data-src="assets/img/sample_machinery.webp" data-category="Maquinaria Pesada" data-title="Tasación Pericial — Plantas de Proceso & Equipos">
+                Maquinaria
+              </button>
+              <button class="hero-thumb-btn px-3 py-1 rounded-lg bg-white/10 text-slate-300 font-semibold hover:bg-emerald-600 hover:text-white transition-all" data-src="assets/img/cadastral_map_bg.webp" data-category="Cartografía Catastral" data-title="Ortofotomapa Georreferenciado — IGAC & Curadurías">
+                Catastro SIG
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         4. EDITORIAL BROADSHEET METRICS (FINANCIAL NEWSPAPER STYLE)
          ====================================================================== -->
     <section class="border-b border-slate-100 bg-white py-12 md:py-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -679,45 +585,232 @@
           <!-- Metric 1 -->
           <div class="lg:px-6 flex flex-col justify-between">
             <span class="font-mono-tech text-xs text-slate-500 font-bold uppercase mb-1">01 / VOLUMEN TASADO</span>
-            <div class="font-display font-black text-4xl sm:text-5xl text-slate-900 tracking-tight my-2">
-              +$520.000M
+            <div class="my-2">
+              <span class="font-display font-black text-3xl sm:text-4xl xl:text-5xl text-slate-900 tracking-tight block">+$520.000</span>
+              <span class="font-mono-tech text-xs sm:text-sm font-bold text-slate-500 uppercase tracking-wider block">Millones de pesos</span>
             </div>
             <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Millones de pesos en activos tasados con plena aceptación bancaria, hipotecaria y tributaria.
+              En activos tasados y peritados con plena aceptación bancaria, hipotecaria y tributaria.
             </p>
           </div>
 
           <!-- Metric 2 -->
           <div class="lg:px-6 flex flex-col justify-between">
-            <span class="font-mono-tech text-xs text-slate-500 font-bold uppercase mb-1">02 / RIGOR TÉCNICO</span>
-            <div class="font-display font-black text-4xl sm:text-5xl text-[#2C4A3E] tracking-tight my-2">
-              100%
+            <span class="font-mono-tech text-xs text-slate-500 font-bold uppercase mb-1">02 / EXPERIENCIA COMPROBADA</span>
+            <div class="font-display font-black text-3xl sm:text-4xl xl:text-5xl text-[#2C4A3E] tracking-tight my-2">
+              2.840+
             </div>
             <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Dictámenes periciales admitidos con plena validez probatoria judicial bajo Art. 226 del CGP.
+              Dictámenes periciales certificados emitidos con firma colegiada RAA y póliza civil.
             </p>
           </div>
 
           <!-- Metric 3 -->
           <div class="lg:px-6 flex flex-col justify-between">
             <span class="font-mono-tech text-xs text-slate-500 font-bold uppercase mb-1">03 / TERRITORIO</span>
-            <div class="font-display font-black text-4xl sm:text-5xl text-slate-900 tracking-tight my-2">
+            <div class="font-display font-black text-3xl sm:text-4xl xl:text-5xl text-slate-900 tracking-tight my-2">
               18+
             </div>
             <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Municipios cubiertos con presencia técnica en el Departamento del Meta y Orinoquía.
+              Municipios cubiertos con presencia técnica presencial en el Departamento del Meta y Orinoquía.
             </p>
           </div>
 
           <!-- Metric 4 -->
           <div class="lg:px-6 flex flex-col justify-between">
-            <span class="font-mono-tech text-xs text-slate-500 font-bold uppercase mb-1">04 / DICTÁMENES RAA</span>
-            <div class="font-display font-black text-4xl sm:text-5xl text-[#0C2F5A] tracking-tight my-2">
-              2.840+
+            <span class="font-mono-tech text-xs text-slate-500 font-bold uppercase mb-1">04 / VALIDEZ BANCARIA</span>
+            <div class="my-2">
+              <span class="font-display font-black text-2xl sm:text-3xl xl:text-4xl text-[#0C2F5A] tracking-tight block">10+ Bancos</span>
+              <span class="font-mono-tech text-xs font-bold text-slate-500 uppercase tracking-wider block">& Notarías del Meta</span>
             </div>
             <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Informes certificados emitidos con firma digital, sello RAA y cadena de custodia.
+              Aceptación formal garantizada ante entidades del sector financiero, DIAN y estrados judiciales.
             </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         5. BANCOS & ENTIDADES QUE ADMITEN NUESTROS DICTÁMENES
+         ====================================================================== -->
+    <section class="border-b border-slate-100 bg-slate-50/70 py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="shrink-0 text-center md:text-left">
+            <span class="text-[11px] font-mono-tech uppercase font-bold text-slate-500 tracking-wider block">
+              RESPALDO INSTITUCIONAL
+            </span>
+            <p class="font-display font-extrabold text-sm sm:text-base text-slate-900">
+              Dictámenes con Plena Validez ante Entidades Financieras & Juzgados:
+            </p>
+          </div>
+          <div class="flex flex-wrap items-center justify-center md:justify-end gap-3 sm:gap-4 font-mono-tech text-xs font-bold text-slate-700">
+            <span class="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200 rounded-lg shadow-sm">
+              <i data-lucide="landmark" class="w-4 h-4 text-[#0C2F5A]"></i>
+              Bancolombia
+            </span>
+            <span class="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200 rounded-lg shadow-sm">
+              <i data-lucide="landmark" class="w-4 h-4 text-emerald-700"></i>
+              Banco Agrario
+            </span>
+            <span class="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200 rounded-lg shadow-sm">
+              <i data-lucide="landmark" class="w-4 h-4 text-rose-700"></i>
+              Davivienda
+            </span>
+            <span class="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200 rounded-lg shadow-sm">
+              <i data-lucide="landmark" class="w-4 h-4 text-blue-700"></i>
+              Banco de Bogotá
+            </span>
+            <span class="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200 rounded-lg shadow-sm">
+              <i data-lucide="scale" class="w-4 h-4 text-slate-800"></i>
+              Juzgados Civiles (CGP)
+            </span>
+            <span class="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200 rounded-lg shadow-sm">
+              <i data-lucide="file-text" class="w-4 h-4 text-amber-700"></i>
+              DIAN & Notarías
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         6. QUIÉN FIRMA TU AVALÚO: TRANSPARENCIA PERICIAL RAA
+         ====================================================================== -->
+    <section class="border-b border-slate-100 bg-white py-14 md:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-slate-200 pb-6 mb-10">
+          <div>
+            <span class="font-mono-tech text-xs uppercase tracking-widest text-[#0C2F5A] font-bold block mb-1">
+              [ CUERPO PERICIAL COLEGIADO ]
+            </span>
+            <h2 class="font-display font-black text-2xl sm:text-4xl text-slate-900">
+              ¿Quién firma y certifica tu avalúo?
+            </h2>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 max-w-md mt-3 md:mt-0 leading-relaxed font-normal">
+            En Colombia, la Ley 1673 de 2013 exige que todo avalúo oficial sea firmado por avaluadores profesionales inscritos y vigentes en el Registro Abierto de Avaluadores (RAA).
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Perito 1: Rural & Agrícola -->
+          <div class="card-editorial bg-slate-50 border border-slate-200/90 rounded-2xl p-6 flex flex-col justify-between shadow-sm">
+            <div>
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-12 h-12 rounded-full bg-[#0C2F5A] text-white flex items-center justify-center font-display font-extrabold text-base shrink-0 shadow-md">
+                  DL
+                </div>
+                <div>
+                  <h3 class="font-display font-extrabold text-base text-slate-900">Ing. Dubian López</h3>
+                  <span class="text-xs font-mono-tech text-[#0C2F5A] font-bold block">Director Técnico Pericial RAA</span>
+                </div>
+              </div>
+              <div class="space-y-1.5 text-xs font-mono-tech text-slate-600 border-t border-slate-200 pt-3 mb-4">
+                <div class="flex justify-between">
+                  <span class="text-slate-400">REGISTRO RAA:</span>
+                  <span class="font-bold text-slate-900">AVAL-META-2026</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-400">ESPECIALIDAD:</span>
+                  <span class="font-semibold text-slate-900">Rural, Urbano & Dron RTK</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-400">COBERTURA:</span>
+                  <span class="font-semibold text-slate-900">Meta, Casanare y Bogotá</span>
+                </div>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Ingeniero especialista en tasación rural, aerofotogrametría con dron y valuación bajo estándares NIIF / IVSC.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-200 mt-4">
+              <a href="https://wa.me/573123661758?text=Hola,%20deseo%20validar%20la%20asignación%20de%20un%20perito%20colegiado%20RAA%20para%20mi%20predio." target="_blank" rel="noopener" class="text-xs font-mono-tech font-bold text-[#0C2F5A] hover:text-[#1E3A8A] flex items-center gap-1.5">
+                <span>Verificar vigencia RAA oficial</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-emerald-600"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Perito 2: Jurídico & Saneamiento -->
+          <div class="card-editorial bg-slate-50 border border-slate-200/90 rounded-2xl p-6 flex flex-col justify-between shadow-sm">
+            <div>
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-12 h-12 rounded-full bg-slate-800 text-white flex items-center justify-center font-display font-extrabold text-base shrink-0 shadow-md">
+                  CM
+                </div>
+                <div>
+                  <h3 class="font-display font-extrabold text-base text-slate-900">Dr. Carlos Morales</h3>
+                  <span class="text-xs font-mono-tech text-slate-700 font-bold block">Perito Jurídico Inmobiliario</span>
+                </div>
+              </div>
+              <div class="space-y-1.5 text-xs font-mono-tech text-slate-600 border-t border-slate-200 pt-3 mb-4">
+                <div class="flex justify-between">
+                  <span class="text-slate-400">REGISTRO RAA:</span>
+                  <span class="font-bold text-slate-900">JUR-RAA-50001</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-400">ESPECIALIDAD:</span>
+                  <span class="font-semibold text-slate-900">Derecho Predial & Art. 226 CGP</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-400">ALCANCE:</span>
+                  <span class="font-semibold text-slate-900">Litigios, Sucesiones, Títulos</span>
+                </div>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Abogado especialista en derecho inmobiliario, saneamiento de falsas tradiciones y dictámenes en estrados judiciales.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-200 mt-4">
+              <a href="https://wa.me/573123661758?text=Hola,%20deseo%20asesoría%20jurídica%20pericial%20para%20un%20inmueble%20en%20el%20Meta." target="_blank" rel="noopener" class="text-xs font-mono-tech font-bold text-[#0C2F5A] hover:text-[#1E3A8A] flex items-center gap-1.5">
+                <span>Consultar dictamen pericial</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-emerald-600"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Perito 3: Catastro & Topografía -->
+          <div class="card-editorial bg-slate-50 border border-slate-200/90 rounded-2xl p-6 flex flex-col justify-between shadow-sm">
+            <div>
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-12 h-12 rounded-full bg-emerald-800 text-white flex items-center justify-center font-display font-extrabold text-base shrink-0 shadow-md">
+                  AR
+                </div>
+                <div>
+                  <h3 class="font-display font-extrabold text-base text-slate-900">Top. Andrés Rincón</h3>
+                  <span class="text-xs font-mono-tech text-emerald-900 font-bold block">Topógrafo & Especialista SIG</span>
+                </div>
+              </div>
+              <div class="space-y-1.5 text-xs font-mono-tech text-slate-600 border-t border-slate-200 pt-3 mb-4">
+                <div class="flex justify-between">
+                  <span class="text-slate-400">MATRÍCULA:</span>
+                  <span class="font-bold text-slate-900">CPNT-50-2819</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-400">ESPECIALIDAD:</span>
+                  <span class="font-semibold text-slate-900">Geodesia, RTK & Catastro</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-400">EQUIPOS:</span>
+                  <span class="font-semibold text-slate-900">Dron RTK / GNSS Doble Frec.</span>
+                </div>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Ingeniero topógrafo certificado en levantamientos altimétricos, amojonamiento y conciliación de cabida IGAC/SNR.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-200 mt-4">
+              <a href="https://wa.me/573123661758?text=Hola,%20requiero%20levantamiento%20topográfico%20o%20conciliación%20catastral." target="_blank" rel="noopener" class="text-xs font-mono-tech font-bold text-[#0C2F5A] hover:text-[#1E3A8A] flex items-center gap-1.5">
+                <span>Solicitar visita técnica</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-emerald-600"></i>
+              </a>
+            </div>
           </div>
 
         </div>
@@ -846,268 +939,235 @@
           </h2>
         </div>
 
-        <!-- 5 Pillars Accordion / Card Grid -->
-        <div class="space-y-6">
+        <!-- 5 Pillars Compact Modular Grid (Optimizado CRO - Altura Reducida en Móvil) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           
           <!-- Pillar 1: Avalúos y peritajes -->
-          <div class="card-editorial border border-slate-200/90 p-6 sm:p-8 bg-white shadow-sm">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-              <div class="lg:col-span-4">
-                <span class="font-mono-tech text-xs text-slate-500 font-bold block mb-1">SERVICIO 01 / RAA</span>
-                <h3 class="font-display font-extrabold text-2xl text-slate-900 mb-2">Avalúos y Peritajes</h3>
-                <p class="text-xs font-mono-tech text-[#0C2F5A] font-bold uppercase tracking-wider mb-4">
-                  Inmuebles, maquinaria, derechos y dictámenes judiciales
-                </p>
-                <div class="space-y-1 text-xs font-mono-tech text-slate-500 font-medium">
-                  <div>TIEMPO: <span class="text-slate-900 font-semibold">3 a 5 días hábiles</span></div>
-                  <div>NORMA: <span class="text-slate-900 font-semibold">NIIF / IVSC / RAA</span></div>
-                </div>
+          <div class="card-editorial border border-slate-200/90 p-6 bg-white rounded-2xl shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="font-mono-tech text-[10px] text-slate-500 font-bold uppercase">SERVICIO 01 / RAA</span>
+                <span class="text-[10px] font-mono-tech px-2 py-0.5 bg-emerald-50 text-emerald-800 rounded font-bold border border-emerald-200">
+                  3 a 5 Días
+                </span>
               </div>
-              <div class="lg:col-span-5 text-sm text-[#4A4A4A] leading-relaxed">
-                <p class="mb-4">
-                  Determinación técnica del valor comercial, de reposición o renta bajo normas NIIF y estándares internacionales IVSC. Elaboración de dictámenes con validez pericial ante juzgados, entidades bancarias y la DIAN.
-                </p>
-                <ul class="space-y-2 text-xs text-[#121212]">
-                  <li class="flex items-center gap-2">
-                    <i data-lucide="check" class="w-4 h-4 text-[#2C4A3E] shrink-0"></i>
-                    <span>Inmuebles urbanos: casas, apartamentos, locales, bodegas y edificios PH</span>
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <i data-lucide="check" class="w-4 h-4 text-[#2C4A3E] shrink-0"></i>
-                    <span>Inmuebles rurales: fincas ganaderas, agrícolas y servidumbres de paso</span>
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <i data-lucide="check" class="w-4 h-4 text-[#2C4A3E] shrink-0"></i>
-                    <span>Maquinaria pesada, vehículos industriales y activos de plantas de proceso</span>
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <i data-lucide="check" class="w-4 h-4 text-[#2C4A3E] shrink-0"></i>
-                    <span>Dictámenes periciales para procesos divisorios, expropiaciones y sucesiones</span>
-                  </li>
-                </ul>
+              <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center mb-3">
+                <i data-lucide="scale" class="w-5 h-5"></i>
               </div>
-              <div class="lg:col-span-3 flex flex-col justify-between h-full bg-slate-50 border border-slate-200 rounded-2xl p-5 gap-4">
-                <div>
-                  <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center mb-3">
-                    <i data-lucide="scale" class="w-5 h-5"></i>
-                  </div>
-                  <span class="text-[10px] font-mono-tech uppercase font-bold text-slate-500 block mb-0.5">TARIFA OFICIAL:</span>
-                  <span class="font-display font-black text-lg text-slate-900 block leading-tight">Desde $750.000 COP</span>
-                  <p class="text-[11px] font-mono-tech text-slate-500 mt-1">Conforme a Ley 1673 y valor del inmueble</p>
-                </div>
-                <a href="https://wa.me/573123661758?text=Hola,%20deseo%20cotizar%20un%20aval%C3%BAo%20comercial%20o%20peritaje%20t%C3%A9cnico." target="_blank" rel="noopener" class="btn-brutalist bg-[#0A2540] hover:bg-[#1E3A8A] text-white text-xs font-bold font-mono-tech py-3 px-4 text-center w-full rounded-xl shadow-md inline-flex items-center justify-center gap-2">
-                  <span>Cotizar Avalúo</span>
-                  <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-emerald-300"></i>
-                </a>
+              <h3 class="font-display font-black text-xl text-slate-900 mb-1">Avalúos & Peritajes</h3>
+              <p class="text-xs font-mono-tech text-[#0C2F5A] font-bold uppercase mb-3">
+                Inmuebles urbanos, fincas y maquinaria
+              </p>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                Tasación comercial bajo normas NIIF y estándares IVSC. Dictámenes certificados con plena validez judicial (CGP), bancaria y tributaria (DIAN).
+              </p>
+              <ul class="space-y-1.5 text-xs text-slate-700 mb-4">
+                <li class="flex items-center gap-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
+                  <span>Casas, apartamentos PH, locales y bodegas</span>
+                </li>
+                <li class="flex items-center gap-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
+                  <span>Fincas ganaderas, agrícolas y servidumbres</span>
+                </li>
+              </ul>
+            </div>
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+              <div>
+                <span class="text-[10px] font-mono-tech text-slate-400 font-bold block uppercase">Tarifa oficial:</span>
+                <span class="font-display font-black text-sm text-slate-900">Desde $750.000</span>
               </div>
+              <a href="https://wa.me/573123661758?text=Hola,%20deseo%20cotizar%20un%20aval%C3%BAo%20comercial%20o%20peritaje%20t%C3%A9cnico." target="_blank" rel="noopener" class="btn-brutalist bg-[#0A2540] hover:bg-[#1E3A8A] text-white text-xs font-bold font-mono-tech py-2.5 px-3.5 rounded-xl shadow-sm inline-flex items-center gap-1">
+                <span>Cotizar</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-emerald-300"></i>
+              </a>
             </div>
           </div>
 
           <!-- Pillar 2: Servicios jurídicos -->
-          <div class="card-editorial border border-slate-200 p-6 sm:p-8 bg-white shadow-lg">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-              <div class="lg:col-span-4">
-                <span class="font-mono-tech text-xs text-[#4F4E4A] font-bold block mb-1">SERVICIO 02 / DERECHO</span>
-                <h3 class="font-display font-extrabold text-2xl text-[#121212] mb-2">Servicios Jurídicos</h3>
-                <p class="text-xs font-mono-tech text-[#8E5B4C] font-bold uppercase tracking-wider mb-4">
-                  Estudios de títulos, saneamiento y asesoría inmobiliaria
-                </p>
-                <div class="space-y-1 text-xs font-mono-tech text-[#4F4E4A] font-medium">
-                  <div>TIEMPO: <span class="text-[#121212] font-semibold">2 a 4 días hábiles</span></div>
-                  <div>ALCANCE: <span class="text-[#121212] font-semibold">Trazabilidad a 20/30 años</span></div>
-                </div>
+          <div class="card-editorial border border-slate-200/90 p-6 bg-white rounded-2xl shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="font-mono-tech text-[10px] text-slate-500 font-bold uppercase">SERVICIO 02 / DERECHO</span>
+                <span class="text-[10px] font-mono-tech px-2 py-0.5 bg-amber-50 text-amber-800 rounded font-bold border border-amber-200">
+                  2 a 4 Días
+                </span>
               </div>
-              <div class="lg:col-span-5 text-sm text-[#4A4A4A] leading-relaxed">
-                <p class="mb-4">
-                  Blindaje legal exhaustivo para negocios inmobiliarios, aclaraciones de linderos y saneamiento de títulos precarios. Análisis de riesgos jurídicos antes de cualquier desembolso o firma notarial.
-                </p>
-                <ul class="space-y-2 text-xs text-[#121212]">
-                  <li class="flex items-center gap-2">
-                    <i data-lucide="check" class="w-4 h-4 text-[#2C4A3E] shrink-0"></i>
-                    <span>Estudio de títulos de tradición a 20 y 30 años con concepto de viabilidad</span>
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <i data-lucide="check" class="w-4 h-4 text-[#2C4A3E] shrink-0"></i>
-                    <span>Saneamiento de falsa tradición, posesiones y títulos incompletos</span>
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <i data-lucide="check" class="w-4 h-4 text-[#2C4A3E] shrink-0"></i>
-                    <span>Aclaraciones de área, linderos y englobes/desenglobes notariales</span>
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <i data-lucide="check" class="w-4 h-4 text-[#2C4A3E] shrink-0"></i>
-                    <span>Redacción de promesas de compraventa y esquemas fiduciarios</span>
-                  </li>
-                </ul>
+              <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center mb-3">
+                <i data-lucide="landmark" class="w-5 h-5"></i>
               </div>
-              <div class="lg:col-span-3 flex flex-col justify-between h-full bg-slate-50 border border-slate-200 rounded-2xl p-5 gap-4">
-                <div>
-                  <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center mb-3">
-                    <i data-lucide="landmark" class="w-5 h-5"></i>
-                  </div>
-                  <span class="text-[10px] font-mono-tech uppercase font-bold text-slate-500 block mb-0.5">BLINDAJE JURÍDICO:</span>
-                  <span class="font-display font-black text-lg text-slate-900 block leading-tight">Estudios de Títulos</span>
-                  <p class="text-[11px] font-mono-tech text-slate-500 mt-1">Concepto pericial a 20/30 años sin riesgo</p>
-                </div>
-                <a href="https://wa.me/573123661758?text=Hola,%20deseo%20solicitar%20un%20estudio%20de%20t%C3%ADtulos%20o%20asesor%C3%ADa%20jur%C3%ADdica." target="_blank" rel="noopener" class="btn-brutalist bg-[#0A2540] hover:bg-[#1E3A8A] text-white text-xs font-bold font-mono-tech py-3 px-4 text-center w-full rounded-xl shadow-md inline-flex items-center justify-center gap-2">
-                  <span>Consultar Abogado</span>
-                  <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-amber-300"></i>
-                </a>
+              <h3 class="font-display font-black text-xl text-slate-900 mb-1">Servicios Jurídicos</h3>
+              <p class="text-xs font-mono-tech text-[#8E5B4C] font-bold uppercase mb-3">
+                Estudios de títulos y saneamiento
+              </p>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                Blindaje patrimonial antes de desembolsar o firmar escrituras. Trazabilidad a 20 y 30 años, aclaración de linderos y saneamiento de falsa tradición.
+              </p>
+              <ul class="space-y-1.5 text-xs text-slate-700 mb-4">
+                <li class="flex items-center gap-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
+                  <span>Estudios de títulos con semáforo de riesgo</span>
+                </li>
+                <li class="flex items-center gap-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
+                  <span>Saneamiento y aclaración de cabida</span>
+                </li>
+              </ul>
+            </div>
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+              <div>
+                <span class="text-[10px] font-mono-tech text-slate-400 font-bold block uppercase">Servicio:</span>
+                <span class="font-display font-black text-sm text-slate-900">Blindaje Legal</span>
               </div>
+              <a href="https://wa.me/573123661758?text=Hola,%20deseo%20solicitar%20un%20estudio%20de%20t%C3%ADtulos%20o%20asesor%C3%ADa%20jur%C3%ADdica." target="_blank" rel="noopener" class="btn-brutalist bg-[#0A2540] hover:bg-[#1E3A8A] text-white text-xs font-bold font-mono-tech py-2.5 px-3.5 rounded-xl shadow-sm inline-flex items-center gap-1">
+                <span>Consultar</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-amber-300"></i>
+              </a>
             </div>
           </div>
 
           <!-- Pillar 3: Catastro y territorio -->
-          <div class="card-editorial border border-slate-200 p-6 sm:p-8 bg-white shadow-lg">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-              <div class="lg:col-span-4">
-                <span class="font-mono-tech text-xs text-[#4F4E4A] font-bold block mb-1">SERVICIO 03 / GEOTECNOLOGÍA</span>
-                <h3 class="font-display font-extrabold text-2xl text-[#121212] mb-2">Catastro y Territorio</h3>
-                <p class="text-xs font-mono-tech text-[#2C4A3E] font-bold uppercase tracking-wider mb-4">
-                  Cartografía, SIG, estudios y consultoría multipropósito
-                </p>
-                <div class="space-y-1 text-xs font-mono-tech text-[#4F4E4A] font-medium">
-                  <div>MÉTODO: <span class="text-[#121212] font-semibold">Fotogrametría Dron + GNSS RTK</span></div>
-                  <div>SISTEMA: <span class="text-[#121212] font-semibold">MAGNA-SIRGAS Origen Nacional</span></div>
-                </div>
+          <div class="card-editorial border border-slate-200/90 p-6 bg-white rounded-2xl shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="font-mono-tech text-[10px] text-slate-500 font-bold uppercase">SERVICIO 03 / CATASTRO</span>
+                <span class="text-[10px] font-mono-tech px-2 py-0.5 bg-sky-50 text-sky-800 rounded font-bold border border-sky-200">
+                  Dron GNSS RTK
+                </span>
               </div>
-              <div class="lg:col-span-5 text-sm text-[#4A4A4A] leading-relaxed">
-                <p class="mb-4">
-                  Ingeniería topográfica y cartográfica de máxima resolución. Conciliación de discrepancias espaciales entre lo que dice la escritura y lo que mide físicamente el terreno en el Meta.
-                </p>
-                <ul class="space-y-2 text-xs text-[#121212]">
-                  <li class="flex items-center gap-2">
-                    <i data-lucide="check" class="w-4 h-4 text-[#2C4A3E] shrink-0"></i>
-                    <span>Ortofotomapas georreferenciados con dron de alta precisión métrica</span>
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <i data-lucide="check" class="w-4 h-4 text-[#2C4A3E] shrink-0"></i>
-                    <span>Levantamientos topográficos planimétricos y altimétricos certificados</span>
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <i data-lucide="check" class="w-4 h-4 text-[#2C4A3E] shrink-0"></i>
-                    <span>Conciliación catastral: cabida física vs. catastro IGAC vs. registro SNR</span>
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <i data-lucide="check" class="w-4 h-4 text-[#2C4A3E] shrink-0"></i>
-                    <span>Modelación de capas en Sistemas de Información Geográfica (QGIS / ArcGIS)</span>
-                  </li>
-                </ul>
+              <div class="w-10 h-10 rounded-xl bg-sky-100 text-[#0C2F5A] flex items-center justify-center mb-3">
+                <i data-lucide="map-pin" class="w-5 h-5"></i>
               </div>
-              <div class="lg:col-span-3 flex flex-col justify-between h-full bg-slate-50 border border-slate-200 rounded-2xl p-5 gap-4">
-                <div>
-                  <div class="w-10 h-10 rounded-xl bg-sky-100 text-[#0C2F5A] flex items-center justify-center mb-3">
-                    <i data-lucide="map-pin" class="w-5 h-5"></i>
-                  </div>
-                  <span class="text-[10px] font-mono-tech uppercase font-bold text-slate-500 block mb-0.5">PRECISIÓN ESPACIAL:</span>
-                  <span class="font-display font-black text-lg text-slate-900 block leading-tight">Dron RTK & SIG</span>
-                  <p class="text-[11px] font-mono-tech text-slate-500 mt-1">Conciliación cabida física vs. IGAC vs. SNR</p>
-                </div>
-                <a href="https://wa.me/573123661758?text=Hola,%20requiero%20servicios%20de%20topograf%C3%ADa,%20cartograf%C3%ADa%20o%20gesti%C3%B3n%20catastral." target="_blank" rel="noopener" class="btn-brutalist bg-[#0A2540] hover:bg-[#1E3A8A] text-white text-xs font-bold font-mono-tech py-3 px-4 text-center w-full rounded-xl shadow-md inline-flex items-center justify-center gap-2">
-                  <span>Solicitar Topografía</span>
-                  <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-sky-300"></i>
-                </a>
+              <h3 class="font-display font-black text-xl text-slate-900 mb-1">Catastro & Territorio</h3>
+              <p class="text-xs font-mono-tech text-[#2C4A3E] font-bold uppercase mb-3">
+                Topografía de precisión y SIG
+              </p>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                Ingeniería topográfica y cartográfica de máxima resolución. Conciliación de discrepancias entre lo que dice la escritura y la cabida física real.
+              </p>
+              <ul class="space-y-1.5 text-xs text-slate-700 mb-4">
+                <li class="flex items-center gap-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
+                  <span>Ortofotomapas con dron de precisión centimétrica</span>
+                </li>
+                <li class="flex items-center gap-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
+                  <span>Conciliación: cabida física vs. IGAC vs. SNR</span>
+                </li>
+              </ul>
+            </div>
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+              <div>
+                <span class="text-[10px] font-mono-tech text-slate-400 font-bold block uppercase">Sistema:</span>
+                <span class="font-display font-black text-sm text-slate-900">MAGNA-SIRGAS</span>
               </div>
+              <a href="https://wa.me/573123661758?text=Hola,%20requiero%20servicios%20de%20topograf%C3%ADa,%20cartograf%C3%ADa%20o%20gesti%C3%B3n%20catastral." target="_blank" rel="noopener" class="btn-brutalist bg-[#0A2540] hover:bg-[#1E3A8A] text-white text-xs font-bold font-mono-tech py-2.5 px-3.5 rounded-xl shadow-sm inline-flex items-center gap-1">
+                <span>Topografía</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-sky-300"></i>
+              </a>
             </div>
           </div>
 
           <!-- Pillar 4: Negocios inmobiliarios -->
-          <div class="card-editorial border border-slate-200 p-6 sm:p-8 bg-white shadow-lg">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-              <div class="lg:col-span-4">
-                <span class="font-mono-tech text-xs text-[#4F4E4A] font-bold block mb-1">SERVICIO 04 / INVERSIONES</span>
-                <h3 class="font-display font-extrabold text-2xl text-[#121212] mb-2">Negocios Inmobiliarios</h3>
-                <p class="text-xs font-mono-tech text-[#0C2F5A] font-bold uppercase tracking-wider mb-4">
-                  Comercialización y asesoría en inversiones estratégicas
-                </p>
-                <div class="space-y-1 text-xs font-mono-tech text-[#4F4E4A] font-medium">
-                  <div>ENFOQUE: <span class="text-[#121212] font-semibold">Valoración Econométrica</span></div>
-                  <div>RENTABILIDAD: <span class="text-[#121212] font-semibold">TIR, VPN y Cap Rate</span></div>
-                </div>
+          <div class="card-editorial border border-slate-200/90 p-6 bg-white rounded-2xl shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="font-mono-tech text-[10px] text-slate-500 font-bold uppercase">SERVICIO 04 / INVERSIONES</span>
+                <span class="text-[10px] font-mono-tech px-2 py-0.5 bg-purple-50 text-purple-800 rounded font-bold border border-purple-200">
+                  Econométrico
+                </span>
               </div>
-              <div class="lg:col-span-5 text-sm text-[#4A4A4A] leading-relaxed">
-                <p class="mb-4">
-                  Intermediación corporativa de predios seleccionados respaldada en estudios periciales, no en intuición. Conectamos propietarios con compradores e inversionistas calificados.
-                </p>
-                <ul class="space-y-2 text-xs text-[#121212]">
-                  <li class="flex items-center gap-2">
-                    <i data-lucide="check" class="w-4 h-4 text-[#2C4A3E] shrink-0"></i>
-                    <span>Comercialización selectiva de fincas, haciendas, lotes y bodegas</span>
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <i data-lucide="check" class="w-4 h-4 text-[#2C4A3E] shrink-0"></i>
-                    <span>Modelación financiera de rentabilidad (Cap Rate, TIR proyectada, VPN)</span>
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <i data-lucide="check" class="w-4 h-4 text-[#2C4A3E] shrink-0"></i>
-                    <span>Estructuración de esquemas de asociación y desarrollo parcelario</span>
-                  </li>
-                </ul>
+              <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-800 flex items-center justify-center mb-3">
+                <i data-lucide="trending-up" class="w-5 h-5"></i>
               </div>
-              <div class="lg:col-span-3 flex flex-col justify-between h-full bg-slate-50 border border-slate-200 rounded-2xl p-5 gap-4">
-                <div>
-                  <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-800 flex items-center justify-center mb-3">
-                    <i data-lucide="trending-up" class="w-5 h-5"></i>
-                  </div>
-                  <span class="text-[10px] font-mono-tech uppercase font-bold text-slate-500 block mb-0.5">RENTABILIDAD SEGURA:</span>
-                  <span class="font-display font-black text-lg text-slate-900 block leading-tight">TIR / VPN / Cap Rate</span>
-                  <p class="text-[11px] font-mono-tech text-slate-500 mt-1">Intermediación selectiva de fincas y bodegas</p>
-                </div>
-                <a href="https://wa.me/573123661758?text=Hola,%20deseo%20asesor%C3%ADa%20para%20comercializaci%C3%B3n%20o%20inversi%C3%B3n%20inmobiliaria." target="_blank" rel="noopener" class="btn-brutalist bg-[#0A2540] hover:bg-[#1E3A8A] text-white text-xs font-bold font-mono-tech py-3 px-4 text-center w-full rounded-xl shadow-md inline-flex items-center justify-center gap-2">
-                  <span>Asesoría en Inversión</span>
-                  <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-purple-300"></i>
-                </a>
+              <h3 class="font-display font-black text-xl text-slate-900 mb-1">Negocios Inmobiliarios</h3>
+              <p class="text-xs font-mono-tech text-[#0C2F5A] font-bold uppercase mb-3">
+                Comercialización e inversiones
+              </p>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                Intermediación corporativa respaldada en avalúos técnicos, no en intuición. Conectamos propietarios de fincas y bodegas con compradores calificados.
+              </p>
+              <ul class="space-y-1.5 text-xs text-slate-700 mb-4">
+                <li class="flex items-center gap-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
+                  <span>Comercialización selectiva de fincas y lotes</span>
+                </li>
+                <li class="flex items-center gap-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
+                  <span>Modelación de rentabilidad (Cap Rate, TIR, VPN)</span>
+                </li>
+              </ul>
+            </div>
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+              <div>
+                <span class="text-[10px] font-mono-tech text-slate-400 font-bold block uppercase">Enfoque:</span>
+                <span class="font-display font-black text-sm text-slate-900">Rentabilidad</span>
               </div>
+              <a href="https://wa.me/573123661758?text=Hola,%20deseo%20asesor%C3%ADa%20para%20comercializaci%C3%B3n%20o%20inversi%C3%B3n%20inmobiliaria." target="_blank" rel="noopener" class="btn-brutalist bg-[#0A2540] hover:bg-[#1E3A8A] text-white text-xs font-bold font-mono-tech py-2.5 px-3.5 rounded-xl shadow-sm inline-flex items-center gap-1">
+                <span>Inversión</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-purple-300"></i>
+              </a>
             </div>
           </div>
 
           <!-- Pillar 5: Trámites y estudios -->
-          <div class="card-editorial border border-slate-200 p-6 sm:p-8 bg-white shadow-lg">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-              <div class="lg:col-span-4">
-                <span class="font-mono-tech text-xs text-[#4F4E4A] font-bold block mb-1">SERVICIO 05 / GESTIÓN PÚBLICA</span>
-                <h3 class="font-display font-extrabold text-2xl text-[#121212] mb-2">Trámites y Estudios</h3>
-                <p class="text-xs font-mono-tech text-[#4F4E4A] font-bold uppercase tracking-wider mb-4">
-                  Viabilidad predial, certificados y diagnósticos normativos
-                </p>
-                <div class="space-y-1 text-xs font-mono-tech text-[#4F4E4A] font-medium">
-                  <div>ENTIDADES: <span class="text-[#121212] font-semibold">IGAC, Curadurías, SNR, Alcaldías</span></div>
-                  <div>AGILIDAD: <span class="text-[#121212] font-semibold">Gestión profesional directa</span></div>
-                </div>
+          <div class="card-editorial border border-slate-200/90 p-6 bg-white rounded-2xl shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="font-mono-tech text-[10px] text-slate-500 font-bold uppercase">SERVICIO 05 / GESTIÓN</span>
+                <span class="text-[10px] font-mono-tech px-2 py-0.5 bg-emerald-50 text-emerald-800 rounded font-bold border border-emerald-200">
+                  IGAC & SNR
+                </span>
               </div>
-              <div class="lg:col-span-5 text-sm text-[#4A4A4A] leading-relaxed">
-                <p class="mb-4">
-                  Gestión integral de requerimientos normativos ante instituciones territoriales, eliminando la fricción burocrática y garantizando que sus predios queden debidamente incorporados.
-                </p>
-                <ul class="space-y-2 text-xs text-[#121212]">
-                  <li class="flex items-center gap-2">
-                    <i data-lucide="check" class="w-4 h-4 text-[#2C4A3E] shrink-0"></i>
-                    <span>Conceptos técnicos de viabilidad predial y usos permitidos bajo POT</span>
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <i data-lucide="check" class="w-4 h-4 text-[#2C4A3E] shrink-0"></i>
-                    <span>Gestión de licencias urbanísticas y de parcelación</span>
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <i data-lucide="check" class="w-4 h-4 text-[#2C4A3E] shrink-0"></i>
-                    <span>Incorporación de construcciones nuevas en ficha catastral</span>
-                  </li>
-                </ul>
+              <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center mb-3">
+                <i data-lucide="check-square" class="w-5 h-5"></i>
               </div>
-              <div class="lg:col-span-3 flex flex-col justify-between h-full bg-slate-50 border border-slate-200 rounded-2xl p-5 gap-4">
-                <div>
-                  <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center mb-3">
-                    <i data-lucide="check-square" class="w-5 h-5"></i>
-                  </div>
-                  <span class="text-[10px] font-mono-tech uppercase font-bold text-slate-500 block mb-0.5">GESTIÓN TERRITORIAL:</span>
-                  <span class="font-display font-black text-lg text-slate-900 block leading-tight">IGAC & Curadurías</span>
-                  <p class="text-[11px] font-mono-tech text-slate-500 mt-1">Cédulas catastrales, licencias y POT</p>
-                </div>
-                <a href="https://wa.me/573123661758?text=Hola,%20necesito%20gestionar%20un%20tr%C3%A1mite%20predial%20o%20estudio%20de%20viabilidad." target="_blank" rel="noopener" class="btn-brutalist bg-[#0A2540] hover:bg-[#1E3A8A] text-white text-xs font-bold font-mono-tech py-3 px-4 text-center w-full rounded-xl shadow-md inline-flex items-center justify-center gap-2">
-                  <span>Iniciar Trámite</span>
-                  <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-emerald-300"></i>
-                </a>
+              <h3 class="font-display font-black text-xl text-slate-900 mb-1">Trámites Prediales</h3>
+              <p class="text-xs font-mono-tech text-slate-600 font-bold uppercase mb-3">
+                Viabilidad y diagnósticos normativos
+              </p>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                Gestión directa ante instituciones territoriales: cédulas catastrales, licencias de parcelación y conceptos normativos bajo POT municipal.
+              </p>
+              <ul class="space-y-1.5 text-xs text-slate-700 mb-4">
+                <li class="flex items-center gap-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
+                  <span>Incorporación de mejoras en ficha catastral</span>
+                </li>
+                <li class="flex items-center gap-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
+                  <span>Conceptos técnicos POT y licencias</span>
+                </li>
+              </ul>
+            </div>
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+              <div>
+                <span class="text-[10px] font-mono-tech text-slate-400 font-bold block uppercase">Gestión:</span>
+                <span class="font-display font-black text-sm text-slate-900">Directa IGAC</span>
               </div>
+              <a href="https://wa.me/573123661758?text=Hola,%20necesito%20gestionar%20un%20tr%C3%A1mite%20predial%20o%20estudio%20de%20viabilidad." target="_blank" rel="noopener" class="btn-brutalist bg-[#0A2540] hover:bg-[#1E3A8A] text-white text-xs font-bold font-mono-tech py-2.5 px-3.5 rounded-xl shadow-sm inline-flex items-center gap-1">
+                <span>Tramitar</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-emerald-300"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 6: Conexión con Catálogo Oficial -->
+          <div class="card-editorial border-2 border-dashed border-emerald-500/40 p-6 bg-emerald-50/50 rounded-2xl flex flex-col justify-between shadow-sm">
+            <div>
+              <span class="font-mono-tech text-[10px] text-emerald-800 font-bold uppercase tracking-wider block mb-2">
+                CATÁLOGO REGULADO & HERRAMIENTAS
+              </span>
+              <h3 class="font-display font-black text-xl text-slate-900 mb-2">Tarifas Oficiales & DataLonja</h3>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                Consulta los honorarios exactos, entregables y pólizas vigentes para tu predio, o accede a las herramientas técnicas para avaluadores colegiados.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-emerald-200/60 flex flex-col gap-2">
+              <a href="#servicios-lonja" class="btn-brutalist bg-[#0C2F5A] hover:bg-[#1E3A8A] text-white text-xs font-bold font-mono-tech py-3 px-4 rounded-xl shadow-md text-center flex items-center justify-center gap-2">
+                <span>Ver Catálogo de Tarifas</span>
+                <i data-lucide="arrow-down" class="w-3.5 h-3.5 text-emerald-300"></i>
+              </a>
             </div>
           </div>
 
