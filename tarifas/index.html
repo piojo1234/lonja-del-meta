@@ -43,7 +43,7 @@
           },
           fontFamily: {
             sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'],
-            display: ['"Montserrat"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            display: ['"Newsreader"', 'Georgia', 'serif'],
             'mono-tech': ['"JetBrains Mono"', 'monospace']
           }
         }
@@ -51,10 +51,10 @@
     }
   </script>
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Newsreader & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -64,7 +64,7 @@
 
   <style>
     .font-mono-tech { font-family: 'JetBrains Mono', monospace; }
-    .font-display { font-family: 'Montserrat', sans-serif; }
+    .font-display { font-family: 'Newsreader', Georgia, serif; }
     .btn-brutalist {
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
@@ -178,12 +178,12 @@
   </script>
 </head>
 
-<body class="bg-[#F8FAFC] text-slate-800 antialiased font-sans selection:bg-emerald-500 selection:text-white">
+<body class="bg-[#F6F4EE] text-[#11161B] antialiased font-sans selection:bg-[#1B3B2E] selection:text-white">
 
   <!-- ======================================================================
        HEADER / NAVEGACIÓN INSTITUCIONAL
        ====================================================================== -->
-  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200">
+  <header class="sticky top-0 z-50 bg-[#F6F4EE]/95 backdrop-blur-md border-b border-[#DFDBD0]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20">
         
@@ -191,29 +191,29 @@
         <a href="../index.html" class="flex items-center gap-3 group">
           <img src="../assets/img/logo-symbol.svg" alt="Lonja Logo" class="w-10 h-10 object-contain group-hover:scale-105 transition-transform">
           <div class="flex flex-col">
-            <span class="font-display font-black text-slate-950 text-base sm:text-lg tracking-tight leading-tight">
-              LONJA DE AVALÚOS <span class="text-emerald-700">DEL META</span>
+            <span class="font-display font-bold text-[#11161B] text-lg sm:text-xl tracking-tight leading-tight">
+              LONJA DE AVALÚOS <span class="text-[#1B3B2E]">DEL META</span>
             </span>
-            <span class="font-mono-tech text-[10px] text-slate-500 font-semibold tracking-wider uppercase">
+            <span class="font-mono-tech text-[10px] text-[#68737D] font-semibold tracking-wider uppercase">
               Peritos RAA · Ley 1673 de 2013
             </span>
           </div>
         </a>
 
         <!-- Desktop Navigation Links -->
-        <nav class="hidden lg:flex items-center gap-7 text-xs font-mono-tech uppercase tracking-wider text-slate-600 font-bold">
-          <a href="../index.html" class="hover:text-emerald-700 transition-colors">Inicio</a>
-          <a href="../avaluos/vivienda/" class="hover:text-emerald-700 transition-colors">Vivienda</a>
-          <a href="../avaluos/fincas/" class="hover:text-emerald-700 transition-colors">Fincas</a>
-          <a href="../compra-segura/titulos/" class="hover:text-emerald-700 transition-colors">Estudio Títulos</a>
-          <a href="./" class="text-emerald-700 font-bold border-b-2 border-emerald-600 pb-0.5">Tarifas 2026</a>
-          <a href="../datalonja.html" class="hover:text-[#0C2F5A] transition-colors text-slate-500">DataLonja PRO</a>
+        <nav class="hidden lg:flex items-center gap-7 text-xs font-mono-tech uppercase tracking-wider text-[#3B444F] font-bold">
+          <a href="../index.html" class="hover:text-[#1B3B2E] transition-colors">Inicio</a>
+          <a href="../avaluos/vivienda/" class="hover:text-[#1B3B2E] transition-colors">Vivienda</a>
+          <a href="../avaluos/fincas/" class="hover:text-[#1B3B2E] transition-colors">Fincas</a>
+          <a href="../compra-segura/titulos/" class="hover:text-[#1B3B2E] transition-colors">Estudio Títulos</a>
+          <a href="./" class="text-[#1B3B2E] font-bold border-b-2 border-[#1B3B2E] pb-0.5">Tarifas 2026</a>
+          <a href="../datalonja.html" class="hover:text-[#0C2340] transition-colors text-[#68737D]">DataLonja PRO</a>
         </nav>
 
         <!-- CTA Header Button -->
         <div class="flex items-center gap-3">
-          <a href="https://wa.me/573123661758?text=Hola%20Lonja%20de%20Aval%C3%BAos,%20deseo%20cotizar%20un%20servicio%20seg%C3%BAn%20la%20tabla%20oficial%20de%20tarifas." target="_blank" rel="noopener" class="btn-brutalist bg-emerald-600 hover:bg-emerald-700 text-white font-mono-tech text-xs font-bold uppercase tracking-wider py-2.5 px-4 rounded-xl shadow-md inline-flex items-center gap-2 transition-all">
-            <i data-lucide="calculator" class="w-4 h-4"></i>
+          <a href="https://wa.me/573123661758?text=Hola%20Lonja%20de%20Aval%C3%BAos,%20deseo%20cotizar%20un%20servicio%20seg%C3%BAn%20la%20tabla%20oficial%20de%20tarifas." target="_blank" rel="noopener" class="btn-brutalist bg-[#1B3B2E] hover:bg-[#11271E] text-white font-mono-tech text-xs font-bold uppercase tracking-wider py-2.5 px-4 rounded-lg shadow-sm border border-[#2F5243] inline-flex items-center gap-2 transition-all">
+            <i data-lucide="calculator" class="w-4 h-4 text-emerald-400"></i>
             <span>Cotizar mi avalúo</span>
           </a>
         </div>

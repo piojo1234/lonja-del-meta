@@ -1,24 +1,25 @@
 /* ==========================================================================
-   LONJA DE AVALÚOS DEL META S.A.S. — MODERN PROPTECH & ARCHITECTURAL STYLESHEET
-   Style: High-Contrast Modern PropTech / Cinematic Visual Hierarchy / Precision UI
+   LONJA DE AVALÚOS DEL META S.A.S. — BESPOKE EDITORIAL & FORENSIC STYLESHEET
+   Style: Financial Broadsheet & Technical Agrimensor / High-End Editorial Rigor
    ========================================================================== */
 
 :root {
-  --bg-bone: #FFFFFF; /* Pure Clean Modern White */
-  --bg-card: #FFFFFF;
-  --bg-card-subtle: #F8FAFC; /* Clean Crisp Slate-50 */
-  --ink-primary: #0F172A; /* Deep Charcoal Slate */
-  --ink-secondary: #334155;
-  --ink-muted: #64748B; /* WCAG AAA compliance */
-  --border-hairline: #E2E8F0;
-  --border-strong: #0C2F5A;
-  --accent-copper: #059669; /* Emerald Growth & Land Value */
-  --accent-emerald: #10B981;
-  --accent-terracotta: #D97706; /* Warm Architectural Amber */
-  --lonja-navy: #0A2540; /* High-Trust Corporate Navy */
-  --lonja-blue: #1E3A8A;
-  --lonja-sky: #38BDF8;
-  --grid-line: transparent;
+  --bg-bone: #F6F4EE; /* Authentic Financial Broadsheet Warm Paper */
+  --bg-card: #FAF8F4; /* Pure Crisp Notarial Surface */
+  --bg-card-subtle: #EFECE3; /* Tinted Warm Cadastral Parchment */
+  --ink-primary: #11161B; /* Deep Rich Notarial Charcoal Ink */
+  --ink-secondary: #3B444F; /* Balanced Editorial Charcoal */
+  --ink-muted: #68737D; /* Technical Subtext & Coordinates */
+  --border-hairline: #DFDBD0; /* Refined Hairline Rule */
+  --border-strong: #1B3B2E; /* Oxidized Copper Official Edge */
+  --accent-copper: #1B3B2E; /* Official Lonja Oxidized Copper */
+  --accent-copper-hover: #11271E;
+  --accent-emerald: #059669; /* Reserved for active verification pings */
+  --accent-terracotta: #8C533E; /* Rich Llanero Clay & Seals */
+  --lonja-navy: #0C2340; /* Notarial Ink & Tribunal Blue */
+  --lonja-blue: #1A3E6D;
+  --lonja-sky: #4D7A9E;
+  --grid-line: rgba(27, 59, 46, 0.035);
 }
 
 /* Base resets & typography */
@@ -34,12 +35,20 @@ html {
 body {
   overflow-x: hidden;
   background-color: var(--bg-bone);
+  color: var(--ink-primary);
 }
 
-/* Custom font utilities inspired by PropTech leaders (Habi, Propy, Houm) */
+/* Custom font utilities: Collins/Koto Editorial & Precision System */
+.font-serif-display,
+.font-editorial {
+  font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  letter-spacing: -0.015em;
+}
+
 .font-display {
-  font-family: 'Montserrat', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  letter-spacing: -0.025em;
+  font-family: 'Newsreader', Georgia, serif;
+  letter-spacing: -0.015em;
 }
 
 .font-sans-body {
@@ -50,6 +59,24 @@ body {
 .font-mono-tech {
   font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
   letter-spacing: -0.02em;
+}
+
+/* Forensic Photo & Evidence Stamps */
+.forensic-stamp {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(17, 22, 27, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(223, 219, 208, 0.35);
+  color: #F6F4EE;
+  padding: 4px 8px;
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 /* Hairline Grid & Architectural Patterns (Neutralized for Visual Clarity) */
